@@ -7,8 +7,12 @@ import { publicConfig } from './public-config.mjs';
 
 const root = resolve(import.meta.dirname, '..');
 loadEnv(resolve(root, '.env'));
-const css = readFileSync(resolve(root, 'src/styles.css'), 'utf8').replace(/@import url\([^)]*\);/, '')
+const fontData = (f) => `url('data:font/ttf;base64,${readFileSync(resolve(root, 'public/fonts', f)).toString('base64')}')`;
+const readCss = (name) => readFileSync(resolve(root, 'src', name), 'utf8').replace(/@import url\([^)]*\);/, '')
+  .replace(/url\('\.\.\/fonts\/([\w-]+\.ttf)'\)/g, (_, f) => fontData(f))
   .replace(/url\('\.\.\/gallery\/([\w-]+\.svg)'\)/g, (_, f) => `url('data:image/svg+xml;base64,${readFileSync(resolve(root, 'public/gallery', f)).toString('base64')}')`);
+const css = readCss('styles.css');
+const missionCss = readCss('mission.css');
 const mark = `data:image/svg+xml;base64,${readFileSync(resolve(root, 'public/mark.svg')).toString('base64')}`;
 const config = `window.MISSION_PASSED_CONFIG = Object.freeze(${JSON.stringify(publicConfig())});`
   + `window.MISSION_PASSED_SEARCH_INDEX = ${readFileSync(resolve(root, 'public/search-index.json'), 'utf8').trim()};`;
@@ -18,6 +22,7 @@ function inline(page) {
   let html = readFileSync(resolve(root, page), 'utf8');
   const scripts = [];
   html = html.replace(/<link rel="stylesheet" href="\/assets\/styles.css"\s*\/?>/, `<style>${css}\n.reveal{opacity:1!important;transform:none!important}</style>`);
+  html = html.replace(/<link rel="stylesheet" href="\/assets\/mission.css"\s*\/?>/, () => `<style>${missionCss}</style>`).replace(/<link rel="preload"[^>]*>/g, '');
   scripts.push(config);
   html = html.replace(/<script src="\/config.js"><\/script>/, '');
   html = html.replace(/<script src="\/assets\/([\w-]+\.js)"[^>]*><\/script>/g, (_, f) => { scripts.push(js(f)); return ''; });
@@ -27,19 +32,14 @@ function inline(page) {
 }
 
 const shots = [
-  ['index.html', '01-portada-escritorio', 1440, 900, true],
-  ['index.html', '02-portada-movil', 390, 844, true],
-  ['index.html', '07-galeria', 1440, 900, false, '#gallery'],
-  ['index.html', '10-roadmap', 1440, 900, false, '#roadmap'],
-  ['index.html', '11-portada-viewport', 1440, 900, false],
-  ['index.html', '13-portada-movil-larga', 390, 1500, false],
-  ['index.html', '12-portada-movil-viewport', 390, 844, false],
-  ['index.html', '08-sorteos', 1440, 900, false, '#sorteos'],
-  ['index.html', '09-sorteos-movil', 390, 844, false, '#sorteos'],
-  ['presale/index.html', '03-launch-pool', 1440, 900, true],
-  ['transparency/index.html', '04-transparencia', 1440, 900, true],
-  ['portal/gta-vi.html', '05-portal-gta-vi', 1440, 900, true],
-  ['portal/characters.html', '06-personajes-movil', 390, 844, true],
+  ['index.html', 'n1-portada', 1440, 900, false],
+  ['index.html', 'n2-portada-movil', 390, 1400, false],
+  ['index.html', 'n3-proyecto', 1440, 900, false, '#proyecto'],
+  ['index.html', 'n4-gta', 1440, 900, false, '#gta'],
+  ['index.html', 'n5-galeria', 1440, 900, false, '#gallery'],
+  ['index.html', 'n6-coleccion', 1440, 900, false, '#sorteos'],
+  ['index.html', 'n7-completa', 1440, 900, true],
+  ['index.html', 'n8-completa-movil', 390, 844, true],
 ];
 const dir = '/projects/sandbox/.kiro/artifacts/screenshots';
 const pages = shots.map(([page, name, w, h, full, selector]) => ({ html: inline(page), name, w, h, full, selector }));

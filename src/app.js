@@ -10,10 +10,10 @@
   });
 
   const allocations = [
-    { label: 'Fondo de sorteos · disponible', value: 16, color: '#d8ff3e' },
-    { label: 'Fondo de sorteos · vesting', value: 4, color: '#a58af4' },
-    { label: 'Compradores · Launch Pool', value: 53.33, color: '#56d7d7' },
-    { label: 'Raydium LP · estimado', value: 26.67, color: '#ff7148' },
+    { label: 'Fondo de sorteos · disponible', value: 16, color: '#ff2d9b' },
+    { label: 'Fondo de sorteos · vesting', value: 4, color: '#b26bff' },
+    { label: 'Compradores · Launch Pool', value: 53.33, color: '#3ff0ff' },
+    { label: 'Raydium LP · estimado', value: 26.67, color: '#ffd36e' },
   ];
 
   const $ = (selector) => document.querySelector(selector);
@@ -268,6 +268,71 @@
     }, { passive: true });
   }
 
+  function setupMarquees() {
+    document.querySelectorAll('[data-marquee]').forEach((track) => {
+      if (track.dataset.cloned) return;
+      [...track.children].forEach((child) => {
+        const copy = child.cloneNode(true);
+        copy.setAttribute('aria-hidden', 'true');
+        copy.querySelectorAll('a').forEach((a) => a.setAttribute('tabindex', '-1'));
+        track.append(copy);
+      });
+      track.dataset.cloned = 'true';
+    });
+  }
+
+  function playTrailer(button) {
+    if (!button || button.classList.contains('playing')) return;
+    const src = button.dataset.embed;
+    if (!/^https:\/\/www\.youtube-nocookie\.com\/embed\/[\w-]+$/.test(src || '')) return;
+    const frame = document.createElement('iframe');
+    frame.src = `${src}?autoplay=1&rel=0`;
+    frame.title = button.getAttribute('aria-label') || 'Tráiler oficial';
+    frame.allow = 'autoplay; encrypted-media; picture-in-picture';
+    frame.allowFullscreen = true;
+    frame.referrerPolicy = 'strict-origin-when-cross-origin';
+    button.classList.add('playing');
+    button.append(frame);
+  }
+
+  function setupTrailers() {
+    document.querySelectorAll('.mp-trailer').forEach((button) => button.addEventListener('click', () => playTrailer(button)));
+    document.querySelectorAll('[data-play-trailer]').forEach((trigger) => trigger.addEventListener('click', () => {
+      const main = $('#trailer-main');
+      main?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      window.setTimeout(() => playTrailer(main), 500);
+    }));
+  }
+
+  function setupTabs() {
+    const tabs = document.querySelectorAll('.mp-tabs [data-filter]');
+    tabs.forEach((tab) => tab.addEventListener('click', () => {
+      tabs.forEach((t) => t.setAttribute('aria-selected', String(t === tab)));
+      const filter = tab.dataset.filter;
+      document.querySelectorAll('.mp-card').forEach((card) => card.classList.toggle('is-hidden', filter !== 'all' && card.dataset.rarity !== filter));
+    }));
+  }
+
+  function setupGlow() {
+    document.addEventListener('pointermove', (event) => {
+      const card = event.target.closest?.('.glow-card');
+      if (!card) return;
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${event.clientX - rect.left}px`);
+      card.style.setProperty('--my', `${event.clientY - rect.top}px`);
+    }, { passive: true });
+    const links = [...document.querySelectorAll('.mp-nav a[href^="#"]')];
+    const sections = links.map((a) => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    if (!('IntersectionObserver' in window) || !sections.length) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        links.forEach((a) => a.classList.toggle('active', a.getAttribute('href') === `#${entry.target.id}`));
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach((section) => observer.observe(section));
+  }
+
   function setupProviderEvents() {
     const detected = getWalletProvider();
     if (!detected?.on) return;
@@ -291,6 +356,10 @@
     setupMenu();
     setupCountdown();
     setupLaunchCountdown();
+    setupMarquees();
+    setupTrailers();
+    setupTabs();
+    setupGlow();
     setupCursorGlow();
     setupProviderEvents();
   });
