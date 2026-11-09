@@ -58,6 +58,21 @@
   function stop() { playing = false; window.clearInterval(timer); ctx?.suspend(); label(); store.set('off'); }
   btn.addEventListener('click', (e) => { e.stopPropagation(); playing ? stop() : start(); });
   label(); document.body.appendChild(btn);
+  // Landing page: GTA-style "press to start" screen so the music begins as you enter.
+  if (document.querySelector('.mp-hero')) {
+    const intro = document.createElement('div');
+    intro.className = 'mp-intro'; intro.setAttribute('role', 'dialog'); intro.setAttribute('aria-label', 'Entrar en MISSION PASSED');
+    intro.innerHTML = `<div class="mp-intro-box"><svg class="crown" viewBox="0 0 120 70" aria-hidden="true"><path d="M8 62 L14 14 L40 40 L60 6 L80 40 L106 14 L112 62 Z"/></svg>
+      <p class="mp-intro-logo" translate="no"><b>Mission</b><b>Passed</b><i>$MP</i></p>
+      <button type="button" class="mp-btn mp-btn-hot mp-intro-go">▶ Pulsa para entrar</button>
+      <button type="button" class="mp-intro-mute">Entrar sin música</button>
+      <small>Radio MP · música original synthwave</small></div>`;
+    document.body.appendChild(intro);
+    const close = (withMusic) => { if (withMusic) start(); else stop(); intro.classList.add('out'); window.setTimeout(() => intro.remove(), 600); };
+    intro.querySelector('.mp-intro-go').addEventListener('click', (e) => { e.stopPropagation(); close(true); });
+    intro.querySelector('.mp-intro-mute').addEventListener('click', (e) => { e.stopPropagation(); close(false); });
+    intro.querySelector('.mp-intro-go').focus();
+  }
   // Auto-start on first interaction unless the visitor muted it before.
   if (store.get() !== 'off') {
     const first = (e) => { if (e.target.closest?.('.radio-toggle')) return; start(); ['pointerdown', 'keydown'].forEach((ev) => document.removeEventListener(ev, first)); };
