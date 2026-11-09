@@ -1,0 +1,18 @@
+{
+  "name": "MISSION PASSED",
+  "symbol": "MP",
+  "description": "MISSION PASSED (MP) is a community memecoin on Solana. 20% community giveaway fund held in the creator wallet; 80% for buyers and liquidity. Independent project, not affiliated with Rockstar Games.",
+  "image": "https://raw.githubusercontent.com/jose23andres-bit/MISSION-PASSED/main/public/token-logo.png",
+  "external_url": "https://github.com/jose23andres-bit/MISSION-PASSED",
+  "attributes": [
+    { "trait_type": "Network", "value": "Solana" },
+    { "trait_type": "Giveaway Fund (creator custody)", "value": "20%" },
+    { "trait_type": "Market and Liquidity", "value": "80%" }
+  ],
+  "properties": {
+    "category": "image",
+    "files": [
+      { "uri": "https://raw.githubusercontent.com/jose23andres-bit/MISSION-PASSED/main/public/token-logo.png", "type": "image/png" }
+    ]
+  }
+}
