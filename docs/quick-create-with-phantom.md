@@ -14,24 +14,33 @@ Toda la configuración vive en `launch.plan.json`. Tu Phantom solo aparece como 
 
 El ejecutor Devnet comprueba que el logo responde antes de enviar nada.
 
-## 3. Ensayo en Devnet (30 min)
+## 3. Ensayo en Devnet desde GitHub (sin instalar nada)
+
+1. Fusiona el PR en `main`.
+2. En GitHub abre **Actions → Devnet rehearsal → Run workflow**.
+3. Escribe `DEVNET` en la confirmación y deja `15` minutos.
+4. Pulsa **Run workflow**.
+
+El workflow hace lo siguiente:
+
+- pasa las pruebas y el dry run;
+- crea una wallet Devnet temporal dentro de GitHub y le pide SOL de prueba al faucet;
+- crea y registra el Launch Pool en Devnet;
+- comprueba en cadena que hay 1.000.000.000 MP, que la cuenta Genesis pertenece al programa y que ni la wallet temporal ni la tuya tienen tokens sin vesting;
+- borra la wallet temporal.
+
+El resultado queda como artefacto del run (`genesis-devnet.json` y `genesis-devnet-verify.json`) con el enlace a Solscan. Devnet no usa dinero real. Si el faucet está saturado, vuelve a lanzarlo más tarde.
+
+### Alternativa en tu ordenador
 
 ```bash
 npm install
-solana-keygen new -o ~/mp-devnet.json   # wallet desechable, solo Devnet
-solana airdrop 2 --keypair ~/mp-devnet.json --url devnet
-export GENESIS_DEVNET_KEYPAIR_PATH=~/mp-devnet.json
-```
-
-Pon `network.devnetApproved` a `true` y ejecuta:
-
-```bash
+node scripts/genesis/ephemeral-keypair.mjs ~/mp-devnet.json
+node scripts/genesis/airdrop.mjs <DIRECCIÓN_QUE_IMPRIME> 2
+export GENESIS_DEVNET_KEYPAIR_PATH=~/mp-devnet.json MP_DEVNET_CONFIRMED=DEVNET
 npm run genesis:devnet -- --execute --start-in-minutes 15
+node scripts/genesis/verify-launch.mjs
 ```
-
-El script comprueba que el RPC es Devnet, crea el lanzamiento, firma con la wallet desechable y lo registra. El resultado queda en `deployment/genesis-devnet.json`.
-
-Verifica en Solscan (`?cluster=devnet`) el suministro, los tres vestings y la cantidad que va al LP.
 
 ## 4. Mainnet
 

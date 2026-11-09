@@ -44,7 +44,9 @@ if (!execute) {
   process.exit(0);
 }
 
-if (plan.network?.devnetApproved !== true) throw new Error('launch.plan.json: network.devnetApproved debe ser true para ejecutar en Devnet.');
+// Approval: either the plan flag, or the word DEVNET typed when launching the GitHub workflow.
+const approved = plan.network?.devnetApproved === true || process.env.MP_DEVNET_CONFIRMED === 'DEVNET';
+if (!approved) throw new Error('Ensayo no autorizado: pon network.devnetApproved=true o lanza el workflow escribiendo DEVNET.');
 const keypairPath = process.env.GENESIS_DEVNET_KEYPAIR_PATH;
 if (!keypairPath) throw new Error('Falta GENESIS_DEVNET_KEYPAIR_PATH: ruta a un keypair JSON de Devnet desechable (nunca tu seed de Phantom).');
 const rpcUrl = process.env.GENESIS_DEVNET_RPC_URL || 'https://api.devnet.solana.com';
