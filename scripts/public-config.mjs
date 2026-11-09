@@ -23,14 +23,14 @@ export function publicConfig(env = process.env) {
   const basePath = rawBase && rawBase !== '/' ? `/${rawBase.replace(/^\/+|\/+$/g, '')}` : '';
   const network = ['devnet', 'testnet', 'mainnet-beta'].includes(env.VITE_SOLANA_NETWORK) ? env.VITE_SOLANA_NETWORK : 'devnet';
   const rpcUrl = env.VITE_SOLANA_RPC_URL || (network === 'mainnet-beta' ? 'https://api.mainnet-beta.solana.com' : `https://api.${network}.solana.com`);
-  const start = env.VITE_LAUNCHPOOL_DEPOSIT_START || '2026-11-11T11:14:36Z';
+  const start = env.VITE_LAUNCHPOOL_DEPOSIT_START || '2026-11-15T19:00:00Z';
   const startMs = Date.parse(start);
   return {
     basePath,
     network,
     rpcUrl,
     tokenMint: publicKey(env.VITE_TOKEN_MINT),
-    tokenLaunchAt: env.VITE_TOKEN_LAUNCH_AT || '2026-11-11T11:14:36Z',
+    tokenLaunchAt: env.VITE_TOKEN_LAUNCH_AT || '2026-11-15T19:00:00Z',
     treasuryWallet: publicKey(env.VITE_TREASURY_WALLET || '4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj'),
     genesisAccount: publicKey(env.VITE_GENESIS_ACCOUNT),
     launchpool: {

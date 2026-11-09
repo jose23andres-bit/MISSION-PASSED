@@ -37,12 +37,17 @@ const shots = [
   ['index.html', 'n3-proyecto', 1440, 900, false, '#proyecto'],
   ['index.html', 'n4-gta', 1440, 900, false, '#gta'],
   ['index.html', 'n5-galeria', 1440, 900, false, '#gallery'],
+  ['index.html', 'n9-mision', 1440, 900, false, '#mision'],
+  ['index.html', 'n10-mision-movil', 390, 900, false, '#mision'],
+  ['index.html', 'n11-premio', 1440, 900, false, '.mp-grand'],
   ['index.html', 'n6-coleccion', 1440, 900, false, '#sorteos'],
+  ['index.html', 'n12-idiomas', 390, 844, false, null, '.lang-toggle'],
   ['index.html', 'n7-completa', 1440, 900, true],
   ['index.html', 'n8-completa-movil', 390, 844, true],
 ];
 const dir = '/projects/sandbox/.kiro/artifacts/screenshots';
-const pages = shots.map(([page, name, w, h, full, selector]) => ({ html: inline(page), name, w, h, full, selector }));
+const only = process.argv.includes('--only') ? process.argv[process.argv.indexOf('--only') + 1].split(',') : null;
+const pages = shots.filter(([, name]) => !only || only.includes(name)).map(([page, name, w, h, full, selector, click]) => ({ html: inline(page), name, w, h, full, selector, click }));
 const code = `async (page) => {
   const shots = ${JSON.stringify(pages)};
   const out = [];
@@ -52,6 +57,7 @@ const code = `async (page) => {
     await page.waitForTimeout(400);
     await page.evaluate(() => { document.documentElement.style.scrollBehavior = 'auto'; window.scrollTo(0, 0); });
     await page.waitForTimeout(150);
+    if (s.click) { await page.click(s.click); await page.waitForTimeout(200); }
     const path = '${dir}/mission-passed-' + s.name + '.jpg';
     if (s.selector) await page.locator(s.selector).screenshot({ path, type: 'jpeg', quality: 80 });
     else if (s.full) await page.screenshot({ path, fullPage: true, type: 'jpeg', quality: 72 });

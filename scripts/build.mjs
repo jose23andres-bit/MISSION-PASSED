@@ -29,7 +29,7 @@ await cp(resolve(root, 'public'), dist, { recursive: true });
 for (const dir of ['docs', 'portal', 'presale', 'transparency', 'admin', 'blockchain']) {
   await cp(resolve(root, dir), resolve(dist, dir), { recursive: true });
 }
-for (const file of ['app.js', 'portal-search.js', 'chain-dashboard.js', 'admin.js', 'styles.css', 'mission.css']) {
+for (const file of ['app.js', 'portal-search.js', 'chain-dashboard.js', 'admin.js', 'lang.js', 'radio.js', 'styles.css', 'mission.css']) {
   await cp(resolve(root, 'src', file), resolve(dist, 'assets', file));
 }
 await writeFile(resolve(dist, 'index.html'), await readFile(resolve(root, 'index.html'), 'utf8'));

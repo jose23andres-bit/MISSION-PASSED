@@ -259,6 +259,58 @@
     if (render()) window.setInterval(render, 1000);
   }
 
+  // Flip-clock countdown to the Launch Pool opening, with a siren pulse,
+  // a "wanted level" that rises as the date approaches and a time-based load bar.
+  function setupMissionClock() {
+    const clock = $('#mission-clock');
+    const target = new Date(config.launchpool?.depositStart || config.tokenLaunchAt || '');
+    if (!clock || Number.isNaN(target.getTime())) return;
+    const announced = Date.parse('2026-11-09T00:00:00Z');
+    const section = $('#mision');
+    const units = Object.fromEntries(['d', 'h', 'm', 's'].map((u) => [u, clock.querySelectorAll(`[data-unit="${u}"] b`)]));
+    const stars = [...document.querySelectorAll('#wanted-stars i')];
+    const bar = $('#mission-bar');
+    const percent = $('#mission-percent');
+    const setDigits = (nodes, value) => {
+      const text = String(value).padStart(2, '0').slice(-2);
+      nodes.forEach((node, i) => {
+        if (node.textContent === text[i]) return;
+        node.textContent = text[i];
+        node.classList.remove('flip');
+        void node.offsetWidth;
+        node.classList.add('flip');
+      });
+    };
+    const render = () => {
+      const now = Date.now();
+      const remaining = Math.max(target.getTime() - now, 0);
+      if (remaining === 0) {
+        clock.hidden = true;
+        $('#mission-live').hidden = false;
+        section?.classList.add('is-live');
+        stars.forEach((s) => s.classList.add('on'));
+        if (bar) bar.style.width = '100%';
+        if (percent) percent.textContent = '100%';
+        return false;
+      }
+      const t = Math.floor(remaining / 1000);
+      const d = Math.floor(t / 86400);
+      setDigits(units.d, Math.min(d, 99));
+      setDigits(units.h, Math.floor((t % 86400) / 3600));
+      setDigits(units.m, Math.floor((t % 3600) / 60));
+      setDigits(units.s, t % 60);
+      const level = Math.max(0, Math.min(5, 5 - d));
+      stars.forEach((s, i) => s.classList.toggle('on', i < level));
+      const share = Math.max(0, Math.min(1, (now - announced) / (target.getTime() - announced)));
+      if (bar) bar.style.width = `${(share * 100).toFixed(1)}%`;
+      if (percent) percent.textContent = `${Math.floor(share * 100)}%`;
+      clock.setAttribute('aria-label', `${d} días, ${Math.floor((t % 86400) / 3600)} horas y ${Math.floor((t % 3600) / 60)} minutos para la apertura`);
+      section?.classList.toggle('tick', t % 2 === 0);
+      return true;
+    };
+    if (render()) window.setInterval(render, 1000);
+  }
+
   function setupCursorGlow() {
     const glow = $('#cursor-glow');
     if (!glow || window.matchMedia('(pointer: coarse)').matches) return;
@@ -356,6 +408,7 @@
     setupMenu();
     setupCountdown();
     setupLaunchCountdown();
+    setupMissionClock();
     setupMarquees();
     setupTrailers();
     setupTabs();

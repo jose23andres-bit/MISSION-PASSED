@@ -18,7 +18,7 @@
     <title>MISSION PASSED · $MP · Solana</title>
     <script src="/config.js"></script>
     <script src="/assets/app.js" defer></script>
-  </head>
+  <script src="/assets/lang.js" defer></script><script src="/assets/radio.js" defer></script></head>
   <body class="mp">
     <a class="skip-link" href="#main">Saltar al contenido</a>
     <div class="grain" aria-hidden="true"></div>
@@ -26,12 +26,13 @@
     <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
 
     <header class="site-header mp-header" id="site-header">
-      <a class="mp-logo" href="#top" aria-label="MISSION PASSED, inicio">
+      <a class="mp-logo" translate="no" href="#top" aria-label="MISSION PASSED, inicio">
         <img class="mp-logo-img" src="/photos/logo.png" alt="MISSION PASSED" onload="this.parentNode.classList.add('has-img')" onerror="this.remove()" />
         <span class="mp-logo-text" aria-hidden="true"><svg class="crown" viewBox="0 0 120 70"><path d="M8 62 L14 14 L40 40 L60 6 L80 40 L106 14 L112 62 Z" /></svg><b>Mission</b><b>Passed</b><i>$MP</i></span>
       </a>
       <nav class="site-nav mp-nav" id="site-nav" aria-label="Navegación principal">
         <a href="#top">Inicio</a>
+        <a href="#mision">Día 15</a>
         <a href="#proyecto">El proyecto</a>
         <a href="#gta">GTA VI</a>
         <a href="#sorteos">Colección</a>
@@ -52,6 +53,7 @@
       <button class="fullmenu-close" id="fullmenu-close" type="button" aria-label="Cerrar menú">✕</button>
       <nav class="fullmenu-nav" aria-label="Menú completo">
         <a href="#top">Inicio</a>
+        <a href="#mision">Día 15</a>
         <a href="#proyecto">El proyecto</a>
         <a href="#gta">GTA VI</a>
         <a href="#gallery">Galería</a>
@@ -75,7 +77,7 @@
         <div class="mp-hero-shade" aria-hidden="true"></div>
         <div class="mp-hero-content">
           <svg class="crown crown-hero" viewBox="0 0 120 70" aria-hidden="true"><path d="M8 62 L14 14 L40 40 L60 6 L80 40 L106 14 L112 62 Z" /></svg>
-          <h1 id="hero-title" class="mp-wordmark"><span data-text="Mission">Mission</span><span data-text="Passed">Passed</span><em>$MP</em></h1>
+          <h1 id="hero-title" class="mp-wordmark" translate="no"><span data-text="Mission">Mission</span><span data-text="Passed">Passed</span><em>$MP</em></h1>
           <p class="mp-hero-copy">La memecoin de Solana con alma de Vice City. Entra en el Launch Pool, consigue tu pase y participa en los sorteos de copias de <strong>GTA VI</strong>.</p>
           <div class="mp-hero-actions">
             <a class="mp-btn mp-btn-hot" href="/presale/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h15a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3Zm0 0 13-4v4M16 13h2" /></svg>Launch Pool <b>›</b></a>
@@ -90,7 +92,7 @@
         </div>
         <a class="mp-scroll" href="#proyecto"><span>Descubre el proyecto</span><i aria-hidden="true"></i></a>
         <div class="mp-hero-bar">
-          <div class="bar-label"><svg class="crown" viewBox="0 0 120 70" aria-hidden="true"><path d="M8 62 L14 14 L40 40 L60 6 L80 40 L106 14 L112 62 Z" /></svg><div><strong id="launch-bar-title">Launch Pool $MP</strong><span id="launch-bar-sub">Apertura prevista · 48 horas de acceso</span></div></div>
+          <div class="bar-label"><svg class="crown" viewBox="0 0 120 70" aria-hidden="true"><path d="M8 62 L14 14 L40 40 L60 6 L80 40 L106 14 L112 62 Z" /></svg><div><strong id="launch-bar-title">Launch Pool $MP</strong><span id="launch-bar-sub">15 nov · 20:00 Madrid · 48 horas de acceso</span></div></div>
           <div class="bar-countdown" id="launch-countdown" role="timer" aria-live="off">
             <div><strong id="launch-days">00</strong><span>Días</span></div>
             <div><strong id="launch-hours">00</strong><span>Horas</span></div>
@@ -105,6 +107,42 @@
       <section class="mp-ticker" aria-label="Datos destacados">
         <div class="mp-ticker-track" data-marquee>
           <span>MISSION PASSED</span><i></i><span>VICE CITY</span><i></i><span>LEONIDA</span><i></i><span>JASON &amp; LUCIA</span><i></i><span>GTA VI · 19.11.2026</span><i></i><span>999 PASES NFT</span><i></i><span>1.000.000.000 $MP</span><i></i><span>SOLANA</span><i></i>
+        </div>
+      </section>
+
+      <!-- MISSION COUNTDOWN · 15.11 -->
+      <section class="mp-mission" id="mision" aria-labelledby="mission-title">
+        <div class="mp-siren" aria-hidden="true"><i></i><i></i></div>
+        <div class="mp-mission-inner">
+          <div class="mp-brief reveal">
+            <p class="mp-brief-tag">Nueva misión disponible</p>
+            <h2 class="mp-sign" id="mission-title"><span>La misión</span><span>empieza en</span></h2>
+            <dl class="mp-brief-list">
+              <div><dt>Objetivo</dt><dd>Entrar en el Launch Pool $MP</dd></div>
+              <div><dt>Fecha</dt><dd>15 nov 2026 · 20:00 (Madrid)</dd></div>
+              <div><dt>Zona</dt><dd>Solana · Metaplex Genesis</dd></div>
+              <div><dt>Recompensa</dt><dd>Tus MP + acceso a los sorteos</dd></div>
+            </dl>
+          </div>
+          <div class="mp-flipclock" id="mission-clock" role="timer" aria-live="off">
+            <div class="flip-unit"><div class="flip-digits" data-unit="d"><b>0</b><b>0</b></div><span>Días</span></div>
+            <i class="flip-colon" aria-hidden="true">:</i>
+            <div class="flip-unit"><div class="flip-digits" data-unit="h"><b>0</b><b>0</b></div><span>Horas</span></div>
+            <i class="flip-colon" aria-hidden="true">:</i>
+            <div class="flip-unit"><div class="flip-digits" data-unit="m"><b>0</b><b>0</b></div><span>Min</span></div>
+            <i class="flip-colon" aria-hidden="true">:</i>
+            <div class="flip-unit"><div class="flip-digits" data-unit="s"><b>0</b><b>0</b></div><span>Seg</span></div>
+          </div>
+          <div class="mp-wanted" aria-label="Nivel de búsqueda: sube a medida que se acerca la apertura">
+            <small>Nivel de búsqueda</small>
+            <div class="wanted-stars" id="wanted-stars"><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="mp-loadbar">
+            <div class="loadbar-head"><small>Cargando misión</small><strong id="mission-percent">0%</strong></div>
+            <div class="loadbar-track"><i id="mission-bar"></i></div>
+            <p>Tiempo transcurrido desde el anuncio (9 nov) hasta la apertura. Las cifras de venta se verán en directo en el Launch Pool.</p>
+          </div>
+          <div class="mp-mission-done" id="mission-live" hidden><strong>Misión en marcha</strong><a class="mp-btn mp-btn-hot" href="/presale/">Ir al Launch Pool <b>›</b></a></div>
         </div>
       </section>
 
@@ -219,6 +257,20 @@
           <article class="mp-card glow-card reveal" data-rarity="epico" style="--hue:250deg"><div class="mp-card-art"><img src="/photos/nft-3.jpg" data-fallback="/gallery/pass-preview.svg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="Diseño de pase épico" loading="lazy" /></div><span class="mp-rarity">Épico</span><h3>Mission Pass #512</h3><p>Diseño en preparación</p></article>
           <article class="mp-card glow-card reveal" data-rarity="legendario" style="--hue:40deg"><div class="mp-card-art"><img src="/photos/nft-4.jpg" data-fallback="/gallery/pass-preview.svg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="Diseño de pase legendario" loading="lazy" /></div><span class="mp-rarity">Legendario</span><h3>Mission Pass #999</h3><p>Diseño en preparación</p></article>
         </div>
+        <article class="mp-grand glow-card reveal" aria-labelledby="grand-title">
+          <div class="mp-grand-badge" aria-hidden="true"><svg class="crown" viewBox="0 0 120 70"><path d="M8 62 L14 14 L40 40 L60 6 L80 40 L106 14 L112 62 Z" /></svg><span>#999</span></div>
+          <div class="mp-grand-copy">
+            <p class="mp-eyebrow">Gran premio legendario</p>
+            <h3 id="grand-title">Viaje a Miami<br /><em>+ PS5 + GTA VI</em></h3>
+            <p>El último pase de la colección es el legendario. Su poseedor gana un viaje a Miami, una PS5 y una copia de GTA VI, pagados con el fondo común.</p>
+            <ul class="mp-grand-list">
+              <li><b>01</b>Se entrega al cerrar la colección de 999 pases.</li>
+              <li><b>02</b>Requisito mínimo de $MP por wallet y fecha límite: se publican aquí antes de la apertura.</li>
+              <li><b>03</b>El pago del premio sale de la wallet del fondo y se puede comprobar en Solscan.</li>
+            </ul>
+          </div>
+          <div class="mp-grand-prizes" aria-hidden="true"><span>Miami</span><span>PS5</span><span>GTA VI</span></div>
+        </article>
         <div class="mp-stats">
           <div class="glow-card reveal"><strong>999</strong><span>Pases NFT · todavía no acuñados</span></div>
           <div class="glow-card reveal"><strong>20%</strong><span>200.000.000 MP · 16% disponible y 4% con vesting de 12 meses</span></div>
@@ -226,7 +278,7 @@
         </div>
         <div class="mp-custody reveal">
           <small>Custodia del fondo</small>
-          <p>El fondo está en la wallet pública <code>4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj</code>, controlada por el creador. Cada movimiento queda a la vista en Solscan. Las bases (cómo conseguir un pase, fechas y número de premios) se publicarán aquí antes del primer sorteo.</p>
+          <p>El fondo está en la wallet pública <code translate="no">4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj</code>, controlada por el creador. Cada movimiento queda a la vista en Solscan. Las bases (cómo conseguir un pase, fechas y número de premios) se publicarán aquí antes del primer sorteo.</p>
           <a class="mp-btn mp-btn-light" href="https://solscan.io/account/4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj" target="_blank" rel="noreferrer">Seguir el fondo en Solscan<span class="ext" aria-hidden="true">↗</span></a>
         </div>
       </section>
@@ -239,7 +291,7 @@
           <p>Del Launch Pool al primer sorteo, paso a paso.</p>
         </div>
         <ol class="mp-road">
-          <li class="glow-card reveal"><span>Fase 01 · 11 nov 2026</span><h3>Launch Pool $MP</h3><p>48 horas de depósitos en Metaplex Genesis. Al cerrar, cada comprador reclama sus MP y se crea la liquidez en Raydium.</p></li>
+          <li class="glow-card reveal"><span>Fase 01 · 15 nov 2026</span><h3>Launch Pool $MP</h3><p>48 horas de depósitos en Metaplex Genesis. Al cerrar, cada comprador reclama sus MP y se crea la liquidez en Raydium.</p></li>
           <li class="glow-card reveal"><span>Fase 02 · 19 nov 2026</span><h3>Llega GTA VI</h3><p>Lanzamiento oficial del juego por Rockstar Games. La comunidad lo celebra en directo.</p></li>
           <li class="glow-card reveal"><span>Fase 03</span><h3>999 Mission Pass</h3><p>Acuñación de los pases NFT que dan acceso a los sorteos.</p></li>
           <li class="glow-card reveal"><span>Fase 04</span><h3>Sorteos GTA VI</h3><p>Sorteos de copias del juego pagados con el fondo común, con bases publicadas y ganadores verificables.</p></li>
@@ -317,7 +369,7 @@
           <details class="glow-card reveal"><summary>¿Qué es MISSION PASSED?<span>+</span></summary><p>Una memecoin comunitaria en Solana inspirada en la estética de Vice City, con un fondo común para sortear copias de GTA VI.</p></details>
           <details class="glow-card reveal"><summary>¿Cuándo se puede comprar MP?<span>+</span></summary><p>Cuando abra el Launch Pool en Metaplex Genesis. Ese día el botón de compra se activa aquí y en la página del Launch Pool.</p></details>
           <details class="glow-card reveal"><summary>¿Dónde se deposita el SOL?<span>+</span></summary><p>En el programa Genesis desde la página oficial del lanzamiento, firmando con tu propia wallet.</p></details>
-          <details class="glow-card reveal"><summary>¿Para qué es el 20%?<span>+</span></summary><p>Es el fondo común de sorteos: 16% disponible y 4% con vesting. Está en la wallet pública <code>4hqD…cXnj</code>, que controla el creador, y cada movimiento puede seguirse en Solscan. No se revoca ninguna autoridad automáticamente.</p></details>
+          <details class="glow-card reveal"><summary>¿Para qué es el 20%?<span>+</span></summary><p>Es el fondo común de sorteos: 16% disponible y 4% con vesting. Está en la wallet pública <code translate="no">4hqD…cXnj</code>, que controla el creador, y cada movimiento puede seguirse en Solscan. No se revoca ninguna autoridad automáticamente.</p></details>
           <details class="glow-card reveal"><summary>¿Qué blockchain se utiliza?<span>+</span></summary><p>Solana. Necesitas una wallet como Phantom y SOL para depositar.</p></details>
           <details class="glow-card reveal"><summary>¿Está relacionado con Rockstar?<span>+</span></summary><p>No. MISSION PASSED es un proyecto independiente. Los vídeos y enlaces de GTA VI llevan a las publicaciones oficiales de Rockstar Games.</p></details>
         </div>
