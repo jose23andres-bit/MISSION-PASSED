@@ -17,7 +17,7 @@
 | Wallet creador/fondos | `4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj` |
 | Saldo comunicado | 0,11 SOL; coste exacto pendiente de simulación |
 | Autoridades | Sin revocación automática |
-| Apertura solicitada | 11 nov 2026 11:14:36 UTC |
+| Apertura solicitada | 15 nov 2026 19:00:00 UTC (20:00 Madrid) |
 | Cierre | 48 horas después |
 | Mint / Genesis | No creados |
 | Auditoría propia | Ninguna |

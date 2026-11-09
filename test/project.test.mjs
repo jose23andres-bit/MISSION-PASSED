@@ -47,7 +47,7 @@ test('production config defaults to the published wallet and final Launch Pool',
   assert.equal(config.treasuryWallet, '4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj');
   assert.equal(config.launchpool.tokenAllocation, 533_333_333);
   assert.equal(config.launchpool.raiseGoalSol, 250);
-  assert.equal(config.launchpool.depositStart, '2026-11-11T11:14:36.000Z');
+  assert.equal(config.launchpool.depositStart, '2026-11-15T19:00:00.000Z');
 });
 
 test('redesign uses official Rockstar links and embeds without copying Rockstar images', async () => {

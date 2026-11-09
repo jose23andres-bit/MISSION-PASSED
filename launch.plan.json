@@ -1,7 +1,7 @@
 {
   "project": "MISSION PASSED",
   "requestedAtUtc": "2026-11-09T11:14:36Z",
-  "requestedTargetAtUtc": "2026-11-11T11:14:36Z",
+  "requestedTargetAtUtc": "2026-11-15T19:00:00Z",
   "requestedDelayHours": 48,
   "status": "READY_FOR_DEVNET_PENDING_APPROVAL",
   "creatorPublicWallet": "4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj",
@@ -62,7 +62,7 @@
     },
     "launchpool": {
       "tokenAllocation": 533333333,
-      "depositStartTime": "2026-11-11T11:14:36Z",
+      "depositStartTime": "2026-11-15T19:00:00Z",
       "depositDurationHours": 48,
       "raiseGoalSol": 250,
       "raydiumLiquidityBps": 5000,
@@ -74,7 +74,7 @@
         "name": "Giveaway Fund Vested",
         "recipient": "4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj",
         "tokenAmount": 40000000,
-        "vestingStartTime": "2026-11-13T11:14:36Z",
+        "vestingStartTime": "2026-11-17T19:00:00Z",
         "vestingDuration": {
           "value": 1,
           "unit": "YEAR"
