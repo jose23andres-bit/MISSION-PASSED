@@ -4,6 +4,6 @@
   "start_url": "/",
   "display": "standalone",
   "background_color": "#07090b",
-  "theme_color": "#07090b",
+  "theme_color": "#f45b76",
   "icons": [{ "src": "/mark.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
 }
