@@ -243,3 +243,7 @@ html, body { overflow-x: clip; }
 
 /* Author display rules must never override the semantic hidden state. */
 [hidden] { display: none !important; }
+
+.buyer-steps { margin: 1.5rem 0 0; }
+.buyer-steps .content-card { min-height: 210px; }
+.buyer-steps .content-card h2 { color: var(--acid); font-size: 1.65rem; }

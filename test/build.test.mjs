@@ -15,3 +15,19 @@ test('production build emits a deployable static site', async () => {
   assert.match(config, /"network": "devnet"/);
   assert.doesNotMatch(config, /SOLANA_KEYPAIR_PATH|ALLOW_MAINNET/);
 });
+
+test('GitHub Pages build prefixes every public route', async () => {
+  execFileSync(process.execPath, ['scripts/build.mjs'], { cwd: root, env: { ...process.env, SITE_BASE_PATH: '/MISSION-PASSED' } });
+  const [html, config, search, manifest] = await Promise.all([
+    readFile(resolve(root, 'dist/index.html'), 'utf8'),
+    readFile(resolve(root, 'dist/config.js'), 'utf8'),
+    readFile(resolve(root, 'dist/search-index.json'), 'utf8'),
+    readFile(resolve(root, 'dist/site.webmanifest'), 'utf8'),
+  ]);
+  assert.match(html, /href="\/MISSION-PASSED\/assets\/styles\.css"/);
+  assert.match(html, /href="\/MISSION-PASSED\/presale\/"/);
+  assert.match(config, /"basePath": "\/MISSION-PASSED"/);
+  assert.ok(JSON.parse(search).every((item) => item.url.startsWith('/MISSION-PASSED')));
+  assert.equal(JSON.parse(manifest).start_url, '/MISSION-PASSED/');
+  execFileSync(process.execPath, ['scripts/build.mjs'], { cwd: root });
+});
