@@ -413,3 +413,14 @@ body.mp .mp-footer .independent-badge { position: static; color: #a993b6; }
 @media (prefers-reduced-motion: reduce) {
   .mp-mission::after,.flip-digits b.flip,.wanted-stars i.on,.loadbar-track i,.mp-grand::before,.mp-grand-badge { animation: none; }
 }
+
+/* ---------- entry screen (starts Radio MP) ---------- */
+.mp-intro { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 1.5rem; background: radial-gradient(circle at 50% 40%,rgba(255,45,155,.35),transparent 55%),linear-gradient(180deg,rgba(13,4,20,.92),rgba(6,1,10,.97)),url('../gallery/00-hero-leonida.svg') center/cover; transition: opacity .6s; }
+.mp-intro.out { opacity: 0; pointer-events: none; }
+.mp-intro-box { display: grid; justify-items: center; gap: 1.1rem; text-align: center; }
+.mp-intro-box .crown { width: 84px; }
+.mp-intro-logo { display: grid; margin: 0; font: 400 clamp(3.2rem,11vw,7rem)/.85 var(--brush); text-transform: uppercase; color: #fff; text-shadow: 4px 4px 0 var(--hot),8px 8px 0 #4a0b5c,0 0 50px rgba(255,45,155,.6); transform: rotate(-4deg); }
+.mp-intro-logo i { justify-self: end; color: var(--hot-2); font: 400 .32em/1 var(--brush); font-style: normal; text-shadow: 0 0 18px var(--hot); }
+.mp-intro-go { min-width: 260px; animation: hotPulse 1.6s infinite; }
+.mp-intro-mute { border: 0; color: #cdb7da; background: none; cursor: pointer; font: 600 .85rem var(--ui); text-decoration: underline; }
+.mp-intro-box small { color: #8f7a9c; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; }
