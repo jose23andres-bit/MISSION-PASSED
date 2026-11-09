@@ -187,9 +187,6 @@
       progress.style.width = `${ratio * 100}%`;
       header.classList.toggle('scrolled', window.scrollY > 24);
       if (routeProgress) routeProgress.style.height = `${Math.min(Math.max((ratio - .38) * 270, 0), 100)}%`;
-      const parallax = Math.min(window.scrollY * .12, 100);
-      document.querySelectorAll('.city-back').forEach((el) => { el.style.transform = `translateY(${parallax * .35}px)`; });
-      document.querySelectorAll('.city-front').forEach((el) => { el.style.transform = `translateY(${parallax * .18}px)`; });
     };
     update();
     window.addEventListener('scroll', update, { passive: true });
@@ -197,18 +194,41 @@
 
   function setupMenu() {
     const toggle = $('#menu-toggle');
-    const nav = $('#site-nav');
-    toggle.addEventListener('click', () => {
-      const open = !nav.classList.contains('open');
-      nav.classList.toggle('open', open);
+    const menu = $('#fullmenu');
+    const close = $('#fullmenu-close');
+    if (!toggle || !menu) return;
+    const setOpen = (open) => {
+      menu.hidden = !open;
       toggle.setAttribute('aria-expanded', String(open));
       document.body.classList.toggle('menu-open', open);
-    });
-    nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
-      nav.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
-      document.body.classList.remove('menu-open');
-    }));
+      if (open) menu.querySelector('.fullmenu-nav a')?.focus();
+      else toggle.focus();
+    };
+    toggle.addEventListener('click', () => setOpen(menu.hidden));
+    close?.addEventListener('click', () => setOpen(false));
+    menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !menu.hidden) setOpen(false); });
+  }
+
+  function setupLaunchCountdown() {
+    const target = new Date(config.launchpool?.depositStart || config.tokenLaunchAt || '');
+    const box = $('#launch-countdown');
+    if (!box || Number.isNaN(target.getTime())) return;
+    const ids = ['days', 'hours', 'minutes', 'seconds'].map((k) => $(`#launch-${k}`));
+    const render = () => {
+      const remaining = Math.max(target.getTime() - Date.now(), 0);
+      if (remaining === 0) {
+        box.hidden = true;
+        $('#launch-bar-sub').textContent = 'Consulta el estado en la página del Launch Pool';
+        return false;
+      }
+      const t = Math.floor(remaining / 1000);
+      [Math.floor(t / 86400), Math.floor((t % 86400) / 3600), Math.floor((t % 3600) / 60), t % 60]
+        .forEach((value, i) => { ids[i].textContent = String(value).padStart(2, '0'); });
+      box.setAttribute('aria-label', `${ids[0].textContent} días, ${ids[1].textContent} horas y ${ids[2].textContent} minutos para la apertura`);
+      return true;
+    };
+    if (render()) window.setInterval(render, 1000);
   }
 
   function setupCountdown() {
@@ -270,6 +290,7 @@
     setupScroll();
     setupMenu();
     setupCountdown();
+    setupLaunchCountdown();
     setupCursorGlow();
     setupProviderEvents();
   });

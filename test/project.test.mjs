@@ -9,7 +9,8 @@ test('landing contains every required section and no placeholder links', async (
   const html = await readFile(resolve(root, 'index.html'), 'utf8');
   for (const id of ['gta', 'editions', 'tokenomics', 'buy', 'launch', 'faq']) assert.match(html, new RegExp(`id="${id}"`));
   assert.doesNotMatch(html, /href=["']#["']/);
-  assert.match(html, /AVISO DE RIESGO/);
+  assert.match(html, /id="roadmap"/);
+  assert.match(html, /id="launch-countdown"/);
   assert.match(html, /16% disponible · 4% vesting/);
 });
 
@@ -69,8 +70,8 @@ test('giveaway fund is labelled with its real custody and the gallery is origina
   assert.equal(plan.giveawayFund.custodyWallet, plan.creatorPublicWallet);
   assert.equal(plan.giveawayFund.nftPasses.supply, 999);
   assert.match(html, /https:\/\/www\.rockstargames\.com\/VI\/media\/screenshots/);
-  const shots = [...html.matchAll(/<img src="\/gallery\/([^"]+)"/g)].map((m) => m[1]);
-  assert.equal(shots.length, 6);
+  const shots = [...html.matchAll(/<img[^>]*src="\/gallery\/([^"]+)"/g)].map((m) => m[1]);
+  assert.equal(shots.length, 8); // hero + 6 postcards + pass design
   for (const shot of shots) {
     const svg = await readFile(resolve(root, 'public/gallery', shot), 'utf8');
     assert.match(svg, /Ilustración original MISSION PASSED/);
