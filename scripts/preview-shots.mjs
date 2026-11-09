@@ -31,8 +31,6 @@ const shots = [
   ['transparency/index.html', '04-transparencia', 1440, 900, true],
   ['portal/gta-vi.html', '05-portal-gta-vi', 1440, 900, true],
   ['portal/characters.html', '06-personajes-movil', 390, 844, true],
-  ['index.html', '07-cuenta-atras', 1440, 900, false, '.countdown-section'],
-  ['index.html', '08-tokenomics', 1440, 900, false, '#tokenomics'],
 ];
 const dir = '/projects/sandbox/.kiro/artifacts/screenshots';
 const pages = shots.map(([page, name, w, h, full, selector]) => ({ html: inline(page), name, w, h, full, selector }));

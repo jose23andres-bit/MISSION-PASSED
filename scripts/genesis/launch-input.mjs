@@ -8,6 +8,22 @@ export const DEPOSIT_WINDOW_HOURS = 48;
 export const DEVNET_GENESIS_HASH = 'EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG';
 export const TIME_UNITS = ['SECOND', 'MINUTE', 'HOUR', 'DAY', 'WEEK', 'TWO_WEEKS', 'MONTH', 'QUARTER', 'YEAR'];
 
+export const TARGET_CREATOR_IMMEDIATE = 160_000_000;
+export const TARGET_CREATOR_VESTED = 40_000_000;
+export const TARGET_MARKET_AND_LIQUIDITY = 800_000_000;
+export const TARGET_BUYER_ALLOCATION = 533_333_333;
+export const TARGET_LIQUIDITY_BPS = 5000;
+export const MIN_CREATOR_IMMEDIATE = 150_000_001;
+
+export function estimateGenesisAllocations(tokenAllocation, liquidityBps, lockedTokens) {
+  // Genesis docs state creator = 1B - launchpool - Raydium LP - locked.
+  // They do not publish the Raydium token rounding formula. Equal-price LP implies
+  // tokenAllocation * liquidityBps / 10000; this estimate MUST be checked in Devnet.
+  const estimatedRaydiumTokens = Math.round(tokenAllocation * liquidityBps / 10_000);
+  const estimatedCreatorImmediate = TOTAL_SUPPLY - tokenAllocation - estimatedRaydiumTokens - lockedTokens;
+  return { estimatedRaydiumTokens, estimatedCreatorImmediate };
+}
+
 const BASE58 = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/;
 export const isPublicKey = (value) => typeof value === 'string' && BASE58.test(value);
 
@@ -96,26 +112,32 @@ export function validateLaunchInput(input, { now = Date.now() } = {}) {
   });
 
   const locked = allocations.reduce((sum, a) => sum + (Number(a.tokenAmount) || 0), 0);
-  const presale = Number(lp.tokenAllocation) || 0;
-  const unallocated = TOTAL_SUPPLY - presale - locked;
-  if (unallocated < 0) errors.push(`asignaciones exceden el suministro fijo de ${TOTAL_SUPPLY}`);
-  if (unallocated > 0) warnings.push(`${unallocated} MP quedan para el LP de Raydium; Genesis entrega cualquier sobrante SIN vesting a la wallet creadora. Verificar el reparto real en Devnet antes de Mainnet.`);
+  const buyerAllocation = Number(lp.tokenAllocation) || 0;
+  const estimate = estimateGenesisAllocations(buyerAllocation, Number(lp.raydiumLiquidityBps) || 0, locked);
+  if (estimate.estimatedCreatorImmediate < 0) errors.push(`asignaciones estimadas exceden el suministro fijo de ${TOTAL_SUPPLY}`);
+  warnings.push(`Estimación pendiente de Devnet: Raydium ${estimate.estimatedRaydiumTokens} MP; creador desbloqueado ${estimate.estimatedCreatorImmediate} MP. Genesis no publica la fórmula de redondeo del LP.`);
 
-  return { errors, warnings, summary: { totalSupply: TOTAL_SUPPLY, presaleTokens: presale, lockedTokens: locked, unallocatedTokens: unallocated } };
+  return { errors, warnings, summary: { totalSupply: TOTAL_SUPPLY, buyerAllocationTokens: buyerAllocation, lockedCreatorTokens: locked, ...estimate, estimatedMarketAndLiquidityTokens: buyerAllocation + estimate.estimatedRaydiumTokens } };
 }
 
-// MISSION PASSED policy: 30 / 25 / 25 / 10 / 10, creator lock goes to the published creator wallet.
+// Final policy approved by the user: ~16% immediate + 4% vested creator,
+// 80% combined between Launch Pool buyers and Raydium liquidity.
 export function checkDistributionPolicy(plan) {
   const errors = [];
   const g = plan.genesis;
-  const byName = Object.fromEntries(g.claimScheduleAllocations.map((a) => [a.name, a]));
-  const expect = (cond, msg) => { if (!cond) errors.push(msg); };
-  expect(g.launchpool.tokenAllocation === TOTAL_SUPPLY * 0.25, 'Public Presale debe ser 250.000.000 (25%)');
-  expect(byName['Creator Allocation']?.tokenAmount === TOTAL_SUPPLY * 0.30, 'Creator Allocation debe ser 300.000.000 (30%)');
-  expect(byName['Creator Allocation']?.recipient === plan.creatorPublicWallet, 'Creator Allocation debe ir a la wallet pública publicada');
-  expect(byName['Community Rewards']?.tokenAmount === TOTAL_SUPPLY * 0.10, 'Community Rewards debe ser 100.000.000 (10%)');
-  expect(byName['Marketing & Development']?.tokenAmount === TOTAL_SUPPLY * 0.10, 'Marketing & Development debe ser 100.000.000 (10%)');
-  expect(g.claimScheduleAllocations.length === 3, 'No se permiten asignaciones adicionales');
+  const allocations = g.claimScheduleAllocations;
+  const creator = allocations.find((a) => a.name === 'Creator Vested Allocation');
+  const expect = (condition, message) => { if (!condition) errors.push(message); };
+  const estimate = estimateGenesisAllocations(g.launchpool.tokenAllocation, g.launchpool.raydiumLiquidityBps, allocations.reduce((sum, a) => sum + a.tokenAmount, 0));
+  expect(g.launchpool.tokenAllocation === TARGET_BUYER_ALLOCATION, `Compradores deben recibir ${TARGET_BUYER_ALLOCATION} MP`);
+  expect(g.launchpool.raydiumLiquidityBps === TARGET_LIQUIDITY_BPS, 'Raydium debe recibir 50% del SOL recaudado');
+  expect(creator?.tokenAmount === TARGET_CREATOR_VESTED, `Creator vesting debe ser ${TARGET_CREATOR_VESTED} MP (4%)`);
+  expect(creator?.recipient === plan.creatorPublicWallet, 'Creator vesting debe ir a la wallet pública publicada');
+  expect(allocations.length === 1, 'No se permiten asignaciones adicionales u ocultas');
+  expect(estimate.estimatedCreatorImmediate === TARGET_CREATOR_IMMEDIATE, `La estimación del creador inmediato debe ser ${TARGET_CREATOR_IMMEDIATE} MP (16%)`);
+  expect(creator?.tokenAmount + estimate.estimatedCreatorImmediate === 200_000_000, 'La asignación total estimada del creador debe ser 20%');
+  expect(g.launchpool.tokenAllocation + estimate.estimatedRaydiumTokens === TARGET_MARKET_AND_LIQUIDITY, 'Compradores y liquidez deben sumar 80%');
+  expect(plan.authorityPolicy?.automaticRevocation === false, 'No se revocarán autoridades automáticamente');
   return errors;
 }
 

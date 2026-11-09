@@ -27,7 +27,7 @@ El workflow hace lo siguiente:
 - pasa las pruebas y el dry run;
 - crea una wallet Devnet temporal dentro de GitHub y espera a que le envíes SOL de prueba;
 - crea y registra el Launch Pool en Devnet;
-- comprueba en cadena que hay 1.000.000.000 MP, que la cuenta Genesis pertenece al programa y que ni la wallet temporal ni la tuya tienen tokens sin vesting;
+- comprueba en cadena que hay 1.000.000.000 MP, que la cuenta Genesis pertenece al programa y que la asignación desbloqueada no supera el 16%;
 - borra la wallet temporal.
 
 El resultado queda como artefacto del run (`genesis-devnet.json` y `genesis-devnet-verify.json`) con el enlace a Solscan. Devnet no usa dinero real.

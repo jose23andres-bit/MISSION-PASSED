@@ -1,47 +1,39 @@
-# Security architecture
+# Arquitectura de seguridad
 
-## Trust boundaries
+## Límites de confianza
 
-- The public site never receives seeds, private keys or keypair JSON.
-- Public `VITE_*` values are assumed readable by everyone.
-- Phantom/Solflare retain signing control. The app must display transactions before signature.
-- Solana RPC and indexers are untrusted views; important state is re-read from on-chain accounts.
-- The frontend cannot be the source of balances, caps, price or purchase history.
+- La web nunca recibe seed phrases, claves privadas ni keypairs JSON.
+- Todo valor `VITE_*` es público.
+- Phantom conserva el control de las firmas Mainnet.
+- La interfaz no determina saldos, reparto ni precio; esos datos se leen de Genesis y Solana.
 
-## Genesis path
+## Ruta Genesis
 
-On-chain components created by the Genesis API client (`createLaunch`):
+- Suministro fijo: 1.000.000.000 MP.
+- Compradores: 533.333.333 MP mediante Launch Pool proporcional de 48 horas.
+- Liquidez Raydium estimada: 266.666.667 MP y 50% del SOL recaudado.
+- Creador disponible estimado: 160.000.000 MP (16%), remanente calculado por Genesis.
+- Creador con vesting: 40.000.000 MP (4%), 12 meses, cliff lineal de 3 meses.
+- Un único bucket de vesting; el validador rechaza cualquier asignación adicional.
+- Receptor público: `4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj`.
 
-- `GenesisAccountV2` for the token launch (fixed 1B supply).
-- Launch Pool bucket for the public 25% (48 h deposit window, proportional allocation, refund if the raise goal is missed).
-- Raydium LP bucket funded with `raydiumLiquidityBps` of the raised SOL.
-- Three `ClaimScheduleBucketV2` locks: Creator 30%, Community 10%, Marketing & Development 10%, all non-cancelable, non-transferable, non-pausable.
-- Any unassigned remainder goes to the creator wallet **without vesting**; it must be confirmed as 0 on Devnet.
-- Squads vault recommended as `fundsRecipient` before Mainnet.
+Genesis documenta el cálculo del creador como remanente tras Launch Pool, Raydium y vestings, pero no publica su fórmula de redondeo del LP. Devnet debe confirmar que el creador recibe más de 15% y como máximo 16%, y que su total es exactamente 20%.
 
-Program ID reviewed: `GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B`.
+## Controles
 
-## Devnet acceptance tests
+- Ejecutable únicamente en Devnet; valida el genesis hash del RPC.
+- Mainnet bloqueada en el repositorio.
+- Sin revocación automática de mint, freeze o metadata.
+- La dirección configurable del lanzamiento solo se publica si pertenece a `metaplex.com` por HTTPS.
+- Un resultado Devnet no puede sobrescribirse accidentalmente.
+- El workflow usa una wallet temporal y la borra al terminar.
 
-- Exact allocation sum and mint supply.
-- Deposits from several wallets; proportional claim matches deposit share.
-- Raise goal missed: refund works and a second refund fails.
-- Raise goal met: claim works and a second claim fails.
-- Claim forbidden after failure; refund forbidden after success.
-- LP token amount and unassigned remainder read from chain.
-- Creator vesting before cliff, at cliff, each period and after completion.
-- Wallet on wrong cluster, rejected signature, stale blockhash and RPC failure.
-- On-chain totals compared with every public dashboard number.
+## Pruebas necesarias antes de Mainnet
 
-## Operational controls
+- Decodificar las asignaciones creadas por Genesis y verificar 16/4/53,33/26,67.
+- Comprobar suministro total, vesting y ausencia de buckets ocultos.
+- Probar depósitos proporcionales y reembolso si no se alcanza el objetivo.
+- Simular el coste exacto contra los 0,11 SOL comunicados.
+- Revisar por separado cualquier revocación de autoridad.
 
-- Separate Devnet and Mainnet wallets.
-- Squads members on separate devices; documented threshold and timelock.
-- Mainnet creation not automated by the repository.
-- Mint and freeze authority revocation only after supply, allocations and metadata are verified.
-- No administrative action may block user claim/refund exits.
-- No private metrics in the static admin bundle. A server-authenticated service is required for genuinely private data.
-
-## Independent review
-
-No MISSION PASSED code or configuration has been externally audited. Before Mainnet, publish the exact program/SDK versions, account addresses, transaction signatures, test evidence and any independent review report.
+MISSION PASSED no tiene auditoría externa. Esta documentación y las pruebas automatizadas no equivalen a una auditoría independiente.

@@ -1,39 +1,34 @@
-# MISSION PASSED: decisiones del token
+# MISSION PASSED — distribución final aprobada
 
-**Estado:** configurado y validado en `launch.plan.json`. Pendiente solo del ensayo en Devnet.
+**Estado:** aprobada por el creador; pendiente de confirmar el cálculo de Raydium en Devnet.
 
-## Distribución
+| Destino | Porcentaje objetivo | MP |
+|---|---:|---:|
+| Creador, disponible al lanzamiento | 16% | 160.000.000 |
+| Creador, vesting | 4% | 40.000.000 |
+| Compradores del Launch Pool | 53,3333333% | 533.333.333 |
+| Liquidez Raydium, estimada | 26,6666667% | 266.666.667 |
+| **Total** | **100%** | **1.000.000.000** |
 
-| Destino | % | MP | Mecanismo Genesis |
-|---|---:|---:|---|
-| Creator Allocation | 30% | 300.000.000 | Vesting `ClaimScheduleBucketV2` → `4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj` |
-| Public Presale | 25% | 250.000.000 | Launch Pool (`tokenAllocation`) |
-| Liquidity | 25% | 250.000.000 | LP de Raydium creado al cerrar la venta |
-| Community Rewards | 10% | 100.000.000 | Vesting → misma wallet pública |
-| Marketing & Development | 10% | 100.000.000 | Vesting → misma wallet pública |
+Genesis documenta que la asignación desbloqueada del creador es el remanente después de restar Launch Pool, Raydium y vestings. No publica la fórmula de redondeo del token destinado a Raydium. Con 533.333.333 MP para compradores y 50% del SOL para Raydium, estimamos 266.666.667 MP para el LP y 160.000.000 MP desbloqueados. **Mainnet queda bloqueada hasta comprobar estas cifras en Devnet.**
 
-El suministro de 1.000.000.000 lo fija Genesis. No hay asignaciones ocultas: el validador rechaza cualquier bucket adicional.
+## Vesting del 4%
 
-## Venta (Launch Pool)
+- Beneficiario: `4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj`.
+- 40.000.000 MP.
+- Inicio tras cerrar la ventana de depósitos.
+- 12 meses, liberación mensual.
+- Cliff lineal de 3 meses: 25% del vesting (10.000.000 MP) al cumplirse.
+- No cancelable, no transferible, no pausable.
 
-- Depósitos en SOL durante 48 horas desde el 11 nov 2026 11:14:36 UTC.
-- Sin precio fijo: cada comprador recibe tokens en proporción a su depósito. Precio final = SOL recaudado ÷ 250.000.000.
-- Objetivo mínimo: 250 SOL, el mínimo que admite Genesis. Si no se alcanza, los depósitos se reembolsan.
-- 50% de los SOL recaudados va al LP de Raydium (`raydiumLiquidityBps: 5000`); el resto a la wallet receptora.
-- Sin límite superior (`softCap` vacío). Si se define, lo depositado por encima se devuelve a prorrata.
+## Launch Pool
 
-La API de Genesis no admite límite por wallet ni precio fijo. Si los necesitas, hay que usar Presale V2 a bajo nivel, que exige más desarrollo y pruebas.
+- Compradores: 533.333.333 MP distribuidos proporcionalmente.
+- Ventana: 48 horas.
+- Objetivo mínimo configurado: 250 SOL; si falla, reembolso conforme a Genesis.
+- Raydium: 50% del SOL recaudado.
+- Receptor del resto: wallet pública del creador.
 
-## Vesting
+## Autoridades
 
-| Bucket | Inicio | Duración | Cliff | Liberación |
-|---|---|---|---|---|
-| Creator | 13 nov 2026 | 12 meses | 3 meses, lineal (25%) | Mensual |
-| Community | 13 nov 2026 | 12 meses | 1 mes, lineal | Mensual |
-| Marketing & Development | 13 nov 2026 | 12 meses | 1 mes, lineal | Mensual |
-
-Todos son no cancelables, no transferibles y no pausables. Genesis no permite un cliff que libere 0 tokens.
-
-## Cambios posibles antes de Devnet
-
-Todo está en `launch.plan.json`. Las tres asignaciones con vesting van hoy a `4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj`. Si quieres wallets separadas para Community o Marketing, cambia su `recipient` y ejecuta `npm run genesis:plan`.
+No se revoca ninguna autoridad automáticamente. Después de Devnet se presenta por separado el estado de mint, freeze y metadata antes de cualquier decisión irreversible.

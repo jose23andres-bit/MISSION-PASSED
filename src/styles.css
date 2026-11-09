@@ -113,7 +113,7 @@ img { max-width: 100%; }
 .tokenomics-intro > p:last-child { max-width: 620px; color: var(--muted); line-height: 1.7; }
 .token-layout { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem,8vw,8rem); align-items: center; max-width: 1250px; margin: 5rem auto 0; }
 .allocation-visual { display: grid; grid-template-columns: minmax(230px,380px) 1fr; gap: 2rem; align-items: center; }
-.token-ring { display: grid; place-items: center; aspect-ratio: 1; border-radius: 50%; background: conic-gradient(var(--acid) 0 30%, var(--cyan) 30% 55%, var(--orange) 55% 80%, #a58af4 80% 90%, #3e4a50 90%); box-shadow: 0 0 60px rgba(86,215,215,.1); }
+.token-ring { display: grid; place-items: center; aspect-ratio: 1; border-radius: 50%; background: conic-gradient(var(--acid) 0 16%, #a58af4 16% 20%, var(--cyan) 20% 73.33%, var(--orange) 73.33% 100%); box-shadow: 0 0 60px rgba(86,215,215,.1); }
 .token-ring::before { width: 63%; aspect-ratio: 1; border-radius: 50%; background: var(--surface); content: ''; }
 .token-ring > div { position: absolute; display: flex; flex-direction: column; align-items: center; }
 .token-ring img { width: 46px; }.token-ring strong { margin-top: .35rem; font-family: var(--display); font-size: 2.3rem; }.token-ring span { color: var(--muted); font-size: .55rem; letter-spacing: .2em; }
@@ -240,3 +240,6 @@ html, body { overflow-x: clip; }
   .story h2, .section-heading h2, .tokenomics h2, .launch h2, .community h2, .risk h2, .countdown-copy h2 { font-size: clamp(2.2rem, 10.5vw, 3.6rem); }
   code { overflow-wrap: anywhere; }
 }
+
+/* Author display rules must never override the semantic hidden state. */
+[hidden] { display: none !important; }

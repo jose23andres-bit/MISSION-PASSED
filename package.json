@@ -1,9 +1,9 @@
 {
   "name": "mission-passed",
   "private": true,
-  "version": "0.2.0",
+  "version": "1.0.0",
   "type": "module",
-  "description": "Cinematic launch site, transparency pages and Metaplex Genesis Launch Pool tooling for MISSION PASSED on Solana.",
+  "description": "Cinematic site and Metaplex Genesis Launch Pool tooling for MISSION PASSED on Solana.",
   "scripts": {
     "dev": "node scripts/dev-server.mjs",
     "build": "node scripts/build.mjs",
@@ -13,10 +13,7 @@
     "launch:readiness": "node scripts/launch-readiness.mjs",
     "genesis:plan": "node scripts/genesis/create-launch.mjs",
     "genesis:devnet": "node scripts/genesis/create-launch.mjs",
-    "solana:validate": "node scripts/solana/validate-config.mjs",
-    "solana:estimate": "node scripts/solana/estimate-costs.mjs --cluster devnet",
-    "solana:rehearsal:devnet": "node scripts/solana/create-token.mjs --cluster devnet",
-    "solana:verify:devnet": "node scripts/solana/verify-token.mjs --cluster devnet"
+    "genesis:verify:devnet": "node scripts/genesis/verify-launch.mjs"
   },
   "dependencies": {
     "@metaplex-foundation/genesis": "0.43.4",

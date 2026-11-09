@@ -25,7 +25,7 @@ jobs:
         shell: bash
         run: npm run launch:readiness || test "$?" -eq 2
       - name: Package reviewed site
-        run: zip -r MISSION_PASSED_FINAL.zip . -x '*.git*' '*.env' 'token.config.json' 'deployment/*.json'
+        run: zip -r MISSION_PASSED_FINAL.zip . -x '*.git*' '*.env' 'deployment/*.json' 'node_modules/*'
       - uses: actions/upload-artifact@v4
         with:
           name: mission-passed-${{ github.sha }}

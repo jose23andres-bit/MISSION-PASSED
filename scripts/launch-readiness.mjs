@@ -13,14 +13,14 @@ const devnetRecord = existsSync(devnetRecordPath) ? JSON.parse(readFileSync(devn
 
 const checks = {
   creatorWalletConfigured: isPublicKey(plan.creatorPublicWallet),
-  distributionPolicy30_25_25_10_10: policy.length === 0,
+  distributionPolicy16_4_80: policy.length === 0,
   genesisInputValid: validation.errors.length === 0,
   devnetApproved: plan.network.devnetApproved === true,
   devnetLaunchRecorded: Boolean(devnetRecord?.mintAddress && devnetRecord?.genesisAccount),
   squadsVaultConfigured: isPublicKey(plan.squadsVault),
   mainnetAuthorized: plan.network.mainnetAuthorized === true,
 };
-const readyForDevnet = checks.creatorWalletConfigured && checks.distributionPolicy30_25_25_10_10 && checks.genesisInputValid && checks.devnetApproved;
+const readyForDevnet = checks.creatorWalletConfigured && checks.distributionPolicy16_4_80 && checks.genesisInputValid && checks.devnetApproved;
 const readyForMainnet = readyForDevnet && checks.devnetLaunchRecorded && checks.squadsVaultConfigured && checks.mainnetAuthorized;
 const report = {
   generatedAtUtc: new Date().toISOString(),

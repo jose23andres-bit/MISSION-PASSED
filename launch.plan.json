@@ -6,6 +6,7 @@
   "status": "READY_FOR_DEVNET_PENDING_APPROVAL",
   "creatorPublicWallet": "4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj",
   "treasuryPublicWalletProvisional": "4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj",
+  "creatorBalanceReportedSol": 0.11,
   "squadsVault": null,
   "network": {
     "first": "devnet",
@@ -19,6 +20,21 @@
     "decimals": null,
     "decimalsNote": "Defined by Genesis; read from chain after the Devnet launch."
   },
+  "economics": {
+    "creatorTotalTokens": 200000000,
+    "creatorImmediateTargetTokens": 160000000,
+    "creatorVestedTokens": 40000000,
+    "marketAndLiquidityTokens": 800000000,
+    "buyerAllocationTokens": 533333333,
+    "estimatedRaydiumTokens": 266666667,
+    "calculationStatus": "ESTIMATE_PENDING_DEVNET_VERIFICATION"
+  },
+  "authorityPolicy": {
+    "automaticRevocation": false,
+    "mintAuthority": "REVIEW_AFTER_DEVNET",
+    "freezeAuthority": "REVIEW_AFTER_DEVNET",
+    "metadataAuthority": "REVIEW_AFTER_FINAL_URLS"
+  },
   "genesis": {
     "programId": "GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B",
     "sdk": "@metaplex-foundation/genesis@0.43.4",
@@ -31,7 +47,7 @@
       "telegram": null
     },
     "launchpool": {
-      "tokenAllocation": 250000000,
+      "tokenAllocation": 533333333,
       "depositStartTime": "2026-11-11T11:14:36Z",
       "depositDurationHours": 48,
       "raiseGoalSol": 250,
@@ -41,9 +57,9 @@
     },
     "claimScheduleAllocations": [
       {
-        "name": "Creator Allocation",
+        "name": "Creator Vested Allocation",
         "recipient": "4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj",
-        "tokenAmount": 300000000,
+        "tokenAmount": 40000000,
         "vestingStartTime": "2026-11-13T11:14:36Z",
         "vestingDuration": {
           "value": 1,
@@ -62,59 +78,15 @@
         "transferable": false,
         "transferableByRecipient": false,
         "pausable": false
-      },
-      {
-        "name": "Community Rewards",
-        "recipient": "4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj",
-        "tokenAmount": 100000000,
-        "vestingStartTime": "2026-11-13T11:14:36Z",
-        "vestingDuration": {
-          "value": 1,
-          "unit": "YEAR"
-        },
-        "unlockSchedule": "MONTH",
-        "cliff": {
-          "duration": {
-            "value": 1,
-            "unit": "MONTH"
-          },
-          "unlockAmount": "linear"
-        },
-        "cancelable": false,
-        "cancelableByRecipient": false,
-        "transferable": false,
-        "transferableByRecipient": false,
-        "pausable": false
-      },
-      {
-        "name": "Marketing & Development",
-        "recipient": "4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj",
-        "tokenAmount": 100000000,
-        "vestingStartTime": "2026-11-13T11:14:36Z",
-        "vestingDuration": {
-          "value": 1,
-          "unit": "YEAR"
-        },
-        "unlockSchedule": "MONTH",
-        "cliff": {
-          "duration": {
-            "value": 1,
-            "unit": "MONTH"
-          },
-          "unlockAmount": "linear"
-        },
-        "cancelable": false,
-        "cancelableByRecipient": false,
-        "transferable": false,
-        "transferableByRecipient": false,
-        "pausable": false
       }
     ]
   },
   "requiredGates": [
     "devnetApproved = true",
-    "Devnet launch executed and supply/buckets verified on-chain",
-    "Squads vault configured for funds recipient",
+    "Devnet launch created and Genesis-calculated creator/Raydium allocations decoded",
+    "Creator immediate allocation is between 150,000,001 and 160,000,000 MP",
+    "Creator total allocation is exactly 200,000,000 MP",
+    "Mainnet creation cost simulated against the 0.11 SOL reported balance",
     "specific Mainnet transaction set explicitly authorized"
   ]
 }
