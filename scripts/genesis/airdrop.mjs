@@ -1,12 +1,17 @@
-// Requests Devnet SOL for the rehearsal signer and waits until the balance arrives.
-// Usage: node scripts/genesis/airdrop.mjs <address> [sol]
+// Funds the Devnet rehearsal signer.
+// 1. Tries the RPC faucet once (it is closed on the public Devnet RPC).
+// 2. Otherwise prints the address and waits until someone sends test SOL from https://faucet.solana.com.
+// Usage: node scripts/genesis/airdrop.mjs <address> [minSol] [waitMinutes]
+import { appendFileSync } from 'node:fs';
 import { DEVNET_GENESIS_HASH, isPublicKey } from './launch-input.mjs';
 
-const [address, solArg = '2'] = process.argv.slice(2);
+const [address, minSolArg = '1', waitArg = '45'] = process.argv.slice(2);
 const rpcUrl = process.env.GENESIS_DEVNET_RPC_URL || 'https://api.devnet.solana.com';
 if (!isPublicKey(address)) throw new Error('Dirección no válida');
-const lamports = Math.round(Number(solArg) * 1e9);
-if (!(lamports > 0 && lamports <= 5e9)) throw new Error('Cantidad entre 0 y 5 SOL');
+const minLamports = Math.round(Number(minSolArg) * 1e9);
+const waitMinutes = Number(waitArg);
+if (!(minLamports > 0 && minLamports <= 5e9)) throw new Error('Saldo mínimo entre 0 y 5 SOL');
+if (!(waitMinutes >= 1 && waitMinutes <= 120)) throw new Error('Espera entre 1 y 120 minutos');
 
 async function rpc(method, params) {
   const res = await fetch(rpcUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ jsonrpc: '2.0', id: 1, method, params }) });
@@ -15,20 +20,39 @@ async function rpc(method, params) {
   return body.result;
 }
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const balance = async () => (await rpc('getBalance', [address, { commitment: 'confirmed' }])).value;
 
 if ((await rpc('getGenesisHash', [])) !== DEVNET_GENESIS_HASH) throw new Error('El RPC no es Devnet. Abortado.');
 
-for (let attempt = 1; attempt <= 4; attempt += 1) {
-  try {
-    await rpc('requestAirdrop', [address, lamports, { commitment: 'confirmed' }]);
-    for (let i = 0; i < 30; i += 1) {
-      const { value } = await rpc('getBalance', [address, { commitment: 'confirmed' }]);
-      if (value >= lamports) { console.log(`Saldo Devnet: ${value / 1e9} SOL`); process.exit(0); }
-      await sleep(2000);
-    }
-  } catch (err) {
-    console.warn(`Intento ${attempt}: ${err.message}`);
-  }
-  await sleep(attempt * 5000);
+try {
+  await rpc('requestAirdrop', [address, minLamports, { commitment: 'confirmed' }]);
+} catch (err) {
+  console.log(`Faucet por RPC no disponible: ${err.message}`);
 }
-throw new Error('El faucet de Devnet no entregó SOL (límite de peticiones). Vuelve a lanzar el workflow más tarde.');
+
+const message = [
+  '',
+  '=====================================================================',
+  ' FALTA SOL DE PRUEBA (Devnet, sin valor real)',
+  ` 1. Abre https://faucet.solana.com`,
+  ` 2. Pega esta dirección:  ${address}`,
+  ` 3. Pide ${minSolArg} SOL o más en Devnet`,
+  ` El ensayo continúa solo en cuanto llegue el saldo (espera máx. ${waitMinutes} min).`,
+  '=====================================================================',
+  '',
+].join('\n');
+console.log(message);
+if (process.env.GITHUB_STEP_SUMMARY) {
+  appendFileSync(process.env.GITHUB_STEP_SUMMARY, `### Envía SOL de prueba (Devnet)\n\n1. Abre https://faucet.solana.com\n2. Pega: \`${address}\`\n3. Pide ${minSolArg} SOL o más.\n\nEl ensayo continúa solo al recibirlo (máx. ${waitMinutes} min).\n`);
+}
+
+const deadline = Date.now() + waitMinutes * 60_000;
+while (Date.now() < deadline) {
+  const value = await balance().catch(() => 0);
+  if (value >= minLamports) {
+    console.log(`Saldo Devnet recibido: ${value / 1e9} SOL`);
+    process.exit(0);
+  }
+  await sleep(10_000);
+}
+throw new Error(`No llegó SOL de prueba en ${waitMinutes} minutos. Vuelve a lanzar el workflow y envía SOL desde https://faucet.solana.com.`);

@@ -12,6 +12,10 @@ on:
         description: 'Minutos hasta que abran los depósitos (5-1440)'
         required: true
         default: '15'
+      wait_minutes:
+        description: 'Minutos de espera para recibir SOL de prueba desde faucet.solana.com (1-120)'
+        required: true
+        default: '45'
 
 permissions:
   contents: read
@@ -24,11 +28,12 @@ jobs:
   rehearse:
     if: ${{ github.event.inputs.confirm == 'DEVNET' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 150
     env:
       GENESIS_DEVNET_RPC_URL: https://api.devnet.solana.com
       MP_DEVNET_CONFIRMED: ${{ github.event.inputs.confirm }}
       START_IN_MINUTES: ${{ github.event.inputs.start_in_minutes }}
+      WAIT_MINUTES: ${{ github.event.inputs.wait_minutes }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -38,6 +43,7 @@ jobs:
         shell: bash
         run: |
           [[ "$START_IN_MINUTES" =~ ^[0-9]+$ ]] && (( START_IN_MINUTES >= 5 && START_IN_MINUTES <= 1440 )) || { echo "start_in_minutes inválido"; exit 1; }
+          [[ "$WAIT_MINUTES" =~ ^[0-9]+$ ]] && (( WAIT_MINUTES >= 1 && WAIT_MINUTES <= 120 )) || { echo "wait_minutes inválido"; exit 1; }
       - name: Tests and dry run
         run: |
           npm test
@@ -52,8 +58,8 @@ jobs:
           echo "GENESIS_DEVNET_KEYPAIR_PATH=$KEYPAIR" >> "$GITHUB_ENV"
           echo "SIGNER=$ADDRESS" >> "$GITHUB_ENV"
           echo "Firmante Devnet temporal: $ADDRESS"
-      - name: Fund signer with Devnet SOL
-        run: node scripts/genesis/airdrop.mjs "$SIGNER" 2
+      - name: Fund signer with Devnet SOL (send from faucet.solana.com)
+        run: node scripts/genesis/airdrop.mjs "$SIGNER" 1 "$WAIT_MINUTES"
       - name: Create Devnet launch
         run: npm run genesis:devnet -- --execute --start-in-minutes "$START_IN_MINUTES"
       - name: Verify on-chain

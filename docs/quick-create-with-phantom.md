@@ -18,25 +18,26 @@ El ejecutor Devnet comprueba que el logo responde antes de enviar nada.
 
 1. Fusiona el PR en `main`.
 2. En GitHub abre **Actions → Devnet rehearsal → Run workflow**.
-3. Escribe `DEVNET` en la confirmación y deja `15` minutos.
-4. Pulsa **Run workflow**.
+3. Escribe `DEVNET` en la confirmación y deja los valores por defecto (`15` y `45`).
+4. Pulsa **Run workflow** y abre el run.
+5. En el paso **Fund signer** verás una dirección. Abre https://faucet.solana.com, pega esa dirección, elige Devnet y pide 1 SOL o más. El faucet de la red ya no reparte SOL automáticamente, por eso hace falta este paso. El ensayo sigue solo en cuanto llega el saldo.
 
 El workflow hace lo siguiente:
 
 - pasa las pruebas y el dry run;
-- crea una wallet Devnet temporal dentro de GitHub y le pide SOL de prueba al faucet;
+- crea una wallet Devnet temporal dentro de GitHub y espera a que le envíes SOL de prueba;
 - crea y registra el Launch Pool en Devnet;
 - comprueba en cadena que hay 1.000.000.000 MP, que la cuenta Genesis pertenece al programa y que ni la wallet temporal ni la tuya tienen tokens sin vesting;
 - borra la wallet temporal.
 
-El resultado queda como artefacto del run (`genesis-devnet.json` y `genesis-devnet-verify.json`) con el enlace a Solscan. Devnet no usa dinero real. Si el faucet está saturado, vuelve a lanzarlo más tarde.
+El resultado queda como artefacto del run (`genesis-devnet.json` y `genesis-devnet-verify.json`) con el enlace a Solscan. Devnet no usa dinero real.
 
 ### Alternativa en tu ordenador
 
 ```bash
 npm install
 node scripts/genesis/ephemeral-keypair.mjs ~/mp-devnet.json
-node scripts/genesis/airdrop.mjs <DIRECCIÓN_QUE_IMPRIME> 2
+node scripts/genesis/airdrop.mjs <DIRECCIÓN_QUE_IMPRIME> 1 45   # y envía SOL desde faucet.solana.com
 export GENESIS_DEVNET_KEYPAIR_PATH=~/mp-devnet.json MP_DEVNET_CONFIRMED=DEVNET
 npm run genesis:devnet -- --execute --start-in-minutes 15
 node scripts/genesis/verify-launch.mjs
