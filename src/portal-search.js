@@ -8,7 +8,7 @@
   const normalize = (value) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
   let index = [];
   const preloaded = window.MISSION_PASSED_SEARCH_INDEX;
-  (Array.isArray(preloaded) ? Promise.resolve(preloaded) : fetch('/search-index.json').then((response) => response.json()))
+  (Array.isArray(preloaded) ? Promise.resolve(preloaded) : fetch(`${window.MISSION_PASSED_CONFIG?.basePath || ''}/search-index.json`).then((response) => response.json()))
     .then((data) => { index = Array.isArray(data) ? data : []; run(); })
     .catch(() => { summary.textContent = 'No se pudo cargar el índice.'; });
 
