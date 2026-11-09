@@ -1,0 +1,16 @@
+{
+  "name": "MISSION PASSED",
+  "short_name": "MP",
+  "start_url": "/jose23andres-bit/MISSION-PASSED/preview/",
+  "display": "standalone",
+  "background_color": "#07090b",
+  "theme_color": "#f45b76",
+  "icons": [
+    {
+      "src": "/jose23andres-bit/MISSION-PASSED/preview/mark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
