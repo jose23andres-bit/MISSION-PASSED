@@ -239,6 +239,15 @@
     if (render()) window.setInterval(render, 1000);
   }
 
+  function setupCursorGlow() {
+    const glow = $('#cursor-glow');
+    if (!glow || window.matchMedia('(pointer: coarse)').matches) return;
+    window.addEventListener('pointermove', (event) => {
+      glow.style.left = `${event.clientX}px`;
+      glow.style.top = `${event.clientY}px`;
+    }, { passive: true });
+  }
+
   function setupProviderEvents() {
     const detected = getWalletProvider();
     if (!detected?.on) return;
@@ -261,6 +270,7 @@
     setupScroll();
     setupMenu();
     setupCountdown();
+    setupCursorGlow();
     setupProviderEvents();
   });
 

@@ -7,7 +7,7 @@ const root = resolve(import.meta.dirname, '..');
 
 test('landing contains every required section and no placeholder links', async () => {
   const html = await readFile(resolve(root, 'index.html'), 'utf8');
-  for (const id of ['portal', 'story', 'tokenomics', 'roadmap', 'community', 'launch', 'faq']) assert.match(html, new RegExp(`id="${id}"`));
+  for (const id of ['gta', 'editions', 'tokenomics', 'buy', 'launch', 'faq']) assert.match(html, new RegExp(`id="${id}"`));
   assert.doesNotMatch(html, /href=["']#["']/);
   assert.match(html, /AVISO DE RIESGO/);
   assert.match(html, /16% disponible · 4% vesting/);
@@ -47,4 +47,13 @@ test('production config defaults to the published wallet and final Launch Pool',
   assert.equal(config.launchpool.tokenAllocation, 533_333_333);
   assert.equal(config.launchpool.raiseGoalSol, 250);
   assert.equal(config.launchpool.depositStart, '2026-11-11T11:14:36.000Z');
+});
+
+test('redesign uses official Rockstar links and embeds without copying Rockstar images', async () => {
+  const html = await readFile(resolve(root, 'index.html'), 'utf8');
+  assert.match(html, /https:\/\/www\.rockstargames\.com\/VI\/trailer-2/);
+  assert.match(html, /https:\/\/www\.rockstargames\.com\/VI\/editions/g);
+  assert.match(html, /youtube-nocookie\.com\/embed\/VQRLujxTm3c/);
+  assert.match(html, /PROYECTO INDEPENDIENTE · NO AFILIADO A ROCKSTAR GAMES/);
+  assert.doesNotMatch(html, /<(?:img|video)[^>]+(?:src|poster)="https:\/\/[^\"]*rockstargames/i);
 });

@@ -9,8 +9,7 @@ from pathlib import Path
 
 SIZE = 512
 SCALE = SIZE / 120
-ACID = (0xD8, 0xFF, 0x3E)
-INK = (0x08, 0x0A, 0x08)
+INK = (0x0B, 0x07, 0x11)
 RADIUS = 8 * SCALE
 M_SHAPE = [(21, 88), (21, 31), (41, 31), (60, 58), (79, 31), (99, 31), (99, 88),
            (79, 88), (79, 60), (60, 86), (41, 60), (41, 88)]
@@ -47,7 +46,16 @@ for py in range(SIZE):
         elif inside_polygon(x, y) or (BAR[0] <= x <= BAR[2] and BAR[1] <= y <= BAR[3]):
             rows += bytes(INK) + b"\xff"
         else:
-            rows += bytes(ACID) + b"\xff"
+            # Original sunset gradient: yellow → coral → pink → violet.
+            t = min(1.0, max(0.0, (x * 0.42 + y * 0.58) / SIZE))
+            stops = [(0.0, (255, 227, 110)), (0.42, (255, 118, 95)), (0.72, (255, 78, 157)), (1.0, (108, 60, 255))]
+            for idx in range(len(stops) - 1):
+                a, ca = stops[idx]; b, cb = stops[idx + 1]
+                if a <= t <= b:
+                    u = (t - a) / (b - a)
+                    color = tuple(round(ca[j] + (cb[j] - ca[j]) * u) for j in range(3))
+                    break
+            rows += bytes(color) + b"\xff"
 
 
 def chunk(kind, data):
