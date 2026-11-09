@@ -5,7 +5,7 @@
 import { appendFileSync } from 'node:fs';
 import { DEVNET_GENESIS_HASH, isPublicKey } from './launch-input.mjs';
 
-const [address, minSolArg = '1', waitArg = '45'] = process.argv.slice(2);
+const [address, minSolArg = '0.1', waitArg = '45'] = process.argv.slice(2);
 const rpcUrl = process.env.GENESIS_DEVNET_RPC_URL || 'https://api.devnet.solana.com';
 if (!isPublicKey(address)) throw new Error('Dirección no válida');
 const minLamports = Math.round(Number(minSolArg) * 1e9);
@@ -34,16 +34,16 @@ const message = [
   '',
   '=====================================================================',
   ' FALTA SOL DE PRUEBA (Devnet, sin valor real)',
-  ` 1. Abre https://faucet.solana.com`,
+  ` 1. Abre https://devnetfaucet.org (alternativa incluida en la guía oficial de Solana)`,
   ` 2. Pega esta dirección:  ${address}`,
-  ` 3. Pide ${minSolArg} SOL o más en Devnet`,
+  ` 3. Solicita al menos ${minSolArg} SOL en Devnet`,
   ` El ensayo continúa solo en cuanto llegue el saldo (espera máx. ${waitMinutes} min).`,
   '=====================================================================',
   '',
 ].join('\n');
 console.log(message);
 if (process.env.GITHUB_STEP_SUMMARY) {
-  appendFileSync(process.env.GITHUB_STEP_SUMMARY, `### Envía SOL de prueba (Devnet)\n\n1. Abre https://faucet.solana.com\n2. Pega: \`${address}\`\n3. Pide ${minSolArg} SOL o más.\n\nEl ensayo continúa solo al recibirlo (máx. ${waitMinutes} min).\n`);
+  appendFileSync(process.env.GITHUB_STEP_SUMMARY, `### Envía 0,1 SOL de prueba (Devnet)\n\nEl faucet oficial puede estar vacío. Usa una de estas alternativas listadas por Solana:\n\n- https://devnetfaucet.org\n- https://faucet.quicknode.com/solana/devnet\n\nPega: \`${address}\` y solicita al menos ${minSolArg} SOL.\n\nEl ensayo continúa al recibirlo (máx. ${waitMinutes} min).\n`);
 }
 
 const deadline = Date.now() + waitMinutes * 60_000;
@@ -55,4 +55,4 @@ while (Date.now() < deadline) {
   }
   await sleep(10_000);
 }
-throw new Error(`No llegó SOL de prueba en ${waitMinutes} minutos. Vuelve a lanzar el workflow y envía SOL desde https://faucet.solana.com.`);
+throw new Error(`No llegó SOL de prueba en ${waitMinutes} minutos. Relanza el workflow y prueba https://devnetfaucet.org o https://faucet.quicknode.com/solana/devnet.`);

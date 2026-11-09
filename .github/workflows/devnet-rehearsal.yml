@@ -58,8 +58,8 @@ jobs:
           echo "GENESIS_DEVNET_KEYPAIR_PATH=$KEYPAIR" >> "$GITHUB_ENV"
           echo "SIGNER=$ADDRESS" >> "$GITHUB_ENV"
           echo "Firmante Devnet temporal: $ADDRESS"
-      - name: Fund signer with Devnet SOL (send from faucet.solana.com)
-        run: node scripts/genesis/airdrop.mjs "$SIGNER" 1 "$WAIT_MINUTES"
+      - name: Fund signer with Devnet SOL (send from a listed faucet)
+        run: node scripts/genesis/airdrop.mjs "$SIGNER" 0.1 "$WAIT_MINUTES"
       - name: Create Devnet launch
         run: npm run genesis:devnet -- --execute --start-in-minutes "$START_IN_MINUTES"
       - name: Verify on-chain
