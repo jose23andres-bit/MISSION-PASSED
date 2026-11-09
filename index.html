@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07090b" />
+    <meta name="description" content="MISSION PASSED — proyecto comunitario experimental en Solana. Estado verificable, distribución propuesta y lanzamiento responsable." />
+    <meta property="og:title" content="MISSION PASSED" />
+    <meta property="og:description" content="La ciudad cambia. La misión permanece." />
+    <meta property="og:image" content="/og-image.svg" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="/" />
+    <link rel="icon" href="/mark.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="stylesheet" href="/assets/styles.css" />
+    <title>MISSION PASSED — Solana</title>
+    <script src="/config.js"></script>
+    <script src="/assets/app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+    <div class="noise" aria-hidden="true"></div>
+    <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+
+    <header class="site-header" id="site-header">
+      <a class="brand" href="#top" aria-label="MISSION PASSED, inicio">
+        <img src="/mark.svg" alt="" width="38" height="38" />
+        <span>MISSION <b>PASSED</b></span>
+      </a>
+      <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menú</button>
+      <nav class="site-nav" id="site-nav" aria-label="Navegación principal">
+        <a href="#portal">GTA VI</a>
+        <a href="#story">Historia</a>
+        <a href="#tokenomics">Tokenomics</a>
+        <a href="#roadmap">Ruta</a>
+        <a href="#launch">Lanzamiento</a>
+      </nav>
+      <button class="wallet-button" id="wallet-button" type="button">
+        <span class="wallet-dot" aria-hidden="true"></span>
+        <span id="wallet-label">Conectar wallet</span>
+      </button>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="sky-glow" aria-hidden="true"></div>
+        <div class="city city-back" aria-hidden="true"></div>
+        <div class="city city-front" aria-hidden="true"></div>
+        <div class="road" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="hero-car" aria-hidden="true"><span class="headlight left"></span><span class="headlight right"></span></div>
+        <div class="hero-content reveal">
+          <p class="eyebrow"><span>01</span> PROTOCOLO URBANO · SOLANA</p>
+          <h1 id="hero-title"><span>MISSION</span><em>PASSED</em></h1>
+          <p class="hero-copy">Una misión comunitaria experimental. Una identidad propia. Cada dato importante, verificable en cadena.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#launch">Revisar lanzamiento</a>
+            <a class="button button-ghost" href="#story">Entrar en la historia</a>
+          </div>
+          <div class="status-ribbon" role="status">
+            <span class="status-pulse"></span>
+            <strong>FASE ACTUAL</strong>
+            <span>Preparación Devnet</span>
+          </div>
+        </div>
+        <div class="scroll-cue" aria-hidden="true"><span>DESLIZA</span><i></i></div>
+      </section>
+
+      <section class="countdown-section section" aria-labelledby="countdown-title">
+        <div class="countdown-copy reveal">
+          <p class="eyebrow"><span>02</span> LANZAMIENTO GLOBAL · 19 NOV 2026</p>
+          <h2 id="countdown-title">La ciudad abre a medianoche.</h2>
+          <p>Cuenta atrás hasta las 00:00 del 19 de noviembre de 2026 en la zona horaria local de cada visitante.</p>
+        </div>
+        <div class="countdown" id="countdown" role="timer" aria-live="off" aria-label="Tiempo restante para el lanzamiento">
+          <div><strong id="countdown-days">000</strong><span>Días</span></div>
+          <div><strong id="countdown-hours">00</strong><span>Horas</span></div>
+          <div><strong id="countdown-minutes">00</strong><span>Minutos</span></div>
+          <div><strong id="countdown-seconds">00</strong><span>Segundos</span></div>
+        </div>
+        <div class="released-message" id="released-message" hidden><span>MISSION UPDATE</span><strong>GAME RELEASED</strong><p>Fecha histórica: 19 de noviembre de 2026.</p></div>
+        <p class="source-note">Fecha: <a href="https://www.take2games.com/ir/news/rockstar-games-announces-pre-orders-grand-theft-auto-vi" target="_blank" rel="noreferrer">anuncio oficial de Take-Two / Rockstar Games ↗</a></p>
+      </section>
+
+      <section class="portal section" id="portal" aria-labelledby="portal-title">
+        <div class="section-heading reveal">
+          <p class="eyebrow"><span>03</span> INTELIGENCIA DE LEONIDA</p>
+          <h2 id="portal-title">Archivo GTA VI</h2>
+          <p class="portal-intro">Portal independiente basado en información oficial enlazada. MISSION PASSED no está afiliado, respaldado ni publicado por Rockstar Games.</p>
+        </div>
+        <form class="search-box reveal" action="/portal/search.html" method="get" role="search">
+          <label for="portal-search">Buscar en el archivo</label>
+          <div><input id="portal-search" name="q" type="search" placeholder="Personajes, lugares, tráilers…" autocomplete="off" /><button type="submit">Buscar</button></div>
+        </form>
+        <div class="portal-grid">
+          <a class="portal-card reveal" href="/portal/gta-vi.html"><span>01</span><h3>GTA VI</h3><p>Fecha, plataformas, contexto y enlaces oficiales.</p></a>
+          <a class="portal-card reveal" href="/portal/characters.html"><span>02</span><h3>Personajes</h3><p>Jason, Lucia y el reparto confirmado.</p></a>
+          <a class="portal-card reveal" href="/portal/leonida.html"><span>03</span><h3>Leonida</h3><p>Vice City y localizaciones publicadas.</p></a>
+          <a class="portal-card reveal" href="/portal/trailers.html"><span>04</span><h3>Tráilers</h3><p>Vídeos oficiales incrustados desde YouTube.</p></a>
+          <a class="portal-card reveal" href="/portal/guides.html"><span>05</span><h3>Guías</h3><p>Índice editorial sin rumores presentados como hechos.</p></a>
+          <a class="portal-card reveal" href="/portal/theories.html"><span>06</span><h3>Teorías</h3><p>Ideas de la comunidad claramente etiquetadas.</p></a>
+          <a class="portal-card reveal" href="/portal/news.html"><span>07</span><h3>Noticias</h3><p>Novedades con enlace a la fuente oficial.</p></a>
+        </div>
+      </section>
+
+      <section class="story section" id="story" aria-labelledby="story-title">
+        <div class="section-index reveal"><span>02</span><p>EL ORIGEN</p></div>
+        <div class="story-grid">
+          <div class="story-copy reveal">
+            <p class="kicker">No hay atajos en esta ciudad.</p>
+            <h2 id="story-title">La misión se gana.<br />La confianza también.</h2>
+            <p>MISSION PASSED nace como una memecoin comunitaria experimental sobre Solana. La propuesta prioriza una presentación clara, decisiones públicas y enlaces verificables cuando el token exista.</p>
+            <p>No prometemos rentabilidad, precio ni recompensas futuras. La experiencia cuenta una historia; la cadena cuenta los hechos.</p>
+          </div>
+          <div class="scene-card reveal" aria-label="Ilustración original de una ciudad nocturna">
+            <div class="scene-moon"></div>
+            <div class="scene-tower tower-a"></div>
+            <div class="scene-tower tower-b"></div>
+            <div class="scene-tower tower-c"></div>
+            <div class="scene-road"></div>
+            <div class="scene-caption"><span>DISTRITO 01</span><strong>NIGHT SHIFT</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="principles section" aria-labelledby="principles-title">
+        <div class="section-heading reveal">
+          <p class="eyebrow"><span>03</span> REGLAS DE LA MISIÓN</p>
+          <h2 id="principles-title">Sin niebla. Sin cifras inventadas.</h2>
+        </div>
+        <div class="principle-grid">
+          <article class="principle-card reveal"><span>01</span><h3>Devnet primero</h3><p>Toda la infraestructura se prueba en la red de desarrollo antes de considerar Mainnet.</p></article>
+          <article class="principle-card reveal"><span>02</span><h3>Datos verificables</h3><p>Mint, suministro, autoridades y enlaces aparecen solo cuando existen y pueden comprobarse.</p></article>
+          <article class="principle-card reveal"><span>03</span><h3>Control explícito</h3><p>Ninguna autoridad se revoca ni se ejecuta una transacción irreversible sin aprobación.</p></article>
+        </div>
+      </section>
+
+      <section class="tokenomics section" id="tokenomics" aria-labelledby="tokenomics-title">
+        <div class="tokenomics-intro reveal">
+          <p class="eyebrow"><span>04</span> ECONOMÍA PROPUESTA</p>
+          <h2 id="tokenomics-title">Tokenomics</h2>
+          <p>1.000.000.000 MP de suministro fijo. El 75% queda en vesting o en liquidez; nada se reparte en secreto.</p>
+        </div>
+        <div class="token-layout">
+          <div class="allocation-visual reveal" aria-label="Distribución propuesta del token">
+            <div class="token-ring"><div><img src="/mark.svg" alt="" /><strong>$MP</strong><span>PROPUESTA</span></div></div>
+            <ul class="legend" id="allocation-legend"></ul>
+          </div>
+          <div class="token-options reveal">
+            <div class="option-header"><h3>Lanzamiento con Metaplex Genesis</h3><span class="draft-badge">PRE-DEVNET</span></div>
+            <dl>
+              <div><dt>Suministro</dt><dd>1.000.000.000 MP (fijo)</dd></div>
+              <div><dt>Venta</dt><dd>Launch Pool · 48 h · 250 M MP</dd></div>
+              <div><dt>Objetivo mínimo</dt><dd>250 SOL o reembolso</dd></div>
+              <div><dt>Creador (30%)</dt><dd>Vesting 12 meses, cliff 3 meses</dd></div>
+              <div><dt>Liquidez</dt><dd>Raydium, creada al cerrar la venta</dd></div>
+            </dl>
+            <a class="text-link" href="/transparency/">Ver wallets y calendario de vesting <span>↗</span></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="roadmap section" id="roadmap" aria-labelledby="roadmap-title">
+        <div class="section-heading reveal">
+          <p class="eyebrow"><span>05</span> RUTA DE OPERACIONES</p>
+          <h2 id="roadmap-title">Cuatro distritos. Una salida.</h2>
+        </div>
+        <div class="route-line" aria-hidden="true"><span id="route-progress"></span></div>
+        <div class="roadmap-list">
+          <article class="roadmap-step complete reveal"><span class="step-number">01</span><div><p>Distrito Zero</p><h3>Identidad y arquitectura</h3><ul><li>Dirección visual original</li><li>Web responsive</li><li>Modelo de seguridad</li></ul></div><strong>EN CURSO</strong></article>
+          <article class="roadmap-step reveal"><span class="step-number">02</span><div><p>Devnet Docks</p><h3>Ensayo verificable</h3><ul><li>Mint en Devnet</li><li>Metadata pública</li><li>Pruebas de wallet</li></ul></div><strong>PENDIENTE DE APROBACIÓN</strong></article>
+          <article class="roadmap-step reveal"><span class="step-number">03</span><div><p>Authority Heights</p><h3>Revisión de lanzamiento</h3><ul><li>Auditoría de autoridades</li><li>Distribución confirmada</li><li>Plan de liquidez publicado</li></ul></div><strong>BLOQUEADO</strong></article>
+          <article class="roadmap-step reveal"><span class="step-number">04</span><div><p>Mainnet Avenue</p><h3>Salida controlada</h3><ul><li>Aprobación expresa</li><li>Pool con operación real</li><li>Indexación pública</li></ul></div><strong>BLOQUEADO</strong></article>
+        </div>
+      </section>
+
+      <section class="launch section" id="launch" aria-labelledby="launch-title">
+        <div class="launch-panel reveal">
+          <div class="launch-copy">
+            <p class="eyebrow"><span>06</span> CENTRO DE CONTROL</p>
+            <h2 id="launch-title">Estado del lanzamiento</h2>
+            <p>Este panel lee configuración pública y el estado de tu wallet. No crea tokens, no compra activos y no solicita firmas.</p>
+          </div>
+          <div class="network-status"><span class="network-light"></span><div><small>RED CONFIGURADA</small><strong id="network-name">DEVNET</strong></div></div>
+          <div class="launch-grid">
+            <div class="launch-item"><small>WALLET</small><strong id="wallet-status">No conectada</strong><span id="wallet-balance">Conecta una wallet compatible</span></div>
+            <div class="launch-item"><small>CONTRATO / MINT</small><strong id="mint-status">No creado</strong><span id="mint-address">Se publicará tras Devnet</span></div>
+            <div class="launch-item"><small>METADATA</small><strong id="metadata-status">Preparada</strong><span>Archivo JSON listo para alojar</span></div>
+            <div class="launch-item"><small>APERTURA DE DEPÓSITOS</small><strong id="token-launch-at">11 NOV 2026</strong><span>Launch Pool de 48 h · pendiente del ensayo Devnet</span></div>
+            <div class="launch-item"><small>MAINNET</small><strong class="danger-text">Bloqueada</strong><span>Requiere autorización expresa</span></div>
+          </div>
+          <div class="contract-actions" id="contract-actions" hidden>
+            <button class="button button-ghost" id="copy-mint" type="button">Copiar mint</button>
+            <a class="button button-ghost" id="solscan-link" target="_blank" rel="noreferrer">Abrir Solscan</a>
+            <a class="button button-ghost" id="dexscreener-link" target="_blank" rel="noreferrer" hidden>Abrir DexScreener</a>
+          </div>
+          <div class="contract-actions ecosystem-actions">
+            <a class="button button-primary" href="/presale/">Abrir presale</a>
+            <a class="button button-ghost" href="/transparency/">Ver transparencia</a>
+            <a class="button button-ghost" href="/admin/">Operator console</a>
+          </div>
+          <div class="launch-note"><strong>Antes del siguiente paso</strong><p>Debes aprobar una opción en <a href="/docs/token-decisions.md">Token Decisions</a>. El script de creación se niega a continuar sin un archivo aprobado.</p></div>
+        </div>
+      </section>
+
+      <section class="community section" id="community" aria-labelledby="community-title">
+        <div class="community-card reveal">
+          <p class="eyebrow"><span>07</span> FRECUENCIA ABIERTA</p>
+          <h2 id="community-title">La comunidad aún no tiene canales oficiales.</h2>
+          <p>No mostramos enlaces inventados. Cuando se configuren cuentas oficiales, aparecerán aquí desde variables de entorno verificables.</p>
+          <div class="community-links" id="community-links" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="faq section" id="faq" aria-labelledby="faq-title">
+        <div class="section-heading reveal"><p class="eyebrow"><span>08</span> ARCHIVO DE INTELIGENCIA</p><h2 id="faq-title">Preguntas frecuentes</h2></div>
+        <div class="faq-list">
+          <details class="reveal"><summary>¿Ya existe el token $MP?<span>+</span></summary><p>No. El contrato no se mostrará hasta que haya sido creado y verificado primero en Devnet. $MP es un símbolo provisional y debe comprobarse antes del lanzamiento.</p></details>
+          <details class="reveal"><summary>¿Esta web promete rentabilidad?<span>+</span></summary><p>No. MISSION PASSED es un experimento comunitario de alto riesgo. No existe promesa de precio, liquidez, utilidad, recompensas ni retorno.</p></details>
+          <details class="reveal"><summary>¿Qué ocurre al conectar mi wallet?<span>+</span></summary><p>La web solicita conexión al proveedor instalado y consulta el saldo público de SOL. No solicita firmas ni ejecuta transacciones.</p></details>
+          <details class="reveal"><summary>¿Cuándo aparecerán Solscan y DexScreener?<span>+</span></summary><p>Solscan aparecerá cuando exista una dirección de mint configurada. DexScreener aparecerá únicamente después de que exista un pool con al menos una transacción, según su proceso de indexación.</p></details>
+        </div>
+      </section>
+
+      <section class="risk section" aria-labelledby="risk-title">
+        <div class="risk-mark" aria-hidden="true">!</div>
+        <div><p class="eyebrow">AVISO DE RIESGO</p><h2 id="risk-title">Solo participa si entiendes que puedes perderlo todo.</h2><p>Los criptoactivos y memecoins son altamente volátiles. Pueden carecer de liquidez, utilidad o valor. Verifica siempre la dirección del contrato en fuentes oficiales. Nunca compartas tu seed phrase o clave privada.</p></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="brand" href="#top"><img src="/mark.svg" alt="" width="34" height="34" /><span>MISSION <b>PASSED</b></span></a>
+      <p>Proyecto experimental en Solana · Sin afiliación con Rockstar Games ni con ninguna franquicia de videojuegos.</p>
+      <p>© <span id="year"></span> MISSION PASSED</p>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

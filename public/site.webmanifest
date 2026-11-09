@@ -1,0 +1,9 @@
+{
+  "name": "MISSION PASSED",
+  "short_name": "MP",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#07090b",
+  "theme_color": "#07090b",
+  "icons": [{ "src": "/mark.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}

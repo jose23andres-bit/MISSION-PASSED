@@ -1,0 +1,73 @@
+name: Devnet rehearsal
+
+# Manual only. Creates the MISSION PASSED Launch Pool on Solana DEVNET (test network, no real money)
+# with a throwaway keypair generated inside the runner. It never touches Mainnet or any personal wallet.
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Escribe DEVNET para confirmar el ensayo'
+        required: true
+      start_in_minutes:
+        description: 'Minutos hasta que abran los depósitos (5-1440)'
+        required: true
+        default: '15'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: devnet-rehearsal
+  cancel-in-progress: false
+
+jobs:
+  rehearse:
+    if: ${{ github.event.inputs.confirm == 'DEVNET' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GENESIS_DEVNET_RPC_URL: https://api.devnet.solana.com
+      MP_DEVNET_CONFIRMED: ${{ github.event.inputs.confirm }}
+      START_IN_MINUTES: ${{ github.event.inputs.start_in_minutes }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate inputs
+        shell: bash
+        run: |
+          [[ "$START_IN_MINUTES" =~ ^[0-9]+$ ]] && (( START_IN_MINUTES >= 5 && START_IN_MINUTES <= 1440 )) || { echo "start_in_minutes inválido"; exit 1; }
+      - name: Tests and dry run
+        run: |
+          npm test
+          npm run genesis:plan
+      - name: Install Genesis SDK
+        run: npm install --no-audit --no-fund
+      - name: Create throwaway Devnet signer
+        shell: bash
+        run: |
+          KEYPAIR="$RUNNER_TEMP/mp-devnet.json"
+          ADDRESS=$(node scripts/genesis/ephemeral-keypair.mjs "$KEYPAIR")
+          echo "GENESIS_DEVNET_KEYPAIR_PATH=$KEYPAIR" >> "$GITHUB_ENV"
+          echo "SIGNER=$ADDRESS" >> "$GITHUB_ENV"
+          echo "Firmante Devnet temporal: $ADDRESS"
+      - name: Fund signer with Devnet SOL
+        run: node scripts/genesis/airdrop.mjs "$SIGNER" 2
+      - name: Create Devnet launch
+        run: npm run genesis:devnet -- --execute --start-in-minutes "$START_IN_MINUTES"
+      - name: Verify on-chain
+        run: node scripts/genesis/verify-launch.mjs
+      - name: Remove throwaway keypair
+        if: always()
+        run: rm -f "$RUNNER_TEMP/mp-devnet.json"
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: devnet-rehearsal-${{ github.run_number }}
+          path: |
+            deployment/genesis-devnet.json
+            deployment/genesis-devnet-verify.json
+          if-no-files-found: warn
+          retention-days: 30
