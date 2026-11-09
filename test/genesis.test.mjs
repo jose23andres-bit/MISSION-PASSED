@@ -35,7 +35,7 @@ test('missing logo or creator recipient blocks the launch', async () => {
   plan.genesis.claimScheduleAllocations[0].recipient = null;
   const { errors } = validateLaunchInput(buildLaunchInput(plan), { now: NOW });
   assert.ok(errors.some((e) => e.startsWith('token.image')));
-  assert.ok(errors.some((e) => e.includes('Creator Vested Allocation') && e.includes('recipient')));
+  assert.ok(errors.some((e) => e.includes('Giveaway Fund Vested') && e.includes('recipient')));
 });
 
 test('Genesis limits and irrevocable vesting are enforced', async () => {

@@ -4,13 +4,19 @@
 
 | Destino | Porcentaje objetivo | MP |
 |---|---:|---:|
-| Creador, disponible al lanzamiento | 16% | 160.000.000 |
-| Creador, vesting | 4% | 40.000.000 |
+| Fondo común de sorteos, disponible al lanzamiento | 16% | 160.000.000 |
+| Fondo común de sorteos, vesting | 4% | 40.000.000 |
 | Compradores del Launch Pool | 53,3333333% | 533.333.333 |
 | Liquidez Raydium, estimada | 26,6666667% | 266.666.667 |
 | **Total** | **100%** | **1.000.000.000** |
 
 Genesis documenta que la asignación desbloqueada del creador es el remanente después de restar Launch Pool, Raydium y vestings. No publica la fórmula de redondeo del token destinado a Raydium. Con 533.333.333 MP para compradores y 50% del SOL para Raydium, estimamos 266.666.667 MP para el LP y 160.000.000 MP desbloqueados. **Mainnet queda bloqueada hasta comprobar estas cifras en Devnet.**
+
+## Fondo común de sorteos
+
+- 20% del suministro (200.000.000 MP) destinado a sorteos de copias de GTA VI entre los poseedores de 999 pases NFT.
+- Custodia: wallet del creador `4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj`. La web lo indica de forma visible.
+- Pases NFT: aún no acuñados. Las bases se publicarán antes del primer sorteo.
 
 ## Vesting del 4%
 

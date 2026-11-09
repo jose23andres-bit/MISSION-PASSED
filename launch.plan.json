@@ -29,6 +29,20 @@
     "estimatedRaydiumTokens": 266666667,
     "calculationStatus": "ESTIMATE_PENDING_DEVNET_VERIFICATION"
   },
+  "giveawayFund": {
+    "label": "Fondo común de sorteos",
+    "shareOfSupply": "20%",
+    "tokens": 200000000,
+    "custodyWallet": "4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj",
+    "custodian": "creator",
+    "purpose": "Sorteos de copias de GTA VI entre poseedores de los pases NFT",
+    "nftPasses": {
+      "supply": 999,
+      "status": "NOT_MINTED"
+    },
+    "rulesStatus": "TO_BE_PUBLISHED_BEFORE_FIRST_DRAW",
+    "publicDisclosure": "The site states that the creator controls the fund wallet."
+  },
   "authorityPolicy": {
     "automaticRevocation": false,
     "mintAuthority": "REVIEW_AFTER_DEVNET",
@@ -41,7 +55,7 @@
     "launchType": "launchpool",
     "token": {
       "image": "https://raw.githubusercontent.com/jose23andres-bit/MISSION-PASSED/main/public/token-logo.png",
-      "description": "MISSION PASSED (MP) is an experimental community memecoin on Solana. Independent project, not affiliated with Rockstar Games. No promise of profit, liquidity or utility.",
+      "description": "MISSION PASSED (MP) is an experimental community memecoin on Solana. 20% community giveaway fund held in the creator wallet. Independent project, not affiliated with Rockstar Games. No promise of profit, liquidity or utility.",
       "website": "https://github.com/jose23andres-bit/MISSION-PASSED",
       "twitter": null,
       "telegram": null
@@ -57,7 +71,7 @@
     },
     "claimScheduleAllocations": [
       {
-        "name": "Creator Vested Allocation",
+        "name": "Giveaway Fund Vested",
         "recipient": "4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj",
         "tokenAmount": 40000000,
         "vestingStartTime": "2026-11-13T11:14:36Z",

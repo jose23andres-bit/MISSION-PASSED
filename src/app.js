@@ -10,8 +10,8 @@
   });
 
   const allocations = [
-    { label: 'Creator · disponible', value: 16, color: '#d8ff3e' },
-    { label: 'Creator · vesting', value: 4, color: '#a58af4' },
+    { label: 'Fondo de sorteos · disponible', value: 16, color: '#d8ff3e' },
+    { label: 'Fondo de sorteos · vesting', value: 4, color: '#a58af4' },
     { label: 'Compradores · Launch Pool', value: 53.33, color: '#56d7d7' },
     { label: 'Raydium LP · estimado', value: 26.67, color: '#ff7148' },
   ];
