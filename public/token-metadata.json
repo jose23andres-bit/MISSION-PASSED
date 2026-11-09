@@ -1,0 +1,17 @@
+{
+  "name": "MISSION PASSED",
+  "symbol": "MP",
+  "description": "MISSION PASSED is an experimental community token project on Solana. No promise of profit, liquidity, utility, or future value.",
+  "image": "https://REPLACE_WITH_PUBLIC_DOMAIN/token-logo.png",
+  "external_url": "https://REPLACE_WITH_PUBLIC_DOMAIN",
+  "attributes": [
+    { "trait_type": "Network", "value": "Solana" },
+    { "trait_type": "Status", "value": "Pre-launch" }
+  ],
+  "properties": {
+    "category": "image",
+    "files": [
+      { "uri": "https://REPLACE_WITH_PUBLIC_DOMAIN/token-logo.png", "type": "image/png" }
+    ]
+  }
+}

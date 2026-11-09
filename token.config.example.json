@@ -1,0 +1,26 @@
+{
+  "approvalStatus": "DRAFT_NOT_APPROVED",
+  "name": "MISSION PASSED",
+  "symbol": "MP",
+  "supply": 1000000000,
+  "decimals": 6,
+  "program": "spl-token",
+  "distribution": {
+    "creatorVested": 30,
+    "publicPresale": 25,
+    "liquidity": 25,
+    "communityRewards": 10,
+    "marketingDevelopment": 10
+  },
+  "treasuryPublicKey": "4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj",
+  "creatorVesting": {
+    "cliffDays": 90,
+    "durationDays": 365,
+    "releaseIntervalDays": 30
+  },
+  "authorities": {
+    "mint": "revoke-after-verification",
+    "freeze": "revoke-after-verification"
+  },
+  "metadataUri": "https://REPLACE_WITH_IMMUTABLE_HOST/token-metadata.json"
+}

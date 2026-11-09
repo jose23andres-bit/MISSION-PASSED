@@ -1,0 +1,29 @@
+{
+  "name": "mission-passed",
+  "private": true,
+  "version": "0.2.0",
+  "type": "module",
+  "description": "Cinematic launch site, transparency pages and Metaplex Genesis Launch Pool tooling for MISSION PASSED on Solana.",
+  "scripts": {
+    "dev": "node scripts/dev-server.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "node --test --test-concurrency=1",
+    "check": "npm run test && npm run build",
+    "logo": "python3 scripts/generate-token-logo.py",
+    "launch:readiness": "node scripts/launch-readiness.mjs",
+    "genesis:plan": "node scripts/genesis/create-launch.mjs",
+    "genesis:devnet": "node scripts/genesis/create-launch.mjs",
+    "solana:validate": "node scripts/solana/validate-config.mjs",
+    "solana:estimate": "node scripts/solana/estimate-costs.mjs --cluster devnet",
+    "solana:rehearsal:devnet": "node scripts/solana/create-token.mjs --cluster devnet",
+    "solana:verify:devnet": "node scripts/solana/verify-token.mjs --cluster devnet"
+  },
+  "dependencies": {
+    "@metaplex-foundation/genesis": "0.43.4",
+    "@metaplex-foundation/umi": "1.6.0",
+    "@metaplex-foundation/umi-bundle-defaults": "1.6.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
