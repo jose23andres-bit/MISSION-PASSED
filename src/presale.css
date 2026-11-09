@@ -1,0 +1,87 @@
+/* MISSION PASSED · presale page */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.ps-page { min-height: 100vh; }
+.ps-top { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .8rem clamp(1rem,4vw,3rem); background: rgba(13,4,20,.85); border-bottom: 1px solid rgba(255,111,208,.25); backdrop-filter: blur(10px); }
+.ps-top nav { display: flex; flex-wrap: wrap; gap: 1.2rem; }
+.ps-top nav a { color: #f3e6fa; font: 600 .82rem var(--ui); letter-spacing: .12em; text-decoration: none; text-transform: uppercase; }
+.ps-top nav a:hover { color: var(--cyan); text-shadow: 0 0 12px var(--cyan); }
+.ps-top .mp-logo-text b { font-size: 1.15rem; }
+
+.ps-hero { position: relative; display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(1.5rem,4vw,4rem); align-items: center; min-height: 78vh; padding: clamp(3rem,7vw,6rem) clamp(1rem,6vw,6rem); overflow: hidden; isolation: isolate; }
+.ps-hero-bg { position: absolute; inset: 0; z-index: -1; }
+.ps-hero-bg img { width: 100%; height: 100%; object-fit: cover; filter: saturate(1.3) brightness(.55); animation: psDrift 30s ease-in-out infinite alternate; }
+.ps-hero-bg::after { position: absolute; inset: 0; content: ''; background: linear-gradient(90deg,rgba(13,4,20,.95) 20%,rgba(13,4,20,.55)),radial-gradient(circle at 80% 20%,rgba(255,45,155,.35),transparent 50%); }
+@keyframes psDrift { to { transform: scale(1.12) translateX(-2%); } }
+.ps-hero-copy p:last-child { max-width: 560px; margin-top: 1.6rem; color: #f0def8; font-size: 1.1rem; line-height: 1.7; }
+.ps-hero-copy b { color: #fff; }
+
+.ps-board { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; padding: clamp(1.2rem,3vw,2rem); }
+.ps-board small { display: block; color: var(--hot-2); font: 700 .72rem var(--ui); letter-spacing: .2em; text-transform: uppercase; }
+.ps-board strong { display: block; margin: .3rem 0; font: 400 clamp(2rem,4.5vw,3.4rem)/1 var(--num); letter-spacing: .02em; }
+.ps-price-now strong { color: var(--gold); text-shadow: 0 0 24px rgba(255,211,110,.6); font-size: clamp(2.8rem,6vw,4.6rem); }
+.ps-board span { color: #cdb8da; font-size: .85rem; }
+.ps-clock { grid-column: 1 / -1; }
+.ps-clock strong { font-size: clamp(1.6rem,3.5vw,2.4rem); color: var(--cyan); text-shadow: 0 0 16px rgba(63,240,255,.6); }
+.ps-meter { grid-column: 1 / -1; padding-bottom: 2.6rem; }
+.ps-meter-track { height: 14px; overflow: hidden; border: 1px solid rgba(255,111,208,.5); border-radius: 999px; background: rgba(255,255,255,.06); }
+.ps-meter-track i { display: block; width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg,var(--cyan),var(--hot),var(--gold)); box-shadow: 0 0 18px var(--hot); transition: width 1.2s cubic-bezier(.2,.8,.2,1); }
+.ps-meter-marks { position: relative; }
+.ps-meter-marks span { position: absolute; top: .4rem; display: grid; justify-items: center; transform: translateX(-50%); }
+.ps-meter-marks span:first-child { justify-items: start; transform: none; }
+.ps-meter-marks span::before { width: 2px; height: 10px; margin-top: -1.1rem; margin-bottom: .2rem; content: ''; background: #fff; opacity: .5; }
+.ps-meter-marks b { font: 400 1rem var(--num); color: #fff; }
+.ps-meter-marks small { color: #a892b6; font-size: .62rem; letter-spacing: .08em; }
+.ps-meter-marks span.active b { color: var(--gold); text-shadow: 0 0 12px var(--gold); }
+.ps-next { grid-column: 1 / -1; margin: 0; color: #f3e6fa; font-size: .92rem; }
+
+.ps-buy-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.5rem; align-items: start; }
+.ps-card { padding: clamp(1.2rem,3vw,2.2rem); }
+.ps-card h2,.ps-side h2 { margin: 0 0 1.2rem; font: 400 clamp(1.8rem,3vw,2.6rem) var(--brush); text-shadow: 2px 2px 0 var(--hot); }
+.ps-flow { display: grid; gap: 1.6rem; margin: 0; padding: 0; list-style: none; }
+.ps-flow h3 { display: flex; align-items: center; gap: .7rem; margin: 0 0 .8rem; font: 700 italic 1.05rem var(--ui); text-transform: uppercase; letter-spacing: .06em; }
+.ps-flow h3 b { display: grid; width: 30px; height: 30px; place-items: center; border-radius: 50%; color: #1a0628; background: var(--gold); font-style: normal; }
+.ps-wallets { display: flex; flex-wrap: wrap; gap: .6rem; }
+.ps-wallet { display: inline-flex; align-items: center; gap: .6rem; min-height: 48px; padding: 0 1.1rem; border: 1px solid rgba(255,255,255,.4); border-radius: .7rem; color: #fff; background: rgba(255,255,255,.06); cursor: pointer; font: 600 .95rem var(--ui); transition: border-color .2s,box-shadow .2s,transform .2s; }
+.ps-wallet:hover { border-color: var(--cyan); box-shadow: 0 0 18px rgba(63,240,255,.5); transform: translateY(-2px); }
+.ps-wallet img { border-radius: .4rem; }
+.ps-connected { margin: 0; padding: .7rem 1rem; border: 1px solid var(--cyan); border-radius: .7rem; color: var(--cyan); font-weight: 600; }
+.ps-balance { margin: .6rem 0 0; color: #a892b6; font-size: .85rem; }
+.ps-currencies { display: inline-flex; overflow: hidden; margin-bottom: .8rem; border: 1px solid rgba(255,111,208,.5); border-radius: .7rem; }
+.ps-currencies button { min-width: 84px; min-height: 44px; border: 0; color: #f3e6fa; background: transparent; cursor: pointer; font: 700 .95rem var(--ui); letter-spacing: .08em; }
+.ps-currencies button[aria-pressed="true"] { color: #fff; background: linear-gradient(95deg,#ff2d9b,#c414a8); }
+.ps-currencies button:disabled { opacity: .35; cursor: not-allowed; }
+.ps-amount { display: flex; align-items: center; border: 1px solid rgba(255,255,255,.35); border-radius: .8rem; background: rgba(0,0,0,.35); }
+.ps-amount:focus-within { border-color: var(--cyan); box-shadow: 0 0 18px rgba(63,240,255,.4); }
+.ps-amount input { flex: 1; min-width: 0; padding: .9rem 1rem; border: 0; color: #fff; background: transparent; font: 400 2rem var(--num); outline: 0; }
+.ps-amount em { padding-right: 1rem; color: var(--hot-2); font: 700 1rem var(--ui); font-style: normal; }
+.ps-quick { display: flex; gap: .5rem; margin-top: .6rem; }
+.ps-quick button { padding: .4rem .8rem; border: 1px solid rgba(255,255,255,.25); border-radius: 999px; color: #f3e6fa; background: none; cursor: pointer; font: 600 .8rem var(--ui); }
+.ps-quick button:hover { border-color: var(--hot-2); }
+.ps-quote { display: grid; gap: .25rem; margin-top: 1rem; padding: 1rem 1.2rem; border-left: 3px solid var(--gold); border-radius: .5rem; background: rgba(255,211,110,.07); }
+.ps-quote strong { font: 400 2.2rem/1 var(--num); color: var(--gold); }
+.ps-quote span,.ps-quote small { color: #e8d6f0; font-size: .88rem; }
+.ps-ack { display: flex; gap: .7rem; margin-bottom: 1rem; color: #e8d6f0; font-size: .88rem; line-height: 1.5; cursor: pointer; }
+.ps-ack input { width: 20px; height: 20px; flex: none; margin-top: .15rem; accent-color: var(--hot); }
+.ps-pay { width: 100%; min-height: 62px; font-size: 1.1rem; }
+.ps-pay:disabled { cursor: not-allowed; opacity: .55; animation: none; filter: grayscale(.4); }
+.ps-status { min-height: 1.4em; margin: .8rem 0 0; font-size: .92rem; }
+.ps-status[data-type="error"] { color: #ff8f9f; }
+.ps-receipts { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,.12); }
+.ps-receipts h3 { margin: 0 0 .5rem; font-size: .9rem; color: var(--hot-2); letter-spacing: .1em; text-transform: uppercase; }
+.ps-receipts ul { display: grid; gap: .4rem; margin: 0; padding: 0; list-style: none; }
+.ps-receipts a { color: var(--cyan); font-size: .85rem; }
+.ps-side { display: grid; gap: 1.5rem; }
+.ps-side .glow-card { padding: 1.5rem; }
+.ps-side p { color: #d8c4e4; font-size: .9rem; line-height: 1.6; }
+.ps-ladder { display: grid; gap: .6rem; margin: 0; padding: 0; list-style: none; counter-reset: tier; }
+.ps-ladder li { display: flex; align-items: center; gap: 1rem; padding: .7rem 1rem; border: 1px solid rgba(255,111,208,.3); border-radius: .7rem; background: rgba(0,0,0,.25); }
+.ps-ladder b { font: 400 1.7rem var(--num); color: var(--gold); }
+.ps-ladder span { color: #e8d6f0; font-size: .85rem; }
+.ps-receiver-card code { display: block; margin-bottom: .5rem; padding: .6rem; border-radius: .5rem; background: rgba(0,0,0,.4); font-size: .78rem; word-break: break-all; }
+.ps-warn { color: var(--gold) !important; }
+.ps-test .ps-hero::before { position: absolute; top: 1rem; right: 1rem; z-index: 2; padding: .35rem .8rem; border-radius: 999px; content: 'MODO PRUEBA · DEVNET'; color: #1a0628; background: var(--gold); font: 700 .7rem var(--ui); letter-spacing: .14em; }
+
+@media (max-width: 900px) {
+  .ps-hero,.ps-buy-grid { grid-template-columns: 1fr; }
+  .ps-top nav { display: none; }
+}

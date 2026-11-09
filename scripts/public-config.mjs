@@ -1,5 +1,7 @@
 // Single source for the public browser configuration (build and dev server).
 // Only public values belong here: everything is readable by every visitor.
+import '../src/presale-tiers.js';
+
 const BASE58 = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/;
 const DEPOSIT_WINDOW_MS = 48 * 60 * 60 * 1000;
 
@@ -15,6 +17,20 @@ export function safeLaunchUrl(value) {
     return url.protocol === 'https:' && (host === 'metaplex.com' || host.endsWith('.metaplex.com')) ? url.toString() : '';
   } catch {
     return '';
+  }
+}
+
+function isoOr(value, fallback) {
+  const ms = Date.parse(value || fallback);
+  return Number.isNaN(ms) ? new Date(Date.parse(fallback)).toISOString() : new Date(ms).toISOString();
+}
+
+// "fromSol:priceUsd,..." → validated tiers. Invalid input falls back to the published defaults.
+export function presaleTiers(text) {
+  try {
+    return globalThis.MPPresaleTiers.parse(text).map((tier) => ({ ...tier }));
+  } catch {
+    return globalThis.MPPresaleTiers.parse().map((tier) => ({ ...tier }));
   }
 }
 
@@ -39,6 +55,16 @@ export function publicConfig(env = process.env) {
       depositStart: Number.isNaN(startMs) ? '' : new Date(startMs).toISOString(),
       depositEnd: Number.isNaN(startMs) ? '' : new Date(startMs + DEPOSIT_WINDOW_MS).toISOString(),
       launchUrl: safeLaunchUrl(env.VITE_LAUNCH_URL),
+    },
+    // Direct presale. Disabled until VITE_PRESALE_WALLET holds a valid public address.
+    presale: {
+      wallet: publicKey(env.VITE_PRESALE_WALLET),
+      start: isoOr(env.VITE_PRESALE_START, '2026-11-09T00:00:00Z'),
+      end: isoOr(env.VITE_PRESALE_END, env.VITE_TOKEN_LAUNCH_AT || '2026-11-15T19:00:00Z'),
+      baselineSol: Math.max(0, Number(env.VITE_PRESALE_BASELINE_SOL) || 0),
+      tiers: presaleTiers(env.VITE_PRESALE_TIERS),
+      tokenCap: 533_333_333,
+      minUsd: 1,
     },
     links: {
       x: env.VITE_PROJECT_X_URL || '',

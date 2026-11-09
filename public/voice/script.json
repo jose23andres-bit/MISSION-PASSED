@@ -1,0 +1,11 @@
+{
+  "character": "Rico",
+  "voice": { "provider": "elevenlabs", "voiceId": "", "model": "eleven_multilingual_v2" },
+  "lines": [
+    { "id": "hola", "audio": false, "text": "¡Eh, colega! Soy Rico. ¿Quieres tus MP antes de que suba el precio? Te lo explico en un minuto." },
+    { "id": "wallet", "audio": false, "text": "Primero, abre Phantom o MetaMask y ten SOL, USDC o USDT en la red Solana. Guarda un poco de SOL para la comisión." },
+    { "id": "precio", "audio": false, "text": "Ahora mismo el precio es el más bajo. Cuando entren cien SOL, sube. Y al llegar a doscientos, vuelve a subir. Quien entra antes, paga menos por cada MP." },
+    { "id": "pagar", "audio": false, "text": "En la página de preventa conecta tu wallet, elige moneda e importe y verás cuántos MP te tocan. Revisa la dirección de destino y firma." },
+    { "id": "recibir", "audio": false, "text": "El quince de noviembre se lanza el token y tus MP llegan a la misma wallet con la que pagaste. Y recuerda: nunca le des tu frase semilla a nadie. Ni a mí." }
+  ]
+}

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="theme-color" content="#ff2d9b" />
-    <meta name="description" content="MISSION PASSED ($MP), la memecoin de Solana inspirada en Vice City. Launch Pool, 999 pases NFT y sorteos de copias de GTA VI." />
+    <meta name="description" content="MISSION PASSED ($MP), la memecoin de Solana inspirada en Vice City. Preventa por tramos con SOL, USDC o USDT, 999 pases NFT y sorteos de copias de GTA VI." />
     <meta property="og:title" content="MISSION PASSED · $MP" />
     <meta property="og:description" content="20% fondo común de sorteos. 80% compradores y liquidez. 999 pases NFT para sortear copias de GTA VI." />
     <meta property="og:image" content="/og-image.svg" />
@@ -18,7 +18,7 @@
     <title>MISSION PASSED · $MP · Solana</title>
     <script src="/config.js"></script>
     <script src="/assets/app.js" defer></script>
-  <script src="/assets/lang.js" defer></script><script src="/assets/radio.js" defer></script></head>
+  <script src="/assets/lang.js" defer></script><script src="/assets/radio.js" defer></script><script src="/assets/guide.js" defer></script></head>
   <body class="mp">
     <a class="skip-link" href="#main">Saltar al contenido</a>
     <div class="grain" aria-hidden="true"></div>
@@ -63,7 +63,7 @@
         <a href="#faq">FAQ</a>
       </nav>
       <div class="fullmenu-mark" aria-hidden="true">MP</div>
-      <a class="mp-btn mp-btn-hot fullmenu-cta" href="/presale/">Launch Pool <b>›</b></a>
+      <a class="mp-btn mp-btn-hot fullmenu-cta" href="/presale/">Preventa <b>›</b></a>
     </div>
 
     <main id="main">
@@ -78,9 +78,9 @@
         <div class="mp-hero-content">
           <svg class="crown crown-hero" viewBox="0 0 120 70" aria-hidden="true"><path d="M8 62 L14 14 L40 40 L60 6 L80 40 L106 14 L112 62 Z" /></svg>
           <h1 id="hero-title" class="mp-wordmark" translate="no"><span data-text="Mission">Mission</span><span data-text="Passed">Passed</span><em>$MP</em></h1>
-          <p class="mp-hero-copy">La memecoin de Solana con alma de Vice City. Entra en el Launch Pool, consigue tu pase y participa en los sorteos de copias de <strong>GTA VI</strong>.</p>
+          <p class="mp-hero-copy">La memecoin de Solana con alma de Vice City. Preventa abierta: paga hoy con <strong>SOL, USDC o USDT</strong> desde Phantom o MetaMask. El precio sube por tramos y $MP se lanza el 15 de noviembre.</p>
           <div class="mp-hero-actions">
-            <a class="mp-btn mp-btn-hot" href="/presale/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h15a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3Zm0 0 13-4v4M16 13h2" /></svg>Launch Pool <b>›</b></a>
+            <a class="mp-btn mp-btn-hot" href="/presale/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h15a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3Zm0 0 13-4v4M16 13h2" /></svg>Preventa <b>›</b></a>
             <button class="mp-btn mp-btn-dark" type="button" data-play-trailer><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8Z" /></svg>Ver tráiler</button>
           </div>
           <ul class="mp-chips">
@@ -92,7 +92,7 @@
         </div>
         <a class="mp-scroll" href="#proyecto"><span>Descubre el proyecto</span><i aria-hidden="true"></i></a>
         <div class="mp-hero-bar">
-          <div class="bar-label"><svg class="crown" viewBox="0 0 120 70" aria-hidden="true"><path d="M8 62 L14 14 L40 40 L60 6 L80 40 L106 14 L112 62 Z" /></svg><div><strong id="launch-bar-title">Launch Pool $MP</strong><span id="launch-bar-sub">15 nov · 20:00 Madrid · 48 horas de acceso</span></div></div>
+          <div class="bar-label"><svg class="crown" viewBox="0 0 120 70" aria-hidden="true"><path d="M8 62 L14 14 L40 40 L60 6 L80 40 L106 14 L112 62 Z" /></svg><div><strong id="launch-bar-title">Preventa $MP</strong><span id="launch-bar-sub">Lanzamiento 15 nov · 20:00 Madrid</span></div></div>
           <div class="bar-countdown" id="launch-countdown" role="timer" aria-live="off">
             <div><strong id="launch-days">00</strong><span>Días</span></div>
             <div><strong id="launch-hours">00</strong><span>Horas</span></div>
@@ -118,9 +118,9 @@
             <p class="mp-brief-tag">Nueva misión disponible</p>
             <h2 class="mp-sign" id="mission-title"><span>La misión</span><span>empieza en</span></h2>
             <dl class="mp-brief-list">
-              <div><dt>Objetivo</dt><dd>Entrar en el Launch Pool $MP</dd></div>
+              <div><dt>Objetivo</dt><dd>Comprar $MP en la preventa</dd></div>
               <div><dt>Fecha</dt><dd>15 nov 2026 · 20:00 (Madrid)</dd></div>
-              <div><dt>Zona</dt><dd>Solana · Metaplex Genesis</dd></div>
+              <div><dt>Zona</dt><dd>Solana · Phantom o MetaMask</dd></div>
               <div><dt>Recompensa</dt><dd>Tus MP + acceso a los sorteos</dd></div>
             </dl>
           </div>
@@ -140,9 +140,9 @@
           <div class="mp-loadbar">
             <div class="loadbar-head"><small>Cargando misión</small><strong id="mission-percent">0%</strong></div>
             <div class="loadbar-track"><i id="mission-bar"></i></div>
-            <p>Tiempo transcurrido desde el anuncio (9 nov) hasta la apertura. Las cifras de venta se verán en directo en el Launch Pool.</p>
+            <p>Tiempo transcurrido desde el anuncio (9 nov) hasta la apertura. Lo recaudado y el precio actual se ven en directo en la página de preventa.</p>
           </div>
-          <div class="mp-mission-done" id="mission-live" hidden><strong>Misión en marcha</strong><a class="mp-btn mp-btn-hot" href="/presale/">Ir al Launch Pool <b>›</b></a></div>
+          <div class="mp-mission-done" id="mission-live" hidden><strong>Misión en marcha</strong><a class="mp-btn mp-btn-hot" href="/presale/">Ir a la preventa <b>›</b></a></div>
         </div>
       </section>
 
@@ -155,9 +155,9 @@
         <div class="mp-project-copy">
           <p class="mp-eyebrow reveal">El proyecto</p>
           <h2 class="mp-title reveal" id="project-title">Bienvenido<br />a la misión</h2>
-          <p class="reveal">MISSION PASSED es una comunidad en Solana que vive la cuenta atrás de GTA VI. El token $MP se lanza en un Launch Pool público de 48 horas y el 20% del suministro forma el fondo común con el que se sortean copias del juego.</p>
+          <p class="reveal">MISSION PASSED es una comunidad en Solana que vive la cuenta atrás de GTA VI. El token $MP está en preventa con precio por tramos, se lanza el 15 de noviembre y el 20% del suministro forma el fondo común con el que se sortean copias del juego.</p>
           <div class="mp-feature-grid">
-            <a class="mp-feature glow-card reveal" href="/presale/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9Z" /></svg><strong>Launch Pool</strong><span>48 h para entrar</span></a>
+            <a class="mp-feature glow-card reveal" href="/presale/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9Z" /></svg><strong>Preventa</strong><span>Precio por tramos</span></a>
             <a class="mp-feature glow-card reveal" href="#sorteos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4Zm4 4h4m-2-2v4m6-1h.01M15 11h.01" /></svg><strong>999 pases</strong><span>Colección NFT</span></a>
             <a class="mp-feature glow-card reveal" href="#sorteos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v8H4v-8M2 7h20v5H2Zm10 13V7m0 0H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7Zm0 0h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7Z" /></svg><strong>Sorteos</strong><span>Copias de GTA VI</span></a>
             <a class="mp-feature glow-card reveal" href="#tokenomics"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 20v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm14 10v-2a4 4 0 0 0-3-3.9M16 2.1a4 4 0 0 1 0 7.8" /></svg><strong>Comunidad</strong><span>80% para el público</span></a>
@@ -252,10 +252,10 @@
           <button type="button" role="tab" aria-selected="false" data-filter="legendario">Legendarios</button>
         </div>
         <div class="mp-cards">
-          <article class="mp-card glow-card reveal" data-rarity="og"><div class="mp-card-art"><img src="/photos/nft-1.jpg" data-fallback="/gallery/pass-preview.svg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="Diseño de pase OG" loading="lazy" /></div><span class="mp-rarity">OG</span><h3>Mission Pass #001</h3><p>Diseño en preparación</p></article>
-          <article class="mp-card glow-card reveal" data-rarity="raro" style="--hue:160deg"><div class="mp-card-art"><img src="/photos/nft-2.jpg" data-fallback="/gallery/pass-preview.svg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="Diseño de pase raro" loading="lazy" /></div><span class="mp-rarity">Raro</span><h3>Mission Pass #128</h3><p>Diseño en preparación</p></article>
-          <article class="mp-card glow-card reveal" data-rarity="epico" style="--hue:250deg"><div class="mp-card-art"><img src="/photos/nft-3.jpg" data-fallback="/gallery/pass-preview.svg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="Diseño de pase épico" loading="lazy" /></div><span class="mp-rarity">Épico</span><h3>Mission Pass #512</h3><p>Diseño en preparación</p></article>
-          <article class="mp-card glow-card reveal" data-rarity="legendario" style="--hue:40deg"><div class="mp-card-art"><img src="/photos/nft-4.jpg" data-fallback="/gallery/pass-preview.svg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="Diseño de pase legendario" loading="lazy" /></div><span class="mp-rarity">Legendario</span><h3>Mission Pass #999</h3><p>Diseño en preparación</p></article>
+          <article class="mp-card glow-card reveal" data-rarity="og"><div class="mp-card-art"><img src="/photos/nft-1.jpg" data-fallback="/nft/01-el-conductor.svg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="El Conductor · pase OG, personaje original de MISSION PASSED" loading="lazy" /></div><span class="mp-rarity">OG</span><h3>El Conductor</h3><p>Pase #001 · Nunca llega tarde a una misión.</p></article>
+          <article class="mp-card glow-card reveal" data-rarity="raro"><div class="mp-card-art"><img src="/photos/nft-2.jpg" data-fallback="/nft/02-la-jefa.svg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="La Jefa · pase raro, personaje original de MISSION PASSED" loading="lazy" /></div><span class="mp-rarity">Raro</span><h3>La Jefa</h3><p>Pase #128 · Manda en la marina.</p></article>
+          <article class="mp-card glow-card reveal" data-rarity="epico"><div class="mp-card-art"><img src="/photos/nft-3.jpg" data-fallback="/nft/03-el-socio.svg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="El Socio · pase épico, personaje original de MISSION PASSED" loading="lazy" /></div><span class="mp-rarity">Épico</span><h3>El Socio</h3><p>Pase #512 · Conoce cada atajo del pantano.</p></article>
+          <article class="mp-card glow-card reveal" data-rarity="legendario"><div class="mp-card-art"><img src="/photos/nft-4.jpg" data-fallback="/nft/04-rico.svg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="Rico · pase legendario, personaje original de MISSION PASSED" loading="lazy" /></div><span class="mp-rarity">Legendario</span><h3>Rico</h3><p>Pase #999 · El guía. Su pase gana el gran premio.</p></article>
         </div>
         <article class="mp-grand glow-card reveal" aria-labelledby="grand-title">
           <div class="mp-grand-badge" aria-hidden="true"><svg class="crown" viewBox="0 0 120 70"><path d="M8 62 L14 14 L40 40 L60 6 L80 40 L106 14 L112 62 Z" /></svg><span>#999</span></div>
@@ -288,10 +288,10 @@
         <div class="mp-head reveal">
           <p class="mp-eyebrow">Roadmap</p>
           <h2 class="mp-title" id="roadmap-title">La ruta de la misión</h2>
-          <p>Del Launch Pool al primer sorteo, paso a paso.</p>
+          <p>De la preventa al primer sorteo, paso a paso.</p>
         </div>
         <ol class="mp-road">
-          <li class="glow-card reveal"><span>Fase 01 · 15 nov 2026</span><h3>Launch Pool $MP</h3><p>48 horas de depósitos en Metaplex Genesis. Al cerrar, cada comprador reclama sus MP y se crea la liquidez en Raydium.</p></li>
+          <li class="glow-card reveal"><span>Fase 01 · hasta el 15 nov 2026</span><h3>Preventa y lanzamiento $MP</h3><p>Preventa por tramos hasta el 15 de noviembre. Ese día se crea $MP, se envían los MP a cada comprador y se crea la liquidez en Raydium.</p></li>
           <li class="glow-card reveal"><span>Fase 02 · 19 nov 2026</span><h3>Llega GTA VI</h3><p>Lanzamiento oficial del juego por Rockstar Games. La comunidad lo celebra en directo.</p></li>
           <li class="glow-card reveal"><span>Fase 03</span><h3>999 Mission Pass</h3><p>Acuñación de los pases NFT que dan acceso a los sorteos.</p></li>
           <li class="glow-card reveal"><span>Fase 04</span><h3>Sorteos GTA VI</h3><p>Sorteos de copias del juego pagados con el fondo común, con bases publicadas y ganadores verificables.</p></li>
@@ -316,7 +316,7 @@
         <div class="mp-head reveal">
           <p class="mp-eyebrow">Tokenomics · $MP</p>
           <h2 class="mp-title" id="token-title">Mil millones de MP</h2>
-          <p>Reparto publicado, wallet a la vista y liquidez en Raydium al cerrar el Launch Pool. Todos entran con las mismas reglas. <a class="mp-link" href="/transparency/">Transparencia completa<span class="ext" aria-hidden="true">↗</span></a></p>
+          <p>Reparto publicado, wallet a la vista y liquidez en Raydium en el lanzamiento del 15 de noviembre. Todos entran con las mismas reglas. <a class="mp-link" href="/transparency/">Transparencia completa<span class="ext" aria-hidden="true">↗</span></a></p>
         </div>
         <div class="mp-token-stage reveal">
           <div class="token-orbit mp-orbit"><div class="token-coin"><img src="/mark.svg" alt="Símbolo de MISSION PASSED" /><strong>$MP</strong><span>SOLANA</span></div></div>
@@ -331,18 +331,25 @@
       <!-- HOW TO -->
       <section class="mp-section mp-buy" id="buy" aria-labelledby="buy-title">
         <div class="mp-head reveal">
-          <p class="mp-eyebrow">Cómo entrar</p>
+          <p class="mp-eyebrow">Cómo comprar</p>
           <h2 class="mp-title" id="buy-title">Cuatro pasos</h2>
+          <p>Sin mínimo para lanzar. Cuanto antes entras, menos pagas por cada MP.</p>
         </div>
+        <ol class="mp-tiers reveal" aria-label="Tramos de precio">
+          <li class="on"><small>Ahora</small><strong>$0.0004</strong><span>por MP</span></li>
+          <li><small>Desde 100 SOL</small><strong>$0.001</strong><span>por MP</span></li>
+          <li><small>Desde 200 SOL</small><strong>$0.005</strong><span>por MP</span></li>
+          <li class="launch"><small>15 nov</small><strong>Lanzamiento</strong><span>MP a tu wallet</span></li>
+        </ol>
         <ol class="mp-steps">
-          <li class="glow-card reveal"><span>01</span><h3>Comprueba</h3><p>Revisa el mint, el reparto y la wallet pública en transparencia.</p></li>
-          <li class="glow-card reveal"><span>02</span><h3>Conecta</h3><p>Abre el Launch Pool oficial en Metaplex y conecta Phantom.</p></li>
-          <li class="glow-card reveal"><span>03</span><h3>Deposita</h3><p>Elige tu cantidad de SOL y firma la transacción en tu wallet.</p></li>
-          <li class="glow-card reveal"><span>04</span><h3>Reclama</h3><p>Al cerrar las 48 horas, reclama tus MP en proporción a tu depósito.</p></li>
+          <li class="glow-card reveal"><span>01</span><h3>Wallet</h3><p>Phantom o MetaMask con SOL, USDC o USDT en la red Solana.</p></li>
+          <li class="glow-card reveal"><span>02</span><h3>Importe</h3><p>En la preventa eliges moneda e importe y ves al momento cuántos MP recibes.</p></li>
+          <li class="glow-card reveal"><span>03</span><h3>Firma</h3><p>Revisa destino e importe en tu wallet y firma. Nunca compartas tu frase semilla.</p></li>
+          <li class="glow-card reveal"><span>04</span><h3>Recibe</h3><p>El 15 de noviembre tus MP llegan a la misma wallet con la que pagaste.</p></li>
         </ol>
         <div class="mp-cta-bar glow-card reveal">
-          <div><small>Launch status</small><strong>Próximamente</strong><p>El acceso al Launch Pool se activa aquí el día de apertura.</p></div>
-          <a class="mp-btn mp-btn-hot" href="/presale/">Ver Launch Pool <b>›</b></a>
+          <div><small>Preventa</small><strong>Abierta</strong><p>Precio actual, lo recaudado y el pago, todo en una página.</p></div>
+          <a class="mp-btn mp-btn-hot" href="/presale/">Ir a la preventa <b>›</b></a>
         </div>
       </section>
 
@@ -367,10 +374,11 @@
         <div class="mp-head reveal"><p class="mp-eyebrow">Preguntas frecuentes</p><h2 class="mp-title" id="faq-title">FAQ</h2></div>
         <div class="mp-faq-list">
           <details class="glow-card reveal"><summary>¿Qué es MISSION PASSED?<span>+</span></summary><p>Una memecoin comunitaria en Solana inspirada en la estética de Vice City, con un fondo común para sortear copias de GTA VI.</p></details>
-          <details class="glow-card reveal"><summary>¿Cuándo se puede comprar MP?<span>+</span></summary><p>Cuando abra el Launch Pool en Metaplex Genesis. Ese día el botón de compra se activa aquí y en la página del Launch Pool.</p></details>
-          <details class="glow-card reveal"><summary>¿Dónde se deposita el SOL?<span>+</span></summary><p>En el programa Genesis desde la página oficial del lanzamiento, firmando con tu propia wallet.</p></details>
+          <details class="glow-card reveal"><summary>¿Cuándo se puede comprar MP?<span>+</span></summary><p>Ya: la preventa está abierta hasta el lanzamiento del 15 de noviembre. El precio sube por tramos: $0.0004 al inicio, $0.001 desde 100 SOL recaudados y $0.005 desde 200 SOL.</p></details>
+          <details class="glow-card reveal"><summary>¿Hace falta llegar a 250 SOL?<span>+</span></summary><p>No. No hay mínimo: $MP se lanza el 15 de noviembre se recaude lo que se recaude.</p></details>
+          <details class="glow-card reveal"><summary>¿Con qué puedo pagar?<span>+</span></summary><p>SOL, USDC o USDT en la red Solana, desde Phantom, MetaMask, Solflare o Backpack. Firmas tú en tu wallet; la web nunca ve tu frase semilla.</p></details>
           <details class="glow-card reveal"><summary>¿Para qué es el 20%?<span>+</span></summary><p>Es el fondo común de sorteos: 16% disponible y 4% con vesting. Está en la wallet pública <code translate="no">4hqD…cXnj</code>, que controla el creador, y cada movimiento puede seguirse en Solscan. No se revoca ninguna autoridad automáticamente.</p></details>
-          <details class="glow-card reveal"><summary>¿Qué blockchain se utiliza?<span>+</span></summary><p>Solana. Necesitas una wallet como Phantom y SOL para depositar.</p></details>
+          <details class="glow-card reveal"><summary>¿Qué blockchain se utiliza?<span>+</span></summary><p>Solana. Necesitas Phantom o MetaMask con SOL, USDC o USDT en la red Solana.</p></details>
           <details class="glow-card reveal"><summary>¿Está relacionado con Rockstar?<span>+</span></summary><p>No. MISSION PASSED es un proyecto independiente. Los vídeos y enlaces de GTA VI llevan a las publicaciones oficiales de Rockstar Games.</p></details>
         </div>
       </section>

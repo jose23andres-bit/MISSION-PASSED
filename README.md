@@ -24,6 +24,7 @@ Wallet pública del creador, custodia del fondo de sorteos: `4hqDqmWYnN1N2VJHfCa
 | Web, portal GTA VI, buscador y cuenta atrás | Terminada |
 | Wallet, transparencia y Launch Pool | Terminados |
 | Configuración Genesis | Válida; pendiente de confirmar reparto exacto en Devnet |
+| Preventa | Página lista; pago desactivado hasta publicar la wallet de cobro |
 | Token | No creado |
 | Mainnet | Bloqueada hasta prueba y autorización separada |
 
@@ -39,7 +40,7 @@ npm run launch:readiness
 npm run ci   # lint + seguridad + pruebas + rutas GitHub Pages
 ```
 
-CI/CD (lint, pruebas, secretos, build, Pages, verificación): ver `docs/ci-cd.md`.
+CI/CD (lint, pruebas, secretos, build, Pages, verificación): ver `docs/ci-cd.md`. Preventa, reparto y voz de Rico: ver `docs/preventa.md`.
 
 Para el ensayo: GitHub → Actions → **Devnet rehearsal** → escribe `DEVNET`. Sigue `docs/quick-create-with-phantom.md`.
 

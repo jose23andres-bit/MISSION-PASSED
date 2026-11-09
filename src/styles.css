@@ -229,3 +229,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .radio-toggle { position: fixed; left: 1rem; bottom: 4.2rem; z-index: 90; display: inline-flex; align-items: center; gap: .5rem; height: 40px; padding: 0 .9rem; border: 1px solid rgba(63,240,255,.7); border-radius: 999px; color: #fff; background: rgba(13,4,20,.88); box-shadow: 0 0 18px rgba(63,240,255,.4); cursor: pointer; font: 700 .78rem/1 'Kanit', system-ui, sans-serif; letter-spacing: .1em; text-transform: uppercase; backdrop-filter: blur(8px); }
 .radio-toggle i { color: #3ff0ff; font-style: normal; }
 .radio-toggle[aria-pressed="true"] { box-shadow: 0 0 0 1px #3ff0ff,0 0 30px rgba(63,240,255,.8); }
+.radio-dock { position: fixed; left: 1rem; bottom: 7.4rem; z-index: 90; width: min(320px,calc(100vw - 2rem)); overflow: hidden; border: 1px solid rgba(63,240,255,.6); border-radius: .9rem; background: rgba(13,4,20,.92); box-shadow: 0 0 24px rgba(63,240,255,.35); backdrop-filter: blur(8px); }
+.radio-dock-head { display: flex; align-items: center; justify-content: space-between; padding: .35rem .7rem; color: #3ff0ff; font: 700 .7rem/1 'Kanit', system-ui, sans-serif; letter-spacing: .16em; text-transform: uppercase; }
+.radio-dock-close { width: 26px; height: 26px; border: 0; border-radius: 50%; color: #fff; background: rgba(255,255,255,.1); cursor: pointer; }
+.radio-dock-player { height: 80px; }
+.radio-dock-player iframe { display: block; border: 0; }
