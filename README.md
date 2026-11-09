@@ -36,7 +36,10 @@ npm test
 npm run build
 npm run genesis:plan
 npm run launch:readiness
+npm run ci   # lint + seguridad + pruebas + rutas GitHub Pages
 ```
+
+CI/CD (lint, pruebas, secretos, build, Pages, verificación): ver `docs/ci-cd.md`.
 
 Para el ensayo: GitHub → Actions → **Devnet rehearsal** → escribe `DEVNET`. Sigue `docs/quick-create-with-phantom.md`.
 
