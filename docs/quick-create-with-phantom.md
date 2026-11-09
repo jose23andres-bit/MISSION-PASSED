@@ -20,7 +20,7 @@ El ejecutor Devnet comprueba que el logo responde antes de enviar nada.
 2. En GitHub abre **Actions → Devnet rehearsal → Run workflow**.
 3. Escribe `DEVNET` en la confirmación y deja los valores por defecto (`15` y `45`).
 4. Pulsa **Run workflow** y abre el run.
-5. En el paso **Fund signer** verás una dirección. Abre https://faucet.solana.com, pega esa dirección, elige Devnet y pide 1 SOL o más. El faucet de la red ya no reparte SOL automáticamente, por eso hace falta este paso. El ensayo sigue solo en cuanto llega el saldo.
+5. En el paso **Fund signer** verás una dirección. Abre https://devnetfaucet.org, pega esa dirección y solicita al menos **0,1 SOL** de Devnet. Si está vacío, prueba https://faucet.quicknode.com/solana/devnet. El ensayo continúa cuando llega el saldo.
 
 El workflow hace lo siguiente:
 
@@ -37,7 +37,7 @@ El resultado queda como artefacto del run (`genesis-devnet.json` y `genesis-devn
 ```bash
 npm install
 node scripts/genesis/ephemeral-keypair.mjs ~/mp-devnet.json
-node scripts/genesis/airdrop.mjs <DIRECCIÓN_QUE_IMPRIME> 1 45   # y envía SOL desde faucet.solana.com
+node scripts/genesis/airdrop.mjs <DIRECCIÓN_QUE_IMPRIME> 0.1 45
 export GENESIS_DEVNET_KEYPAIR_PATH=~/mp-devnet.json MP_DEVNET_CONFIRMED=DEVNET
 npm run genesis:devnet -- --execute --start-in-minutes 15
 node scripts/genesis/verify-launch.mjs

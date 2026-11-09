@@ -51,3 +51,11 @@ test('rehearsal workflow is manual, Devnet-only and needs typed confirmation', a
   assert.doesNotMatch(code, /mainnet|secrets\./i);
   assert.match(code, /api\.devnet\.solana\.com/);
 });
+
+test('workflow only waits for 0.1 Devnet SOL and offers listed alternatives', async () => {
+  const yml = await readFile(resolve(root, '.github/workflows/devnet-rehearsal.yml'), 'utf8');
+  const script = await readFile(resolve(root, 'scripts/genesis/airdrop.mjs'), 'utf8');
+  assert.match(yml, /airdrop\.mjs "\$SIGNER" 0\.1/);
+  assert.match(script, /devnetfaucet\.org/);
+  assert.match(script, /faucet\.quicknode\.com\/solana\/devnet/);
+});
