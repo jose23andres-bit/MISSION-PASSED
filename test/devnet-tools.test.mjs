@@ -37,7 +37,7 @@ test('a correct Devnet launch passes every check', () => {
 test('wrong supply, foreign owner or unvested tokens fail verification', () => {
   assert.equal(evaluateLaunch({ ...good, supply: { uiAmountString: '1000000001' } }).checks.supplyIsOneBillion, false);
   assert.equal(evaluateLaunch({ ...good, genesisOwner: '11111111111111111111111111111111' }).checks.genesisAccountOwnedByGenesis, false);
-  assert.equal(evaluateLaunch({ ...good, creatorBalance: 5 }).checks.creatorHoldsNoUnvestedTokens, false);
+  assert.equal(evaluateLaunch({ ...good, creatorBalance: 160_000_001 }).checks.immediateCreatorBalanceDoesNotExceed16Percent, false);
   assert.equal(evaluateLaunch({ ...good, genesisHash: 'mainnet' }).ok, false);
 });
 

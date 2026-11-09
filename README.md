@@ -1,54 +1,46 @@
 # MISSION PASSED
 
-Web cinematográfica, portal independiente de GTA VI y herramientas para lanzar el token MISSION PASSED (MP) en Solana con Metaplex Genesis.
+Web cinematográfica y herramientas para lanzar MISSION PASSED (MP) mediante Metaplex Genesis en Solana.
+
+## Distribución final
+
+- 16% disponible para el creador al lanzamiento (estimación de remanente Genesis).
+- 4% del creador con vesting de 12 meses y cliff de 3 meses.
+- 53,33% para compradores del Launch Pool.
+- 26,67% estimado para liquidez Raydium.
+- No hay asignaciones adicionales.
+
+Wallet pública del creador: `4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj`. Saldo comunicado: 0,11 SOL. Ninguna autoridad se revoca automáticamente.
 
 ## Estado
 
 | Parte | Estado |
 |---|---|
-| Web, portal GTA VI, buscador, cuenta atrás | Terminado |
-| Conexión de wallet (Phantom, Solflare) | Terminado; solo lectura |
-| Transparencia, Launch Pool, consola de operador | Terminado; se rellenan con direcciones reales al lanzar |
-| Configuración Genesis (`launch.plan.json`) | Completa y validada |
-| Ensayo Devnet | Workflow manual en GitHub Actions (`devnet-rehearsal.yml`); pendiente de ejecutar |
-| Token en cadena | No creado |
-| Mainnet | Bloqueada en código |
+| Web, portal GTA VI, buscador y cuenta atrás | Terminada |
+| Wallet, transparencia y Launch Pool | Terminados |
+| Configuración Genesis | Válida; pendiente de confirmar reparto exacto en Devnet |
+| Token | No creado |
+| Mainnet | Bloqueada hasta prueba y autorización separada |
 
-Revisión del código Solana: `docs/review-opus-5.5.md`. Informe previo a Mainnet: `docs/pre-mainnet-report.md`.
-
-## Uso
+## Comandos
 
 ```bash
 cp .env.example .env
-npm run dev                # http://127.0.0.1:4173
-npm test                   # 24 pruebas
-npm run build              # genera dist/
-npm run launch:readiness   # qué falta para Devnet y Mainnet
-npm run genesis:plan       # dry run del lanzamiento, sin red
+npm run dev
+npm test
+npm run build
+npm run genesis:plan
+npm run launch:readiness
 ```
 
-El build y el servidor de desarrollo leen `.env`. Las variables `VITE_*` son públicas.
-
-## Lanzamiento
-
-Sigue `docs/quick-create-with-phantom.md`. En resumen:
-
-1. Publica la web en Netlify o Vercel (`vercel.json` y `netlify.toml` incluidos).
-2. Ensayo en Devnet: GitHub → Actions → **Devnet rehearsal** → escribe `DEVNET`.
-3. Verifica en cadena y aprueba Mainnet, que se firma en Phantom.
+Para el ensayo: GitHub → Actions → **Devnet rehearsal** → escribe `DEVNET`. Sigue `docs/quick-create-with-phantom.md`.
 
 ## Estructura
 
-```
-index.html, portal/, presale/, transparency/, admin/   páginas
-src/                    JS y CSS del navegador
-scripts/genesis/        input, validación y ejecutor Genesis
-scripts/solana/         ensayo técnico SPL por CLI (no es la ruta de lanzamiento)
-launch.plan.json        configuración del lanzamiento
-docs/                   decisiones, seguridad, revisión, informes
-test/                   pruebas
-```
+- `index.html`, `portal/`, `presale/`, `transparency/`, `admin/`: web.
+- `scripts/genesis/`: validador y ejecutor Devnet.
+- `launch.plan.json`: fuente única del reparto.
+- `test/`: pruebas de web, distribución y seguridad.
+- `docs/preview/`: capturas de escritorio y móvil.
 
-## Riesgo
-
-Proyecto experimental. Una memecoin puede perder todo su valor. Sin afiliación con Rockstar Games.
+Proyecto experimental. Sin afiliación con Rockstar Games.

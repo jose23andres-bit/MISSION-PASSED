@@ -10,11 +10,10 @@
   });
 
   const allocations = [
-    { label: 'Creator allocation · vesting', value: 30, color: '#d8ff3e' },
-    { label: 'Public presale', value: 25, color: '#56d7d7' },
-    { label: 'Liquidity', value: 25, color: '#ff7148' },
-    { label: 'Community rewards', value: 10, color: '#a58af4' },
-    { label: 'Marketing & development', value: 10, color: '#3e4a50' },
+    { label: 'Creator · disponible', value: 16, color: '#d8ff3e' },
+    { label: 'Creator · vesting', value: 4, color: '#a58af4' },
+    { label: 'Compradores · Launch Pool', value: 53.33, color: '#56d7d7' },
+    { label: 'Raydium LP · estimado', value: 26.67, color: '#ff7148' },
   ];
 
   const $ = (selector) => document.querySelector(selector);

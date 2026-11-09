@@ -8,13 +8,13 @@ export const GENESIS_PROGRAM_ID = 'GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B'
 
 // Pure evaluation of facts read from the chain, so it can be unit-tested offline.
 export function evaluateLaunch(facts) {
+    const balance = (facts.signerBalance || 0) + (facts.creatorBalance || 0);
   const checks = {
     rpcIsDevnet: facts.genesisHash === DEVNET_GENESIS_HASH,
     mintExists: facts.supply !== null,
     supplyIsOneBillion: facts.supply !== null && Number(facts.supply.uiAmountString) === TOTAL_SUPPLY,
     genesisAccountOwnedByGenesis: facts.genesisOwner === GENESIS_PROGRAM_ID,
-    signerHoldsNoTokens: facts.signerBalance === 0,
-    creatorHoldsNoUnvestedTokens: facts.creatorBalance === 0,
+    immediateCreatorBalanceDoesNotExceed16Percent: balance <= 160_000_000,
   };
   return { checks, ok: Object.values(checks).every(Boolean) };
 }
