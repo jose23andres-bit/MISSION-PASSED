@@ -8,12 +8,16 @@
     "dev": "node scripts/dev-server.mjs",
     "build": "node scripts/build.mjs",
     "test": "node --test --test-concurrency=1",
-    "check": "npm run test && npm run build",
     "logo": "python3 scripts/generate-token-logo.py",
     "launch:readiness": "node scripts/launch-readiness.mjs",
     "genesis:plan": "node scripts/genesis/create-launch.mjs",
     "genesis:devnet": "node scripts/genesis/create-launch.mjs",
-    "genesis:verify:devnet": "node scripts/genesis/verify-launch.mjs"
+    "genesis:verify:devnet": "node scripts/genesis/verify-launch.mjs",
+    "lint": "node scripts/ci/lint.mjs",
+    "security": "node scripts/ci/secret-scan.mjs && node scripts/ci/safety-guard.mjs",
+    "check:pages": "SITE_BASE_PATH=/MISSION-PASSED npm run build && SITE_BASE_PATH=/MISSION-PASSED node scripts/ci/check-pages-paths.mjs",
+    "ci": "npm run lint && npm run security && npm test && npm run check:pages",
+    "check": "npm run test && npm run build"
   },
   "dependencies": {
     "@metaplex-foundation/genesis": "0.43.4",

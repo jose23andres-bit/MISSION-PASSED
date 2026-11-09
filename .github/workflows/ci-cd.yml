@@ -1,0 +1,310 @@
+name: CI/CD
+
+# Cada push y pull request ejecuta: instalación → lint → pruebas → seguridad → build → rutas de GitHub Pages.
+# Solo `main` publica, y únicamente si TODAS las comprobaciones pasan. Después se verifica el sitio publicado.
+#
+# Entornos (valores públicos en config/environments/*.env):
+#   development → ramas y pull requests (solo vista previa, no se publica)
+#   devnet      → rama `devnet` (vista previa + comprobación de red Devnet de solo lectura)
+#   production  → rama `main` (GitHub Pages; el entorno de GitHub se llama github-pages)
+#
+# Este pipeline NO usa secretos ni claves: no despliega contratos, no crea tokens, no firma ni mueve fondos.
+# El ensayo en Devnet es un workflow aparte, manual y con confirmación escrita (devnet-rehearsal.yml).
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-cd-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+env:
+  NODE_VERSION: '22'
+  FORCE_COLOR: '0'
+
+jobs:
+  # ── 0. Entorno de destino ────────────────────────────────────────────────────────
+  context:
+    name: Entorno de destino
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    outputs:
+      environment: ${{ steps.pick.outputs.environment }}
+    steps:
+      - id: pick
+        shell: bash
+        run: |
+          case "$GITHUB_REF" in
+            refs/heads/main)   ENVIRONMENT=production ;;
+            refs/heads/devnet) ENVIRONMENT=devnet ;;
+            *)                 ENVIRONMENT=development ;;
+          esac
+          echo "environment=$ENVIRONMENT" >> "$GITHUB_OUTPUT"
+          echo "### Entorno: \`$ENVIRONMENT\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "Referencia: \`$GITHUB_REF\` · commit \`${GITHUB_SHA::7}\`" >> "$GITHUB_STEP_SUMMARY"
+
+  # ── 1-3. Dependencias, lint y pruebas ───────────────────────────────────────────
+  quality:
+    name: Dependencias · Lint · Pruebas
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - name: 1. Instalar dependencias (npm ci, versiones del lockfile)
+        run: npm ci --no-audit --no-fund
+      - name: 2. Lint y comprobación de errores
+        run: npm run lint
+      - name: 3. Pruebas automatizadas
+        run: |
+          mkdir -p test-results
+          npm test -- --test-reporter=spec --test-reporter-destination=stdout --test-reporter=junit --test-reporter-destination=test-results/junit.xml
+      - name: Informe de pruebas (anotaciones y resumen)
+        if: always()
+        run: node scripts/ci/report-tests.mjs test-results/junit.xml
+      - name: Informe de preparación del lanzamiento (informativo)
+        if: always()
+        shell: bash
+        run: npm run launch:readiness > /dev/null || test "$?" -eq 2
+      - name: Guardar informes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: informes-calidad
+          path: |
+            test-results/
+            deployment/readiness.json
+          if-no-files-found: ignore
+          retention-days: 14
+
+  # ── 4. Seguridad y secretos ──────────────────────────────────────────────────────
+  security:
+    name: Seguridad · Secretos · Guarda blockchain
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Escaneo de secretos (árbol de trabajo + historial git)
+        run: node scripts/ci/secret-scan.mjs --history
+      - name: Guarda — sin despliegues en red principal, tokens, firmas ni fondos
+        run: node scripts/ci/safety-guard.mjs
+      - name: Auditoría de dependencias (bloquea high/critical)
+        run: npm audit --omit=dev --audit-level=high
+
+  # ── 5-6. Build de producción y rutas de GitHub Pages ────────────────────────────
+  build:
+    name: Build · Rutas Pages · Verificación previa
+    needs: [context, quality, security]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      TARGET_ENVIRONMENT: ${{ needs.context.outputs.environment }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Cargar configuración del entorno (${{ needs.context.outputs.environment }})
+        run: node scripts/ci/load-environment.mjs "$TARGET_ENVIRONMENT" >> "$GITHUB_ENV"
+      - name: 5. Build de producción
+        run: |
+          npm run build
+          node scripts/ci/stamp-version.mjs
+      - name: 6. Rutas compatibles con GitHub Pages
+        run: node scripts/ci/check-pages-paths.mjs
+      - name: Escaneo de secretos sobre la salida publicada (dist/)
+        run: node scripts/ci/secret-scan.mjs --dist
+      - name: Verificación previa — servidor local que imita GitHub Pages
+        run: node scripts/ci/verify-site.mjs --dir dist --base "$SITE_BASE_PATH" --expect-network "$VITE_SOLANA_NETWORK"
+      - name: Guardar sitio compilado
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-${{ needs.context.outputs.environment }}
+          path: dist
+          retention-days: ${{ needs.context.outputs.environment == 'production' && 30 || 7 }}
+          if-no-files-found: error
+      - name: Preparar artefacto de GitHub Pages
+        if: needs.context.outputs.environment == 'production' && github.event_name == 'push'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  # ── Puerta única: nada se publica si algo anterior no está en verde ─────────────
+  gate:
+    name: ✅ Todas las comprobaciones
+    needs: [context, quality, security, build]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Exigir que todas las etapas hayan pasado
+        shell: bash
+        env:
+          CONTEXT: ${{ needs.context.result }}
+          QUALITY: ${{ needs.quality.result }}
+          SECURITY: ${{ needs.security.result }}
+          BUILD: ${{ needs.build.result }}
+        run: |
+          {
+            echo "### Resultado de las comprobaciones"
+            echo "| Etapa | Resultado |"
+            echo "|---|---|"
+            echo "| Entorno | $CONTEXT |"
+            echo "| Dependencias · Lint · Pruebas | $QUALITY |"
+            echo "| Seguridad · Secretos | $SECURITY |"
+            echo "| Build · Rutas Pages | $BUILD |"
+          } >> "$GITHUB_STEP_SUMMARY"
+          for result in "$CONTEXT" "$QUALITY" "$SECURITY" "$BUILD"; do
+            if [ "$result" != "success" ]; then
+              echo "::error title=Publicación bloqueada::Alguna etapa no terminó en verde. No se publica nada."
+              echo "" >> "$GITHUB_STEP_SUMMARY"
+              echo "🚫 **Publicación bloqueada.** Revisa la etapa en rojo; los fallos de pruebas aparecen como anotaciones." >> "$GITHUB_STEP_SUMMARY"
+              exit 1
+            fi
+          done
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "✅ Todo en verde." >> "$GITHUB_STEP_SUMMARY"
+
+  # ── Vista previa de development / devnet (no se publica en Pages) ───────────────
+  preview:
+    name: Vista previa (${{ needs.context.outputs.environment }})
+    needs: [context, gate]
+    if: needs.context.outputs.environment != 'production'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: ${{ needs.context.outputs.environment }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Cargar configuración del entorno
+        run: node scripts/ci/load-environment.mjs "${{ needs.context.outputs.environment }}" >> "$GITHUB_ENV"
+      - name: Comprobar red Devnet (solo lectura)
+        if: needs.context.outputs.environment == 'devnet'
+        run: node scripts/ci/check-devnet.mjs
+      - name: Resumen
+        run: |
+          {
+            echo "### Vista previa lista (${{ needs.context.outputs.environment }})"
+            echo "El sitio compilado está en el artefacto \`site-${{ needs.context.outputs.environment }}\` de esta ejecución."
+            echo "No se publica en GitHub Pages: solo \`main\` publica."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  # ── 7. Despliegue (solo main, solo si la puerta está en verde) ──────────────────
+  deploy:
+    name: Desplegar a producción (GitHub Pages)
+    needs: [context, gate]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.gate.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+  # ── 8. Verificación posterior al despliegue ─────────────────────────────────────
+  verify:
+    name: Verificar el sitio publicado
+    needs: [deploy]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Cargar configuración de producción
+        run: node scripts/ci/load-environment.mjs production >> "$GITHUB_ENV"
+      - name: Comprobar páginas, recursos, red y commit publicado
+        run: >
+          node scripts/ci/verify-site.mjs
+          --url "${{ needs.deploy.outputs.page_url }}"
+          --expect-network "$VITE_SOLANA_NETWORK"
+          --expect-commit "$GITHUB_SHA"
+          --retries 20 --delay 15
+      - name: Abrir incidencia si la verificación falla
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/issues" \
+            -f title="🚨 Verificación posterior al despliegue fallida (${GITHUB_SHA::7})" \
+            -f body="La verificación del sitio publicado falló para el commit \`$GITHUB_SHA\`. Detalles: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID . Se intenta una restauración automática de la última versión correcta." \
+            > /dev/null || echo "No se pudo crear la incidencia"
+
+  # ── Restauración automática de la última versión buena ──────────────────────────
+  rollback:
+    name: Restaurar última versión correcta
+    needs: [verify]
+    if: always() && needs.verify.result == 'failure'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      actions: read
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Localizar la última ejecución verde de main
+        id: last
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          RUN_ID=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/ci-cd.yml/runs?branch=main&event=push&status=success&per_page=20" \
+            --jq "[.workflow_runs[] | select(.id != $GITHUB_RUN_ID)][0].id")
+          if [ -z "$RUN_ID" ] || [ "$RUN_ID" = "null" ]; then
+            echo "::error title=Sin versión anterior::No hay una ejecución verde previa que restaurar."
+            exit 1
+          fi
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+          echo "Restaurando la ejecución #$RUN_ID" >> "$GITHUB_STEP_SUMMARY"
+      - name: Descargar el sitio de esa ejecución
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download "${{ steps.last.outputs.run_id }}" --repo "$GITHUB_REPOSITORY" --name site-production --dir dist
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - id: deployment
+        uses: actions/deploy-pages@v4

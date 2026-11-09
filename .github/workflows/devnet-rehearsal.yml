@@ -29,6 +29,7 @@ jobs:
     if: ${{ github.event.inputs.confirm == 'DEVNET' }}
     runs-on: ubuntu-latest
     timeout-minutes: 150
+    environment: devnet
     env:
       GENESIS_DEVNET_RPC_URL: https://api.devnet.solana.com
       MP_DEVNET_CONFIRMED: ${{ github.event.inputs.confirm }}
@@ -44,8 +45,11 @@ jobs:
         run: |
           [[ "$START_IN_MINUTES" =~ ^[0-9]+$ ]] && (( START_IN_MINUTES >= 5 && START_IN_MINUTES <= 1440 )) || { echo "start_in_minutes inválido"; exit 1; }
           [[ "$WAIT_MINUTES" =~ ^[0-9]+$ ]] && (( WAIT_MINUTES >= 1 && WAIT_MINUTES <= 120 )) || { echo "wait_minutes inválido"; exit 1; }
-      - name: Tests and dry run
+      - name: Tests, safety checks and dry run
         run: |
+          npm ci --no-audit --no-fund
+          npm run lint
+          npm run security
           npm test
           npm run genesis:plan
       - name: Install Genesis SDK
