@@ -7,7 +7,8 @@ import { publicConfig } from './public-config.mjs';
 
 const root = resolve(import.meta.dirname, '..');
 loadEnv(resolve(root, '.env'));
-const css = readFileSync(resolve(root, 'src/styles.css'), 'utf8').replace(/@import url\([^)]*\);/, '');
+const css = readFileSync(resolve(root, 'src/styles.css'), 'utf8').replace(/@import url\([^)]*\);/, '')
+  .replace(/url\('\.\.\/gallery\/([\w-]+\.svg)'\)/g, (_, f) => `url('data:image/svg+xml;base64,${readFileSync(resolve(root, 'public/gallery', f)).toString('base64')}')`);
 const mark = `data:image/svg+xml;base64,${readFileSync(resolve(root, 'public/mark.svg')).toString('base64')}`;
 const config = `window.MISSION_PASSED_CONFIG = Object.freeze(${JSON.stringify(publicConfig())});`
   + `window.MISSION_PASSED_SEARCH_INDEX = ${readFileSync(resolve(root, 'public/search-index.json'), 'utf8').trim()};`;
@@ -29,6 +30,10 @@ const shots = [
   ['index.html', '01-portada-escritorio', 1440, 900, true],
   ['index.html', '02-portada-movil', 390, 844, true],
   ['index.html', '07-galeria', 1440, 900, false, '#gallery'],
+  ['index.html', '10-roadmap', 1440, 900, false, '#roadmap'],
+  ['index.html', '11-portada-viewport', 1440, 900, false],
+  ['index.html', '13-portada-movil-larga', 390, 1500, false],
+  ['index.html', '12-portada-movil-viewport', 390, 844, false],
   ['index.html', '08-sorteos', 1440, 900, false, '#sorteos'],
   ['index.html', '09-sorteos-movil', 390, 844, false, '#sorteos'],
   ['presale/index.html', '03-launch-pool', 1440, 900, true],
@@ -45,9 +50,12 @@ const code = `async (page) => {
     await page.setViewportSize({ width: s.w, height: s.h });
     await page.setContent(s.html, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(400);
+    await page.evaluate(() => { document.documentElement.style.scrollBehavior = 'auto'; window.scrollTo(0, 0); });
+    await page.waitForTimeout(150);
     const path = '${dir}/mission-passed-' + s.name + '.jpg';
     if (s.selector) await page.locator(s.selector).screenshot({ path, type: 'jpeg', quality: 80 });
-    else await page.screenshot({ path, fullPage: s.full, type: 'jpeg', quality: 72 });
+    else if (s.full) await page.screenshot({ path, fullPage: true, type: 'jpeg', quality: 72 });
+    else await page.screenshot({ path, fullPage: true, clip: { x: 0, y: 0, width: s.w, height: s.h }, type: 'jpeg', quality: 80 });
     out.push(path);
   }
   return out;

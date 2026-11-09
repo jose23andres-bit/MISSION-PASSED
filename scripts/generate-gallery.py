@@ -11,16 +11,16 @@ W, H = 1600, 900
 OUT = Path(__file__).resolve().parent.parent / "public" / "gallery"
 
 
-def svg(defs, body, title):
+def svg(defs, body, title, w=W, h=H):
     return (
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img">'
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}" role="img">'
         f"<title>{title} · Ilustración original MISSION PASSED</title><defs>{defs}"
         '<filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/>'
         '<feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>'
         '<filter id="soft"><feGaussianBlur stdDeviation="18"/></filter>'
         '<linearGradient id="vignette" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".25"/>'
         '<stop offset=".35" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".45"/></linearGradient>'
-        f'</defs>{body}<rect width="{W}" height="{H}" fill="url(#vignette)"/></svg>'
+        f'</defs>{body}<rect width="{w}" height="{h}" fill="url(#vignette)"/></svg>'
     )
 
 
@@ -276,7 +276,122 @@ def scene_club():
     return svg(defs, body, "Club nocturno")
 
 
+def ferris_wheel(cx, cy, r, color):
+    spokes = "".join(
+        f'<line x1="{cx}" y1="{cy}" x2="{cx + r * math.cos(a):.1f}" y2="{cy + r * math.sin(a):.1f}" stroke="{color}" stroke-width="2"/>'
+        for a in [i * math.pi / 8 for i in range(16)]
+    )
+    cabins = "".join(
+        f'<circle cx="{cx + r * math.cos(a):.1f}" cy="{cy + r * math.sin(a):.1f}" r="7" fill="#ff7ad9" filter="url(#glow)"/>'
+        for a in [i * math.pi / 8 for i in range(16)]
+    )
+    legs = f'<path d="M{cx},{cy} L{cx - r * .55},{cy + r * 1.25} M{cx},{cy} L{cx + r * .55},{cy + r * 1.25}" stroke="{color}" stroke-width="6"/>'
+    return f'<g opacity=".75"><circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{color}" stroke-width="4"/>{spokes}{legs}{cabins}</g>'
+
+
+def helicopter(x, y, s, color):
+    return (
+        f'<g transform="translate({x},{y}) scale({s})" fill="{color}">'
+        '<ellipse cx="0" cy="0" rx="46" ry="20"/><path d="M38,-6 L130,-14 L130,-4 L40,8 Z"/><rect x="122" y="-30" width="8" height="30"/>'
+        '<rect x="-4" y="-30" width="8" height="12"/><rect x="-110" y="-34" width="220" height="4" rx="2"/>'
+        '<path d="M-30,20 L-36,34 M24,20 L30,34 M-50,34 L44,34" stroke="' + color + '" stroke-width="4"/>'
+        '<path d="M-40,-4 Q-30,-16 -10,-14 L-12,4 Z" fill="#ff9fe0" opacity=".8"/></g>'
+    )
+
+
+def sports_car(x, y, s):
+    return (
+        f'<g transform="translate({x},{y}) scale({s})">'
+        '<path d="M0,120 Q10,60 90,48 L170,8 Q260,-8 360,8 L450,48 Q530,60 540,120 L540,170 L0,170 Z" fill="#14061c"/>'
+        '<path d="M150,46 L190,14 Q270,2 350,14 L390,46 Z" fill="#3b1250"/>'
+        '<path d="M160,44 L196,18 Q270,8 344,18 L380,44 Z" fill="#ff5fc8" opacity=".25"/>'
+        '<rect x="30" y="92" width="480" height="16" rx="8" fill="#ff1f4b" filter="url(#glow)"/>'
+        '<rect x="40" y="96" width="140" height="8" rx="4" fill="#ffd0d8"/><rect x="360" y="96" width="140" height="8" rx="4" fill="#ffd0d8"/>'
+        '<path d="M250,118 l20,-14 l20,14 l-8,0 l-12,-8 l-12,8 Z" fill="#ff5fc8"/>'
+        '<rect x="200" y="128" width="140" height="22" rx="4" fill="#2a1036"/><text x="270" y="145" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="16" fill="#ff9fe0">MP · 999</text>'
+        '<rect x="20" y="160" width="90" height="40" rx="10" fill="#07020b"/><rect x="430" y="160" width="90" height="40" rx="10" fill="#07020b"/>'
+        '<path d="M0,120 Q10,60 90,48 L170,8 Q260,-8 360,8 L450,48 Q530,60 540,120" fill="none" stroke="#ff5fc8" stroke-width="3" opacity=".8"/></g>'
+    )
+
+
+def duo(x, y, s):
+    """Two original back-to-back silhouettes with neon rim light (generic, not based on any game character)."""
+    man = (
+        "M-40,-430 C-10,-470 60,-470 80,-430 C96,-400 92,-360 86,-340 L100,-318 L84,-310 C82,-280 70,-262 44,-256 "
+        "L46,-220 C120,-206 196,-180 222,-120 L250,140 L-250,140 L-230,-120 C-210,-180 -150,-210 -70,-222 L-64,-262 "
+        "C-92,-280 -104,-330 -96,-372 C-88,-404 -64,-424 -40,-430 Z"
+    )
+    woman = (
+        "M300,-380 C260,-430 330,-470 380,-450 C430,-470 490,-430 470,-380 C510,-350 500,-290 470,-262 C490,-220 470,-180 430,-170 "
+        "L432,-150 C500,-138 560,-110 580,-50 L600,140 L230,140 L240,-60 C252,-110 290,-140 340,-150 L342,-176 "
+        "C310,-190 296,-226 300,-262 C270,-290 268,-350 300,-380 Z"
+    )
+    rim = '<path d="{d}" fill="none" stroke="{c}" stroke-width="5" opacity=".9" filter="url(#glow)" transform="translate({dx},0)"/>'
+    return (
+        f'<g transform="translate({x},{y}) scale({s})">'
+        + rim.format(d=man, c="#ff5fc8", dx=-4) + rim.format(d=woman, c="#5ff2df", dx=4)
+        + f'<path d="{man}" fill="#12051a"/><path d="{woman}" fill="#12051a"/>'
+        '<path d="M-26,-372 L74,-376 L76,-352 Q50,-338 26,-352 L20,-360 L4,-360 Q-6,-340 -26,-350 Z" fill="#1f0a2b"/>'
+        '<path d="M-20,-368 L8,-368 L4,-356 Z M30,-370 L68,-372 L64,-358 Z" fill="#ff7ad9" opacity=".85"/>'
+        '<path d="M330,-330 L440,-334 L442,-312 Q414,-298 392,-312 L386,-318 L372,-318 Q362,-300 334,-310 Z" fill="#1f0a2b"/>'
+        '<path d="M384,-328 L432,-330 L428,-316 Z" fill="#5ff2df" opacity=".85"/>'
+        '<path d="M-60,-200 Q0,-120 60,-200" stroke="#ffd36e" stroke-width="5" fill="none" opacity=".8"/>'
+        '<circle cx="470" cy="-250" r="14" fill="none" stroke="#ffd36e" stroke-width="4" opacity=".8"/>'
+        "".join(f'<path d="M{px},{py} q14,-26 28,0 q-14,10 -28,0 Z" fill="#ff5fc8" opacity=".35"/>' for px, py in [(-170, -120), (-90, -60), (-10, -150), (80, -80), (150, -10), (-150, 20), (40, 40)])
+        + "</g>"
+    )
+
+
+def scene_hero():
+    rng = random.Random(7)
+    defs = grad("sky", [(0, "#2a0a52"), (.35, "#8f1d8c"), (.62, "#ff3fa4"), (.85, "#ff8a7a"), (1, "#ffb48a")])
+    defs += grad("bay", [(0, "#ff6fb8"), (.3, "#7a1f8f"), (1, "#14061f")])
+    defs += grad("sun", [(0, "#fff0c4"), (1, "#ff6fa8")])
+    sdefs, sun = striped_sun(700, 500, 200, "sun")
+    win = (["#ffe3f4", "#ff9fe0", "#5ff2df", "#ffd36e"], .3)
+    body = (
+        f'<rect width="1920" height="1080" fill="url(#sky)"/>' + stars(rng, 60, 300)
+        + "".join(f'<ellipse cx="{rng.randint(0, 1920)}" cy="{rng.randint(90, 380)}" rx="{rng.randint(120, 300)}" ry="{rng.randint(10, 26)}" fill="#ffb3e0" opacity=".28"/>' for _ in range(12))
+        + sun
+        + f'<g opacity=".55">{skyline(rng, 700, 60, 120, 320, "#5a1670", x1=1920)}</g>'
+        + skyline(rng, 700, 60, 140, 470, "#2a0838", win, x1=1920, wmin=50, wmax=120)
+        + ferris_wheel(560, 590, 120, "#ffb3e6")
+        + f'<rect y="700" width="1920" height="380" fill="url(#bay)"/>'
+        + water_reflections(rng, 710, 1060, ["#ff9fe0", "#ffe3f4", "#5ff2df"], 160)
+        + helicopter(1060, 210, 1.1, "#1a0626")
+        + palm(80, 1080, 640, 90, "#12051a", 1.3) + palm(1860, 1080, 700, -110, "#12051a", 1.35) + palm(1700, 1060, 470, -40, "#12051a", .95)
+        + duo(1290, 1040, 1.05)
+        + sports_car(40, 830, .95)
+        + '<rect y="1040" width="1920" height="40" fill="#0b0310"/>'
+    )
+    return svg(defs + sdefs, body, "Portada Leonida", 1920, 1080)
+
+
+def scene_pass():
+    rng = random.Random(8)
+    defs = grad("card", [(0, "#ff2d9b"), (.5, "#8f1d8c"), (1, "#2a0a52")], 1, 1)
+    defs += grad("sun", [(0, "#fff0c4"), (1, "#ff6fa8")])
+    defs += grad("edge", [(0, "#5ff2df"), (.5, "#ffd36e"), (1, "#ff5fc8")], 1, 1)
+    sdefs, sun = striped_sun(800, 470, 260, "sun")
+    body = (
+        '<rect width="1600" height="900" fill="#12051a"/>'
+        '<rect x="330" y="70" width="940" height="760" rx="48" fill="url(#edge)" filter="url(#glow)"/>'
+        '<rect x="342" y="82" width="916" height="736" rx="40" fill="url(#card)"/>'
+        + sun
+        + f'<g opacity=".9">{skyline(rng, 640, 30, 60, 200, "#2a0838", (["#ffe3f4", "#5ff2df"], .25), x0=342, x1=1250, wmin=40, wmax=80)}</g>'
+        + '<rect x="342" y="640" width="916" height="178" fill="#12051a" opacity=".55"/>'
+        + palm(430, 820, 420, 50, "#12051a", .8) + palm(1170, 820, 470, -60, "#12051a", .85)
+        + '<path d="M740,190 L770,130 L800,175 L830,130 L860,190 Z" fill="#ffd36e" filter="url(#glow)"/>'
+        '<text x="800" y="260" text-anchor="middle" font-family="Arial Black,Arial,sans-serif" font-weight="900" font-size="58" letter-spacing="10" fill="#fff">MISSION PASS</text>'
+        '<text x="800" y="720" text-anchor="middle" font-family="Arial Black,Arial,sans-serif" font-weight="900" font-size="96" fill="#fff">#001<tspan fill="#ffd36e" font-size="54"> / 999</tspan></text>'
+        '<text x="800" y="780" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="26" letter-spacing="8" fill="#5ff2df">SORTEOS GTA VI · SOLANA</text>'
+    )
+    return svg(defs + sdefs, body, "Pase NFT MISSION PASS")
+
+
 SCENES = {
+    "00-hero-leonida.svg": scene_hero,
+    "pass-preview.svg": scene_pass,
     "01-ocean-drive.svg": scene_beach,
     "02-neon-skyline.svg": scene_skyline,
     "03-night-highway.svg": scene_highway,

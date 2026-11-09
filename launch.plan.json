@@ -55,7 +55,7 @@
     "launchType": "launchpool",
     "token": {
       "image": "https://raw.githubusercontent.com/jose23andres-bit/MISSION-PASSED/main/public/token-logo.png",
-      "description": "MISSION PASSED (MP) is an experimental community memecoin on Solana. 20% community giveaway fund held in the creator wallet. Independent project, not affiliated with Rockstar Games. No promise of profit, liquidity or utility.",
+      "description": "MISSION PASSED (MP) is a community memecoin on Solana. 20% community giveaway fund held in the creator wallet. Independent project, not affiliated with Rockstar Games.",
       "website": "https://github.com/jose23andres-bit/MISSION-PASSED",
       "twitter": null,
       "telegram": null
