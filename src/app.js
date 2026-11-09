@@ -333,12 +333,24 @@
     });
   }
 
-  function playTrailer(button) {
-    if (!button || button.classList.contains('playing')) return;
+  // YouTube player commands through postMessage (needs enablejsapi=1).
+  function ytCommand(button, func) {
+    const frame = button?.querySelector('iframe');
+    frame?.contentWindow?.postMessage(JSON.stringify({ event: 'command', func, args: [] }), 'https://www.youtube-nocookie.com');
+  }
+
+  // muted=true is used for scroll autoplay: browsers only allow autoplay without sound.
+  function playTrailer(button, muted = false) {
+    if (!button) return;
+    if (button.classList.contains('playing')) {
+      ytCommand(button, 'playVideo');
+      if (!muted) ytCommand(button, 'unMute');
+      return;
+    }
     const src = button.dataset.embed;
     if (!/^https:\/\/www\.youtube-nocookie\.com\/embed\/[\w-]+$/.test(src || '')) return;
     const frame = document.createElement('iframe');
-    frame.src = `${src}?autoplay=1&rel=0`;
+    frame.src = `${src}?autoplay=1&rel=0&playsinline=1&enablejsapi=1&modestbranding=1${muted ? '&mute=1' : ''}&origin=${encodeURIComponent(window.location.origin)}`;
     frame.title = button.getAttribute('aria-label') || 'Tráiler oficial';
     frame.allow = 'autoplay; encrypted-media; picture-in-picture';
     frame.allowFullscreen = true;
@@ -347,7 +359,31 @@
     button.append(frame);
   }
 
+  // Trailers start muted when at least 60% visible and pause when scrolled away. Only one plays at a time.
+  function setupScrollAutoplay() {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const saveData = navigator.connection?.saveData;
+    if (reduced || saveData || !('IntersectionObserver' in window)) return;
+    const trailers = [...document.querySelectorAll('.mp-trailer')];
+    const ratios = new Map();
+    let current = null;
+    const pick = () => {
+      let best = null, bestRatio = 0.6;
+      ratios.forEach((ratio, el) => { if (ratio >= bestRatio) { best = el; bestRatio = ratio; } });
+      if (best === current) return;
+      if (current) ytCommand(current, 'pauseVideo');
+      current = best;
+      if (best) playTrailer(best, true);
+    };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => ratios.set(entry.target, entry.intersectionRatio));
+      pick();
+    }, { threshold: [0, 0.3, 0.6, 0.8, 1] });
+    trailers.forEach((el) => observer.observe(el));
+  }
+
   function setupTrailers() {
+    setupScrollAutoplay();
     document.querySelectorAll('.mp-trailer').forEach((button) => button.addEventListener('click', () => playTrailer(button)));
     document.querySelectorAll('[data-play-trailer]').forEach((trigger) => trigger.addEventListener('click', () => {
       const main = $('#trailer-main');

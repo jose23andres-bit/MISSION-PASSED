@@ -1,1 +1,141 @@
-<!doctype html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Launch Pool de MISSION PASSED en Metaplex Genesis: reglas, ventana de 48 horas y calculadora de reparto."><link rel="icon" href="/mark.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/styles.css"><script src="/config.js"></script><script src="/assets/chain-dashboard.js" defer></script><title>Launch Pool | MISSION PASSED</title><script src="/assets/lang.js" defer></script></head><body class="portal-body"><header class="portal-header"><a class="brand" translate="no" href="/"><img src="/mark.svg" alt=""><span>MISSION <b>PASSED</b></span></a><nav><a href="/transparency/">Transparencia</a><a href="/#tokenomics">Tokenomics</a><a href="/#launch">Wallet</a></nav></header><main class="portal-main"><header class="portal-hero"><p class="eyebrow"><span>GENESIS</span> LAUNCH POOL</p><h1>Venta pública.</h1><p>Durante 48 horas cualquiera deposita SOL. Al cerrar, 533.333.333 MP se reparten en proporción a lo depositado; Genesis reserva además la parte calculada para Raydium.</p><span class="unofficial-label" id="presale-state">NO DESPLEGADA</span></header><div class="content-grid"><article class="content-card"><h2>Tokens a la venta</h2><p><strong id="allocation-value">533.333.333 MP (53,33%)</strong></p></article><article class="content-card"><h2>Objetivo mínimo</h2><p id="goal-value">Objetivo pendiente.</p></article><article class="content-card"><h2>Ventana</h2><p id="window-value">Ventana de 48 h pendiente de publicar.</p></article><article class="content-card"><h2>Programa</h2><p>Metaplex Genesis · <code translate="no">GNS1S5J5…Rxii2B</code></p><a class="official-link" href="https://developers.metaplex.com/smart-contracts/genesis/launch-pool" target="_blank" rel="noreferrer">Cómo funciona un Launch Pool ↗</a></article></div><section class="article-section"><h2>Así compra la gente</h2><div class="content-grid buyer-steps"><article class="content-card"><h2>01 · Entrar</h2><p>El visitante abre esta página y verifica nombre, distribución, wallet pública y mint.</p></article><article class="content-card"><h2>02 · Depositar</h2><p>Cuando exista el lanzamiento, el botón oficial abre Metaplex. Allí conecta Phantom y elige cuánto SOL depositar.</p></article><article class="content-card"><h2>03 · Firmar</h2><p>Phantom muestra la transacción. El comprador la revisa y decide si firma. Esta web nunca recibe su seed.</p></article><article class="content-card"><h2>04 · Reclamar</h2><p>Al cerrar las 48 horas, Genesis calcula el reparto proporcional. El comprador reclama MP y comprueba la firma en Solscan.</p></article></div></section><section class="article-section"><h2>Calculadora de reparto</h2><form class="search-box" id="quote-form"><label for="sol-amount">Tu depósito y total recaudado (SOL)</label><div><input id="sol-amount" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Tu depósito"><input id="sol-total" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Total recaudado"><button type="submit">Calcular</button></div></form><p id="quote-output" aria-live="polite">El reparto depende del total recaudado al cierre.</p></section><section class="article-section"><h2>Participar</h2><p id="purchase-gate">El enlace oficial de Metaplex se activa aquí el día de apertura. Los depósitos van directamente al programa Genesis.</p><a class="button button-primary" id="join-launch" target="_blank" rel="noreferrer" hidden>Ir al lanzamiento oficial ↗</a></section></main><footer class="site-footer"><a class="brand" translate="no" href="/"><img src="/mark.svg" alt=""><span>MISSION <b>PASSED</b></span></a><p>Cada depósito se firma en la wallet del comprador.</p><p>Solana</p></footer></body></html>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#ff2d9b" />
+    <meta name="description" content="Preventa de MISSION PASSED ($MP) en Solana: precio por tramos, pago con Phantom o MetaMask en SOL, USDC o USDT." />
+    <link rel="icon" href="/mark.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/assets/styles.css" />
+    <link rel="stylesheet" href="/assets/mission.css" />
+    <link rel="stylesheet" href="/assets/presale.css" />
+    <title>Preventa $MP | MISSION PASSED</title>
+    <script src="/config.js"></script>
+    <script src="/assets/vendor/solana-web3.min.js" defer></script>
+    <script src="/assets/presale-tiers.js" defer></script>
+    <script src="/assets/presale.js" defer></script>
+    <script src="/assets/lang.js" defer></script>
+    <script src="/assets/radio.js" defer></script>
+    <script src="/assets/guide.js" defer></script>
+  </head>
+  <body class="mp ps-page">
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+    <div class="grain" aria-hidden="true"></div>
+    <header class="ps-top">
+      <a class="mp-logo" translate="no" href="/" aria-label="MISSION PASSED, inicio">
+        <span class="mp-logo-text"><svg class="crown" viewBox="0 0 120 70" aria-hidden="true"><path d="M8 62 L14 14 L40 40 L60 6 L80 40 L106 14 L112 62 Z" /></svg><b>Mission</b><b>Passed</b><i>$MP</i></span>
+      </a>
+      <nav aria-label="Secciones">
+        <a href="#comprar">Comprar</a>
+        <a href="#como">Cómo funciona</a>
+        <a href="#reglas">Reglas</a>
+        <a href="/transparency/">Transparencia</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="ps-hero" aria-labelledby="ps-title">
+        <div class="ps-hero-bg" aria-hidden="true"><img src="/gallery/02-neon-skyline.svg" alt="" /></div>
+        <div class="ps-hero-copy">
+          <p class="mp-eyebrow">Preventa abierta · <span id="ps-network">Solana</span></p>
+          <h1 class="mp-title" id="ps-title">Entra antes<br />de que suba</h1>
+          <p>Paga hoy con <b>SOL, USDC o USDT</b> desde <b>Phantom</b> o <b>MetaMask</b>. El precio sube por tramos según lo recaudado. No hay mínimo para lanzar: $MP se lanza el 15 de noviembre.</p>
+        </div>
+
+        <div class="ps-board glow-card" aria-live="polite">
+          <div class="ps-price-now">
+            <small>Precio actual</small>
+            <strong id="ps-price">$0.0004</strong>
+            <span id="ps-tier">Tramo 1</span>
+          </div>
+          <div class="ps-raised">
+            <small>Recaudado</small>
+            <strong id="ps-raised">— SOL</strong>
+            <span id="ps-solusd"></span>
+          </div>
+          <div class="ps-clock">
+            <small id="ps-countdown-label">La preventa cierra en</small>
+            <strong id="ps-countdown">—</strong>
+          </div>
+          <div class="ps-meter" aria-hidden="true">
+            <div class="ps-meter-track"><i id="ps-meter-fill"></i></div>
+            <div class="ps-meter-marks" id="ps-meter-marks"></div>
+          </div>
+          <p class="ps-next" id="ps-next"></p>
+        </div>
+      </section>
+
+      <section class="mp-section ps-buy" id="comprar" aria-labelledby="buy-title">
+        <div class="ps-buy-grid">
+          <div class="ps-card glow-card">
+            <h2 id="buy-title">Comprar $MP</h2>
+            <ol class="ps-flow">
+              <li>
+                <h3><b>1</b>Conecta tu wallet</h3>
+                <div class="ps-wallets" id="ps-wallets"></div>
+                <p class="ps-balance" id="ps-balance">Compatible con Phantom, MetaMask (Solana), Solflare y Backpack.</p>
+              </li>
+              <li>
+                <h3><b>2</b>Elige moneda e importe</h3>
+                <div class="ps-currencies" role="group" aria-label="Moneda de pago">
+                  <button type="button" data-currency="SOL" aria-pressed="true">SOL</button>
+                  <button type="button" data-currency="USDC" aria-pressed="false">USDC</button>
+                  <button type="button" data-currency="USDT" aria-pressed="false">USDT</button>
+                </div>
+                <label class="ps-amount"><span class="sr-only">Importe</span><input id="ps-amount" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.5" /><em id="ps-unit">SOL</em></label>
+                <div class="ps-quick"><button type="button" data-quick="0.25">0,25</button><button type="button" data-quick="1">1</button><button type="button" data-quick="5">5</button><button type="button" data-quick="25">25</button></div>
+                <div class="ps-quote" id="ps-quote"></div>
+              </li>
+              <li>
+                <h3><b>3</b>Firma en tu wallet</h3>
+                <label class="ps-ack"><input type="checkbox" id="ps-ack" /> <span>Entiendo que pago a la wallet de preventa publicada abajo, que los MP se envían a esta misma wallet tras el lanzamiento del 15 de noviembre y que una memecoin puede perder todo su valor.</span></label>
+                <button class="mp-btn mp-btn-hot ps-pay" id="ps-pay" type="button" disabled>Conecta tu wallet</button>
+                <p class="ps-status" id="ps-status" role="status"></p>
+              </li>
+            </ol>
+            <div class="ps-receipts" id="ps-receipts" hidden><h3>Tus pagos en este dispositivo</h3><ul></ul></div>
+          </div>
+
+          <aside class="ps-side">
+            <div class="glow-card ps-ladder-card">
+              <h2>Tramos de precio</h2>
+              <ol class="ps-ladder" id="ps-ladder"></ol>
+              <p>Si tu pago cruza un tramo, la parte de abajo se cobra al precio anterior y el resto al nuevo.</p>
+            </div>
+            <div class="glow-card ps-receiver-card">
+              <h2>Wallet de preventa</h2>
+              <p id="ps-receiver">Se publica aquí cuando la preventa se active. Hasta entonces el botón de pago permanece desactivado.</p>
+              <p class="ps-warn">Comprueba en tu wallet que la dirección de destino coincide antes de firmar.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="mp-section ps-how" id="como" aria-labelledby="how-title">
+        <div class="mp-head"><p class="mp-eyebrow">Paso a paso</p><h2 class="mp-title" id="how-title">Cómo funciona</h2></div>
+        <ol class="mp-steps">
+          <li class="glow-card"><span>01</span><h3>Wallet</h3><p>Instala Phantom o MetaMask y ten SOL, USDC o USDT en la red Solana, más 0,003 SOL para la comisión.</p></li>
+          <li class="glow-card"><span>02</span><h3>Importe</h3><p>Elige moneda e importe. Verás al momento cuántos MP te corresponden al precio actual.</p></li>
+          <li class="glow-card"><span>03</span><h3>Firma</h3><p>Tu wallet muestra la transacción. Revisa destino e importe y firma. Esta web nunca ve tu frase semilla.</p></li>
+          <li class="glow-card"><span>04</span><h3>Recibe</h3><p>El 15 de noviembre se crea $MP y tus MP llegan a la misma wallet con la que pagaste.</p></li>
+        </ol>
+      </section>
+
+      <section class="mp-section ps-rules" id="reglas" aria-labelledby="rules-title">
+        <div class="mp-head"><p class="mp-eyebrow">Reglas claras</p><h2 class="mp-title" id="rules-title">Lo que debes saber</h2></div>
+        <div class="mp-faq-list">
+          <details class="glow-card" open><summary>¿Hay un mínimo para lanzar?<span>+</span></summary><p>No. $MP se lanza el 15 de noviembre se recaude lo que se recaude.</p></details>
+          <details class="glow-card"><summary>¿Cómo se calcula lo recaudado?<span>+</span></summary><p>Es el saldo de la wallet de preventa: SOL más USDC y USDT convertidos a SOL al precio actual (oráculo Pyth). Se actualiza cada 30 segundos y cualquiera puede comprobarlo en Solscan.</p></details>
+          <details class="glow-card"><summary>¿Cuándo recibo mis MP?<span>+</span></summary><p>Tras crear el token el 15 de noviembre (<span id="ps-end">15 nov 2026</span>). El reparto se calcula con un registro público de todos los pagos de la wallet de preventa, en el orden en que llegaron.</p></details>
+          <details class="glow-card"><summary>¿Es una inversión?<span>+</span></summary><p>No. $MP es una memecoin comunitaria sin rentabilidad prometida. Su precio puede bajar o llegar a cero. Compra solo lo que estés dispuesto a perder.</p></details>
+          <details class="glow-card"><summary>¿Y si me equivoco de red o de moneda?<span>+</span></summary><p>Solo se aceptan SOL, USDC y USDT en la red Solana. Envíos desde otras redes o de otras monedas no se pueden recuperar.</p></details>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer mp-footer">
+      <p class="independent-badge">PROYECTO INDEPENDIENTE · NO AFILIADO A ROCKSTAR GAMES</p>
+      <p><a class="mp-link" href="/">Volver a la portada</a> · <a class="mp-link" href="/transparency/">Transparencia</a></p>
+    </footer>
+  </body>
+</html>

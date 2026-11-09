@@ -36,7 +36,11 @@ const BLOCKED_NAMES = [
 
 const BINARY = new Set(['.png', '.jpg', '.jpeg', '.gif', '.webp', '.ico', '.woff', '.woff2', '.ttf', '.otf', '.zip', '.mp3', '.mp4', '.webm', '.pdf']);
 
-function scanText(name, text, fileLabel = name, offsetLine = 0) {
+// Embedded binaries (fonts, images) in data: URIs are base64, not secrets; blank them keeping line numbers.
+const stripDataUris = (text) => text.replace(/data:[\w.+-]+\/[\w.+-]+;base64,[A-Za-z0-9+/=]+/g, (m) => 'x'.repeat(Math.min(m.length, 12)));
+
+function scanText(name, rawText, fileLabel = name, offsetLine = 0) {
+  const text = stripDataUris(rawText);
   for (const rule of RULES) {
     const match = rule.re.exec(text);
     if (!match) continue;

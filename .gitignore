@@ -9,3 +9,4 @@ deployment/*.json
 .DS_Store
 token.config.json
 test-results/
+deployment/*.csv
