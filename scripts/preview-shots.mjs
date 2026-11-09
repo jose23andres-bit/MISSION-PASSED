@@ -20,13 +20,17 @@ function inline(page) {
   scripts.push(config);
   html = html.replace(/<script src="\/config.js"><\/script>/, '');
   html = html.replace(/<script src="\/assets\/([\w-]+\.js)"[^>]*><\/script>/g, (_, f) => { scripts.push(js(f)); return ''; });
-  html = html.replaceAll('/mark.svg', mark);
+  html = html.replaceAll('/mark.svg', mark).replaceAll(' loading="lazy"', '');
+  html = html.replace(/\/gallery\/([\w-]+\.svg)/g, (_, f) => `data:image/svg+xml;base64,${readFileSync(resolve(root, 'public/gallery', f)).toString('base64')}`);
   return html.replace('</body>', `${scripts.map((s) => `<script>${s}</script>`).join('')}</body>`);
 }
 
 const shots = [
   ['index.html', '01-portada-escritorio', 1440, 900, true],
   ['index.html', '02-portada-movil', 390, 844, true],
+  ['index.html', '07-galeria', 1440, 900, false, '#gallery'],
+  ['index.html', '08-sorteos', 1440, 900, false, '#sorteos'],
+  ['index.html', '09-sorteos-movil', 390, 844, false, '#sorteos'],
   ['presale/index.html', '03-launch-pool', 1440, 900, true],
   ['transparency/index.html', '04-transparencia', 1440, 900, true],
   ['portal/gta-vi.html', '05-portal-gta-vi', 1440, 900, true],

@@ -57,3 +57,23 @@ test('redesign uses official Rockstar links and embeds without copying Rockstar 
   assert.match(html, /PROYECTO INDEPENDIENTE · NO AFILIADO A ROCKSTAR GAMES/);
   assert.doesNotMatch(html, /<(?:img|video)[^>]+(?:src|poster)="https:\/\/[^\"]*rockstargames/i);
 });
+
+test('giveaway fund is labelled with its real custody and the gallery is original art', async () => {
+  const html = await readFile(resolve(root, 'index.html'), 'utf8');
+  const transparency = await readFile(resolve(root, 'transparency/index.html'), 'utf8');
+  const plan = JSON.parse(await readFile(resolve(root, 'launch.plan.json'), 'utf8'));
+  assert.match(html, /id="sorteos"/);
+  assert.match(html, /999 pases/);
+  assert.match(html, /controlada por el creador/);
+  assert.match(transparency, /Esta wallet la controla el creador/);
+  assert.equal(plan.giveawayFund.custodyWallet, plan.creatorPublicWallet);
+  assert.equal(plan.giveawayFund.nftPasses.supply, 999);
+  assert.match(html, /https:\/\/www\.rockstargames\.com\/VI\/media\/screenshots/);
+  const shots = [...html.matchAll(/<img src="\/gallery\/([^"]+)"/g)].map((m) => m[1]);
+  assert.equal(shots.length, 6);
+  for (const shot of shots) {
+    const svg = await readFile(resolve(root, 'public/gallery', shot), 'utf8');
+    assert.match(svg, /Ilustración original MISSION PASSED/);
+    assert.doesNotMatch(svg, /<image\b|href="http/);
+  }
+});

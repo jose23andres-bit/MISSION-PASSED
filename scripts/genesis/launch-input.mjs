@@ -126,7 +126,7 @@ export function checkDistributionPolicy(plan) {
   const errors = [];
   const g = plan.genesis;
   const allocations = g.claimScheduleAllocations;
-  const creator = allocations.find((a) => a.name === 'Creator Vested Allocation');
+  const creator = allocations.find((a) => a.name === 'Giveaway Fund Vested');
   const expect = (condition, message) => { if (!condition) errors.push(message); };
   const estimate = estimateGenesisAllocations(g.launchpool.tokenAllocation, g.launchpool.raydiumLiquidityBps, allocations.reduce((sum, a) => sum + a.tokenAmount, 0));
   expect(g.launchpool.tokenAllocation === TARGET_BUYER_ALLOCATION, `Compradores deben recibir ${TARGET_BUYER_ALLOCATION} MP`);
