@@ -498,3 +498,54 @@ body.mp .mp-footer .independent-badge { position: static; color: #a993b6; }
 .guide.min .guide-avatar { width:68px; }
 @media (max-width:640px) { .guide-avatar { width:64px; } .guide.min .guide-avatar { width:58px; } }
 @media (prefers-reduced-motion:reduce) { .mp-hero-img,.mp-section img,.mp-final-img { transform:none !important; } }
+
+/* MISSION PASSED — Vice City cinematic refresh */
+body.mp{--hot:#ff35b5;--hot-2:#ff8be0;--violet:#8c42ff;--cyan:#45eaff;--gold:#ffd84d;--night:#080611;--night-2:#160b25;background:radial-gradient(ellipse at 50% -15%,rgba(137,49,255,.16),transparent 48%),var(--night)}
+body.mp .mp-header{height:76px;padding-inline:clamp(1rem,3.2vw,3.5rem);border-bottom:1px solid rgba(255,139,224,.18);background:linear-gradient(180deg,rgba(7,5,18,.94),rgba(7,5,18,.62));backdrop-filter:blur(18px) saturate(1.35)}
+body.mp .mp-header.scrolled{background:rgba(7,5,18,.96);border-color:rgba(255,139,224,.28);box-shadow:0 12px 45px rgba(0,0,0,.34),0 1px 0 rgba(255,53,181,.14)}
+.mp-logo-img{height:54px;max-width:min(260px,24vw);object-fit:contain}
+body.mp .mp-nav{gap:clamp(.65rem,1.45vw,1.55rem)!important}
+body.mp .mp-nav a{font-size:clamp(.68rem,.78vw,.82rem);letter-spacing:.045em}
+body.mp .mp-wallet{border-radius:999px;padding-inline:1.25rem;background:linear-gradient(110deg,rgba(255,53,181,.16),rgba(140,66,255,.18))}
+.mp-hero{min-height:max(760px,100svh);padding:clamp(7.5rem,12vh,10rem) clamp(1.2rem,6.5vw,7rem) 12rem}
+.mp-hero-media{overflow:hidden;background:#10091d}
+.mp-hero-img{object-position:66% 43%;filter:saturate(1.12) contrast(1.06) brightness(.9);image-rendering:auto;transform:translateZ(0)}
+.mp-hero-shade{background:linear-gradient(90deg,rgba(7,5,18,.94) 0%,rgba(7,5,18,.76) 28%,rgba(7,5,18,.22) 58%,rgba(7,5,18,.05) 100%),linear-gradient(0deg,rgba(7,5,18,.96),rgba(7,5,18,.35) 24%,transparent 54%),linear-gradient(180deg,rgba(7,5,18,.68),transparent 24%)}
+.mp-hero-content{width:min(780px,64vw)}
+.mp-wordmark{font-size:clamp(4.5rem,10.8vw,10.8rem);letter-spacing:-.035em;filter:drop-shadow(0 18px 28px rgba(0,0,0,.38))}
+.mp-wordmark span{-webkit-text-stroke:1.5px rgba(255,255,255,.94);text-shadow:3px 3px 0 #17101f,6px 6px 0 var(--hot),10px 10px 0 #4a145f,0 0 42px rgba(255,53,181,.42)}
+.mp-wordmark em{padding:.02em .22em .08em;border:2px solid rgba(255,139,224,.9);border-radius:.18em;background:linear-gradient(110deg,rgba(255,53,181,.26),rgba(140,66,255,.22));box-shadow:0 0 20px rgba(255,53,181,.4),inset 0 0 16px rgba(255,255,255,.12)}
+.mp-hero-copy{max-width:590px;padding:1rem 1.15rem;border:1px solid rgba(255,139,224,.28);border-left:3px solid var(--hot);border-radius:0 .8rem .8rem 0;background:linear-gradient(100deg,rgba(8,6,18,.76),rgba(8,6,18,.18));backdrop-filter:blur(8px);box-shadow:0 12px 36px rgba(0,0,0,.18),-8px 0 18px -10px var(--hot)}
+.mp-hero-actions .mp-btn{min-height:58px;border-radius:999px;padding-inline:1.8rem}
+.mp-btn-hot{background:linear-gradient(105deg,#ffd84d,#ffb92e 48%,#ff8d32);color:#160b25;border-color:#ffe88b;box-shadow:0 0 0 1px rgba(255,232,139,.35),0 10px 30px rgba(255,177,42,.25),0 0 30px rgba(255,177,42,.22)}
+.mp-btn-hot:hover{box-shadow:0 0 0 2px #fff0ad,0 12px 38px rgba(255,177,42,.48)}
+.mp-btn-dark{border-radius:999px;background:rgba(8,6,18,.72);border-color:rgba(255,139,224,.8)}
+.mp-chips li{border-radius:999px;background:rgba(8,6,18,.72);border-color:rgba(255,139,224,.38);backdrop-filter:blur(12px)}
+.mp-hero-bar{right:clamp(1rem,4vw,4rem);left:clamp(1rem,4vw,4rem);bottom:1.35rem;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:clamp(.75rem,2vw,2rem);padding:1rem clamp(1rem,2vw,1.7rem);border:1px solid rgba(255,139,224,.56);border-radius:1.15rem;background:linear-gradient(105deg,rgba(10,6,22,.94),rgba(28,8,42,.86));box-shadow:0 14px 45px rgba(0,0,0,.36),0 0 32px rgba(255,53,181,.2),inset 0 0 24px rgba(255,255,255,.025);backdrop-filter:blur(18px) saturate(1.35)}
+.mp-hero-bar .bar-label strong{color:var(--gold)}
+.mp-hero-bar .bar-countdown div{min-width:clamp(52px,5vw,76px);border-radius:.75rem;background:rgba(255,53,181,.08)}
+.mp-section{padding-block:clamp(4.5rem,8vw,7.5rem)}
+.mp-section::before{background:radial-gradient(ellipse at 12% 12%,rgba(255,53,181,.13),transparent 38%),radial-gradient(ellipse at 88% 86%,rgba(69,234,255,.08),transparent 42%),linear-gradient(180deg,#0b0715,#090612)}
+.mp-project-art,.mp-shot,.mp-card-art{overflow:hidden;background:#160d25}
+.mp-project-art img,.mp-shot img,.mp-card-art img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(1.08) contrast(1.04);transform:translateZ(0)}
+.mp-project-art img{transition:transform .8s cubic-bezier(.2,.75,.25,1),filter .5s}
+.mp-project-art:hover img,.mp-shot:hover img,.mp-card:hover .mp-card-art img{transform:scale(1.045);filter:saturate(1.18) contrast(1.07)}
+.mp-shot{border:1px solid rgba(255,139,224,.28);border-radius:1rem;box-shadow:0 14px 34px rgba(0,0,0,.28)}
+.mp-card.glow-card,.mp-feature.glow-card,.mp-world.glow-card,.mp-grand.glow-card{border-color:rgba(255,139,224,.24);background:linear-gradient(145deg,rgba(34,15,54,.94),rgba(9,6,19,.96));box-shadow:0 16px 44px rgba(0,0,0,.2)}
+.mp-card-art{aspect-ratio:4/5;border-radius:.85rem}
+.mp-card-art img{object-position:center 28%}
+.mp-rarity{border:1px solid rgba(255,216,77,.4);background:rgba(255,216,77,.1);color:#ffe58b}
+.mp-grand{overflow:hidden}
+.mp-grand::after{position:absolute;inset:0;z-index:0;pointer-events:none;content:"";background:radial-gradient(ellipse at 85% 50%,rgba(255,53,181,.16),transparent 48%)}
+.mp-grand-copy,.mp-grand-badge,.mp-grand-prizes{position:relative;z-index:1}
+.mp-custody{border:1px solid rgba(69,234,255,.26);border-radius:1rem;background:linear-gradient(110deg,rgba(11,25,38,.78),rgba(14,7,28,.86));box-shadow:inset 0 0 28px rgba(69,234,255,.035)}
+.mp-road li{border-color:rgba(255,139,224,.25);background:linear-gradient(120deg,rgba(30,12,47,.9),rgba(9,6,19,.92))}
+.mp-road li::before{border-radius:50%;transform:none;box-shadow:0 0 0 5px rgba(255,53,181,.12),0 0 18px var(--hot)}
+.mp-release,.mp-mission-inner,.mp-stats>div{backdrop-filter:blur(12px)}
+.mp-title{text-wrap:balance}
+.mp-head>p:last-child:not(.mp-eyebrow){max-width:720px}
+.mp-section img{backface-visibility:hidden}
+@media(min-width:1200px){.mp-hero{padding-left:clamp(5rem,8vw,9rem)}.mp-hero-content{width:min(820px,58vw)}.mp-wordmark{font-size:clamp(7rem,9.5vw,11.5rem)}.mp-hero-bar{max-width:1680px;margin-inline:auto}}
+@media(max-width:980px){body.mp .mp-header{height:70px;padding-inline:1rem}.mp-hero{min-height:900px;padding:8rem 1.25rem 2rem}.mp-hero-img{object-position:62% 36%}.mp-hero-shade{background:linear-gradient(180deg,rgba(7,5,18,.52),rgba(7,5,18,.2) 28%,rgba(7,5,18,.9) 70%,#080611 100%)}.mp-hero-content{width:min(760px,100%)}.mp-hero-bar{margin-top:2.5rem;position:relative;inset:auto;grid-template-columns:1fr auto;max-width:none}.mp-hero-bar .bar-chain{grid-column:1/-1;justify-self:start}}
+@media(max-width:640px){body.mp .mp-header{height:64px}.mp-logo-img{height:43px;max-width:52vw}.mp-hero{min-height:unset;padding:7.2rem 1rem 1.2rem}.mp-hero-img{object-position:60% 32%;animation:none}.mp-hero-shade{background:linear-gradient(180deg,rgba(7,5,18,.25),rgba(7,5,18,.22) 22%,rgba(7,5,18,.82) 48%,#080611 88%)}.mp-hero-content{width:100%}.crown-hero{width:54px;margin-left:1rem;margin-bottom:-.5rem}.mp-wordmark{font-size:clamp(3.5rem,16vw,5.8rem);line-height:.88}.mp-wordmark span{text-shadow:2px 2px 0 #17101f,4px 4px 0 var(--hot),6px 6px 0 #4a145f,0 0 24px rgba(255,53,181,.38)}.mp-wordmark em{right:.15rem;bottom:-.5em;font-size:.54em}.mp-hero-copy{margin:2.2rem 0 1.1rem;font-size:.94rem;line-height:1.55}.mp-hero-actions{display:grid;grid-template-columns:1fr;gap:.65rem}.mp-hero-actions .mp-btn{width:100%;min-height:52px}.mp-chips{gap:.4rem;margin-top:1rem}.mp-chips li{font-size:.63rem;padding:.45rem .65rem}.mp-hero-bar{display:grid;grid-template-columns:1fr;margin-top:1.2rem;padding:.9rem;gap:.85rem}.mp-hero-bar .bar-countdown{width:100%;justify-content:stretch}.mp-hero-bar .bar-countdown div{flex:1;min-width:0;padding:.45rem .2rem}.mp-hero-bar .bar-countdown strong{font-size:1.8rem}.mp-hero-bar .bar-chain{grid-column:auto}.mp-section{padding:4.25rem 1rem}.mp-title{font-size:clamp(2.5rem,12vw,4.2rem)}.mp-head{margin-bottom:2rem}.mp-card-art{aspect-ratio:3/4}.mp-reel-track{gap:.75rem}.mp-shot{width:min(78vw,330px)}}
+@media(prefers-reduced-motion:reduce){.mp-hero-img,.mp-rays,.mp-particles i,.mp-wordmark span,.mp-wordmark span::after,.mp-btn-hot,.crown{animation:none!important}.mp-project-art img,.mp-shot img,.mp-card-art img{transition:none!important}body.mp *{scroll-behavior:auto!important}}
