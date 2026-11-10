@@ -486,3 +486,15 @@ body.mp .mp-footer .independent-badge { position: static; color: #a993b6; }
 .guide-hint { position: absolute; top: 4%; right: 70%; padding: .3rem .6rem; border-radius: 999px; color: #1a0628; background: var(--gold,#ffd36e); font: 700 .7rem var(--ui,sans-serif); white-space: nowrap; box-shadow: 0 0 14px rgba(255,211,110,.6); opacity: 0; transition: opacity .3s; animation: guideHalo 2.4s ease-in-out infinite; }
 .guide.min .guide-hint { opacity: 1; }
 .guide.open .guide-hint { display: none; }
+
+
+/* Cinematic Vice City depth and compact original Rico assistant */
+.mp-hero-media { perspective:1100px; transform-style:preserve-3d; }
+.mp-hero-img { transform:translate3d(0,var(--hero-parallax,0px),0) scale(1.08); will-change:transform; }
+.mp-section img,.mp-final-img { transform:translate3d(0,var(--scene-depth,0px),0) scale(1.035); will-change:transform; }
+.mp-section { transform-style:preserve-3d; }
+.mp-section .mp-head,.mp-section .glow-card { backface-visibility:hidden; }
+.guide-avatar { width:clamp(68px,7vw,96px); filter:drop-shadow(0 0 16px rgba(255,45,155,.58)); }
+.guide.min .guide-avatar { width:68px; }
+@media (max-width:640px) { .guide-avatar { width:64px; } .guide.min .guide-avatar { width:58px; } }
+@media (prefers-reduced-motion:reduce) { .mp-hero-img,.mp-section img,.mp-final-img { transform:none !important; } }
