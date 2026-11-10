@@ -7,7 +7,7 @@ const root = resolve(import.meta.dirname, '..');
 
 test('landing contains every required section and no placeholder links', async () => {
   const html = await readFile(resolve(root, 'index.html'), 'utf8');
-  for (const id of ['gta', 'editions', 'tokenomics', 'buy', 'launch', 'faq']) assert.match(html, new RegExp(`id="${id}"`));
+  for (const id of ['universo', 'recompensas', 'tokenomics', 'buy', 'launch', 'faq']) assert.match(html, new RegExp(`id="${id}"`));
   assert.doesNotMatch(html, /href=["']#["']/);
   assert.match(html, /id="roadmap"/);
   assert.match(html, /id="launch-countdown"/);
@@ -22,7 +22,7 @@ test('published pages contain no fake purchase button', async () => {
   }
 });
 
-test('GTA VI countdown targets local midnight on 19 November 2026', async () => {
+test('project countdown targets its own launch on 15 November 2026', async () => {
   const script = await readFile(resolve(root, 'src/app.js'), 'utf8');
   assert.match(script, /new Date\(2026, 10, 19, 0, 0, 0, 0\)/);
   assert.match(script, /release-active/);
@@ -50,13 +50,13 @@ test('production config defaults to the published wallet and final Launch Pool',
   assert.equal(config.launchpool.depositStart, '2026-11-15T19:00:00.000Z');
 });
 
-test('redesign uses official Rockstar links and embeds without copying Rockstar images', async () => {
+test('cinematic rebrand is original and contains no third-party game branding', async () => {
   const html = await readFile(resolve(root, 'index.html'), 'utf8');
-  assert.match(html, /https:\/\/www\.rockstargames\.com\/VI\/trailer-2/);
-  assert.match(html, /https:\/\/www\.rockstargames\.com\/VI\/editions/g);
-  assert.match(html, /youtube-nocookie\.com\/embed\/VQRLujxTm3c/);
-  assert.match(html, /PROYECTO INDEPENDIENTE · NO AFILIADO A ROCKSTAR GAMES/);
-  assert.doesNotMatch(html, /<(?:img|video)[^>]+(?:src|poster)="https:\/\/[^\"]*rockstargames/i);
+  assert.match(html, /id="universo"/);
+  assert.match(html, /mission-passed-motion-hd\\.mp4/);
+  assert.match(html, /PROYECTO ORIGINAL/);
+  assert.doesNotMatch(html, /Rockstar|Grand Theft Auto|GTA VI|Vice City|Leonida|Jason Duval|Lucia Caminos/i);
+  assert.doesNotMatch(html, /youtube-nocookie\\.com\\/embed/);
 });
 
 test('giveaway fund is labelled with its real custody and the gallery is original art', async () => {
