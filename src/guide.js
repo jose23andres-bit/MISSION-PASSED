@@ -1,4 +1,4 @@
-// "Rico", the 2D guide. Original character (not based on any Rockstar character).
+// "Rico", the 2D guide. Original character, created exclusively for MISSION PASSED.
 // Slides in after the hero, explains how to buy in short lines and talks with lip-sync.
 // Voice: pre-generated ElevenLabs MP3s in /voice/ when available (script.json → "audio": true),
 // otherwise the browser's built-in Spanish speech synthesis.
