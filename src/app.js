@@ -20,6 +20,7 @@
   const isValidPublicKey = (value) => typeof value === 'string' && /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(value);
   const shortAddress = (value) => `${value.slice(0, 4)}…${value.slice(-4)}`;
   let provider = null;
+  let activeStandardWallet = null;
   let publicKey = '';
   let toastTimer = 0;
 
@@ -96,8 +97,13 @@
   }
 
   async function connectWallet() {
-    if (publicKey && provider) {
-      try { await provider.disconnect?.(); } catch { /* provider controls disconnect */ }
+    if (publicKey) {
+      try {
+        if (provider) await provider.disconnect?.();
+        else await activeStandardWallet?.features?.['standard:disconnect']?.disconnect?.();
+      } catch { /* wallet controls disconnect */ }
+      provider = null;
+      activeStandardWallet = null;
       publicKey = '';
       setWalletUI('', NaN);
       showToast('Wallet desconectada');
@@ -111,7 +117,9 @@
         const account = (result.accounts || standard.accounts || []).find((item) => (item.chains || []).some((chain) => chain.startsWith('solana:')));
         publicKey = account?.address || '';
         provider = null;
+        activeStandardWallet = standard;
       } else {
+        activeStandardWallet = null;
         provider = getWalletProvider();
         if (!provider) {
           showToast('No hay una wallet Solana detectada. Abre esta web desde Phantom, Solflare, Backpack o consulta wallets compatibles.', 'error');
@@ -128,6 +136,8 @@
       showToast(`Wallet conectada en ${config.network}`);
     } catch (error) {
       publicKey = '';
+      provider = null;
+      activeStandardWallet = null;
       setWalletUI('', NaN);
       showToast(error?.message || 'No se pudo conectar la wallet', 'error');
     }
