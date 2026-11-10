@@ -108,7 +108,6 @@
     setMouth(0);
     root.classList.remove('talking');
     $('.guide-listen').textContent = '▶ Escúchame';
-    window.MPRadio?.unduck();
   }
 
   function lipSyncFromAnalyser() {
@@ -145,7 +144,6 @@
     speaking = true;
     root.classList.add('talking');
     $('.guide-listen').textContent = '■ Parar';
-    window.MPRadio?.duck();
     const done = () => { if (speaking) stopTalking(); };
     if (line.audio) {
       audio = audio || new Audio();
