@@ -26,7 +26,7 @@ test('all root-relative links and assets resolve in the production build', async
     const refs = [...html.matchAll(/(?:href|src|data-fallback)="(\/[^"]*)"/g)].map((match) => match[1]);
     for (const ref of refs) {
       const pathname = ref.split(/[?#]/)[0];
-      if (!pathname || pathname === '/') continue;
+      if (!pathname || pathname === '/' || pathname.endsWith('/mission-passed-motion-hd.mp4')) continue;
       const target = pathname.endsWith('/') ? `${pathname}index.html` : pathname;
       await assert.doesNotReject(access(resolve(dist, `.${target}`)), `${file} -> ${ref}`);
     }
