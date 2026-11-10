@@ -59,6 +59,18 @@ test('cinematic rebrand is original and contains no third-party game branding', 
   assert.doesNotMatch(html, /youtube-nocookie\.com\/embed/);
 });
 
+test('homepage campaign dashboard distinguishes verified Mainnet balances from the 30% demo', async () => {
+  const html = await readFile(resolve(root, 'index.html'), 'utf8');
+  const app = await readFile(resolve(root, 'src/app.js'), 'utf8');
+  assert.match(html, /id="mp-live-eur"/);
+  assert.match(html, /id="mp-demo-slider"[^>]*value="30"/);
+  assert.match(html, /class="mp-demo-stamp">DEMO/);
+  assert.match(html, /0 \/ 999/);
+  assert.match(app, /config\.network !== 'mainnet-beta'/);
+  assert.match(app, /mp-nft-favorites/);
+  assert.match(app, /MAINNET · SALDO NETO/);
+});
+
 test('giveaway fund is labelled with its real custody and the gallery is original art', async () => {
   const html = await readFile(resolve(root, 'index.html'), 'utf8');
   const transparency = await readFile(resolve(root, 'transparency/index.html'), 'utf8');
