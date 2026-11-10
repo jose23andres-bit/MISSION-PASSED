@@ -45,6 +45,7 @@ export function publicConfig(env = process.env) {
     basePath,
     network,
     rpcUrl,
+    campaignGoalEur: Math.max(1, Number(env.VITE_CAMPAIGN_GOAL_EUR) || 50000),
     tokenMint: publicKey(env.VITE_TOKEN_MINT),
     tokenLaunchAt: env.VITE_TOKEN_LAUNCH_AT || '2026-11-15T19:00:00Z',
     treasuryWallet: publicKey(env.VITE_TREASURY_WALLET || '4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj'),
