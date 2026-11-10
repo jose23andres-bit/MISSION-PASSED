@@ -157,8 +157,8 @@ body.mp .fullmenu-mark { font: 400 clamp(10rem,28vw,26rem)/.8 var(--brush); }
 .mp-feature svg { width: 38px; height: 38px; margin-bottom: .4rem; fill: none; stroke: var(--hot-2); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 8px var(--hot)); }
 .mp-feature strong { font: 700 italic .95rem var(--ui); text-transform: uppercase; }.mp-feature span { color: #cdb8da; font-size: .75rem; }
 
-/* ---------- GTA zone ---------- */
-.mp-gta::before { background: linear-gradient(180deg,rgba(13,4,20,.88),rgba(13,4,20,.96)),url('../photos/gallery-02.jpg') center/cover; }
+/* ---------- Original cinematic universe ---------- */
+.mp-universe::before { background: linear-gradient(180deg,rgba(13,4,20,.88),rgba(13,4,20,.96)),url('../photos/gallery-02.jpg') center/cover; }
 .mp-trailers { display: grid; grid-template-columns: 1.6fr 1fr; gap: 1rem; }
 .mp-trailer { position: relative; overflow: hidden; padding: 0; color: #fff; cursor: pointer; aspect-ratio: 16/9; text-align: left; }
 .mp-trailer:first-child { grid-row: span 2; }
