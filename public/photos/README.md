@@ -8,4 +8,4 @@ Imágenes originales suministradas para el proyecto e integradas en portada, pro
 - `gallery-01.jpg` a `gallery-08.jpg`: galería principal.
 - `vice-*.jpg` y `leonida-*.jpg`: archivo completo de escenas.
 
-No son capturas oficiales de Rockstar Games.
+Son ilustraciones y escenas originales del proyecto; no representan marcas ni productos de terceros.
