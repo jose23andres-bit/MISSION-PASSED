@@ -107,6 +107,38 @@
         </div>
       </section>
 
+      <!-- LIVE PRESALE CONTROL · VERIFIED DATA + CLEAR DEMO -->
+      <section class="mp-section mp-live-control" id="live-mission" aria-labelledby="live-title">
+        <div class="mp-head reveal">
+          <p class="mp-eyebrow">Mission control · datos verificables</p>
+          <h2 class="mp-title" id="live-title">La misión se mide<br>con datos reales.</h2>
+          <p>Seguimiento de tesorería, objetivo de financiación y simulador interactivo. Las cifras reales solo se actualizan con datos verificables de la red Solana.</p>
+        </div>
+        <div class="mp-live-grid">
+          <article class="mp-live-panel glow-card reveal">
+            <div class="mp-live-panel-head"><div><small>01 · Tesorería on-chain</small><h3>Recaudación verificada</h3></div><span class="mp-live-state" id="mp-live-state">COMPROBANDO RED</span></div>
+            <div class="mp-live-total" id="mp-live-eur">0,00 €</div>
+            <p class="mp-live-caption" id="mp-live-caption">No hay ventas confirmadas. Los pagos reales permanecen bloqueados mientras el proyecto esté en Devnet.</p>
+            <div class="mp-live-meter"><i id="mp-live-fill"></i></div>
+            <div class="mp-live-stats">
+              <div><small>Objetivo público</small><strong id="mp-live-goal">50.000 €</strong></div>
+              <div><small>Progreso real</small><strong id="mp-live-percent">0,0 %</strong></div>
+              <div><small>Saldo SOL</small><strong id="mp-live-sol">—</strong></div>
+            </div>
+            <div class="mp-live-actions"><button class="mp-btn mp-btn-dark" id="mp-live-refresh" type="button">Actualizar datos ↻</button><a class="mp-btn mp-btn-dark" href="/transparency/">Ver transparencia ↗</a></div>
+            <p class="mp-live-footnote" id="mp-live-updated">Fuente: RPC Solana · pendiente de Mainnet y tesorería habilitada</p>
+          </article>
+          <article class="mp-simulator glow-card reveal">
+            <div class="mp-sim-head"><div><small>02 · Vista de demostración</small><h3>Simula el objetivo</h3></div><span class="mp-demo-stamp">DEMO</span></div>
+            <div class="mp-sim-percent"><strong id="mp-demo-percent">30%</strong><span>del objetivo de campaña</span></div>
+            <input id="mp-demo-slider" type="range" min="0" max="100" step="1" value="30" aria-label="Porcentaje simulado del objetivo de campaña" />
+            <div class="mp-sim-range"><span>0%</span><span>100%</span></div>
+            <div class="mp-sim-amount"><small>Equivalente simulado</small><strong id="mp-demo-amount">15.000 €</strong></div>
+            <p>Simulación visual editable: no representa compras, inversores, tokens vendidos ni fondos recibidos. El panel real de la izquierda es la única referencia de recaudación.</p>
+          </article>
+        </div>
+      </section>
+
       <!-- MOVING TICKER -->
       <section class="mp-ticker" aria-label="Datos destacados">
         <div class="mp-ticker-track" data-marquee>
@@ -146,7 +178,7 @@
             <div class="loadbar-track"><i id="mission-bar"></i></div>
             <p>Tiempo transcurrido desde el anuncio (9 nov) hasta la apertura. Lo recaudado y el precio actual se ven en directo en la página de preventa.</p>
           </div>
-          <div class="mp-mission-done" id="mission-live" hidden><strong>Misión en marcha</strong><a class="mp-btn mp-btn-hot" href="/presale/">Ir a la preventa <b>›</b></a></div>
+          <div class="mp-mission-done" id="mission-live" hidden><strong>Misión en marcha</strong><a class="mp-btn mp-btn-hot" href="/presale/">Consultar estado y simulador <b>›</b></a></div>
         </div>
       </section>
 
@@ -208,8 +240,8 @@
       <section class="mp-section mp-collection" id="sorteos" aria-labelledby="giveaway-title">
         <div class="mp-head reveal">
           <p class="mp-eyebrow">Fondo común · 20% del suministro</p>
-          <h2 class="mp-title" id="giveaway-title">999 pases.<br />Copias de experiencias digitales.</h2>
-          <p>El 20% de $MP forma el fondo común de sorteos de la comunidad. Con él se financian sorteos de copias de experiencias digitales entre los poseedores de los 999 pases NFT de MISSION PASSED.</p>
+          <h2 class="mp-title" id="giveaway-title">999 pases.<br />Una colección con identidad.</h2>
+          <p>El 20% del suministro está asignado al fondo comunitario de recompensas, con una parte disponible y otra sujeta a vesting. Los 999 Mission Pass están concebidos como coleccionables digitales con perfiles, rarezas y ventajas comunitarias. Las recompensas solo se activarán cuando se publiquen sus bases y exista saldo verificable.</p>
         </div>
         <div class="mp-tabs" role="tablist" aria-label="Rarezas">
           <button type="button" role="tab" aria-selected="true" data-filter="all">Todos</button>
@@ -222,7 +254,7 @@
           <article class="mp-card glow-card reveal" data-rarity="og"><div class="mp-card-art"><img src="/photos/nft-1.jpg" data-fallback="/nft/01-el-conductor.svg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="El Conductor · pase OG, personaje original de MISSION PASSED" loading="lazy" /></div><span class="mp-rarity">OG</span><h3>El Conductor</h3><p>Pase #001 · Nunca llega tarde a una misión.</p></article>
           <article class="mp-card glow-card reveal" data-rarity="raro"><div class="mp-card-art"><img src="/photos/nft-2.jpg" data-fallback="/nft/02-la-jefa.svg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="La Jefa · pase raro, personaje original de MISSION PASSED" loading="lazy" /></div><span class="mp-rarity">Raro</span><h3>La Jefa</h3><p>Pase #128 · Manda en la marina.</p></article>
           <article class="mp-card glow-card reveal" data-rarity="epico"><div class="mp-card-art"><img src="/photos/nft-3.jpg" data-fallback="/nft/03-el-socio.svg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="El Socio · pase épico, personaje original de MISSION PASSED" loading="lazy" /></div><span class="mp-rarity">Épico</span><h3>El Socio</h3><p>Pase #512 · Conoce cada atajo del pantano.</p></article>
-          <article class="mp-card glow-card reveal" data-rarity="legendario"><div class="mp-card-art"><img src="/photos/nft-4.jpg" data-fallback="/nft/04-rico.svg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="Rico · pase legendario, personaje original de MISSION PASSED" loading="lazy" /></div><span class="mp-rarity">Legendario</span><h3>Rico</h3><p>Pase #999 · El guía. Su pase gana el gran premio.</p></article>
+          <article class="mp-card glow-card reveal" data-rarity="legendario"><div class="mp-card-art"><img src="/photos/nft-4.jpg" data-fallback="/nft/04-rico.svg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="Rico · pase legendario, personaje original de MISSION PASSED" loading="lazy" /></div><span class="mp-rarity">Legendario</span><h3>Rico</h3><p>Pase #999 · El guía de Neon Coast. Utilidad y recompensas sujetas a bases públicas.</p></article>
         </div>
         <article class="mp-grand glow-card reveal" aria-labelledby="grand-title">
           <div class="mp-grand-badge" aria-hidden="true"><svg class="crown" viewBox="0 0 120 70"><path d="M8 62 L14 14 L40 40 L60 6 L80 40 L106 14 L112 62 Z" /></svg><span>#999</span></div>
@@ -312,7 +344,7 @@
           <li class="glow-card reveal"><span>04</span><h3>Recibe</h3><p>El 15 de noviembre tus MP llegan a la misma wallet con la que pagaste.</p></li>
         </ol>
         <div class="mp-cta-bar glow-card reveal">
-          <div><small>Preventa</small><strong>Abierta</strong><p>Precio actual, lo recaudado y el pago, todo en una página.</p></div>
+          <div><small>Estado de la preventa</small><strong>En preparación</strong><p>Los pagos reales se habilitarán cuando Mainnet, contrato y tesorería estén verificados.</p></div>
           <a class="mp-btn mp-btn-hot" href="/presale/">Ir a la preventa <b>›</b></a>
         </div>
       </section>
@@ -338,7 +370,7 @@
         <div class="mp-head reveal"><p class="mp-eyebrow">Preguntas frecuentes</p><h2 class="mp-title" id="faq-title">FAQ</h2></div>
         <div class="mp-faq-list">
           <details class="glow-card reveal"><summary>¿Qué es MISSION PASSED?<span>+</span></summary><p>Un token comunitario en Solana con una identidad visual original, una colección digital y un sistema de recompensas sujeto a reglas públicas.</p></details>
-          <details class="glow-card reveal"><summary>¿Cuándo se puede comprar MP?<span>+</span></summary><p>Ya: la preventa está abierta hasta el lanzamiento del 15 de noviembre. El precio sube por tramos: $0.0004 al inicio, $0.001 desde 100 SOL recaudados y $0.005 desde 200 SOL.</p></details>
+          <details class="glow-card reveal"><summary>¿Cuándo se puede comprar MP?<span>+</span></summary><p>Todavía no. La web está en Devnet y no acepta pagos reales. La apertura solo se anunciará cuando la red Mainnet, el contrato y la tesorería estén verificados.</p></details>
           <details class="glow-card reveal"><summary>¿Hace falta llegar a 250 SOL?<span>+</span></summary><p>No. No hay mínimo: $MP se lanza el 15 de noviembre se recaude lo que se recaude.</p></details>
           <details class="glow-card reveal"><summary>¿Con qué puedo pagar?<span>+</span></summary><p>SOL, USDC o USDT en la red Solana, desde Phantom, MetaMask, Solflare o Backpack. Firmas tú en tu wallet; la web nunca ve tu frase semilla.</p></details>
           <details class="glow-card reveal"><summary>¿Para qué es el 20%?<span>+</span></summary><p>Es el fondo común de sorteos: 16% disponible y 4% con vesting. Está en la wallet pública <code translate="no">4hqD…cXnj</code>, que controla el creador, y cada movimiento puede seguirse en Solscan. No se revoca ninguna autoridad automáticamente.</p></details>
