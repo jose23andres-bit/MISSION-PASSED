@@ -1,14 +1,11 @@
-# Fotos de MISSION PASSED
+# Fotografía cinematográfica MISSION PASSED
 
-Sube aquí tus imágenes (por ejemplo, las que generes en Higgsfield) con estos nombres exactos.
-La web las usa automáticamente; si falta alguna, muestra la ilustración original de `public/gallery/`.
+Imágenes originales suministradas para el proyecto e integradas en portada, proyecto, colección y galería.
+- `hero.jpg`: portada.
+- `proyecto.jpg`: bloque del proyecto.
+- `final.jpg`: cierre.
+- `nft-1.jpg` a `nft-4.jpg`: tarjetas de colección.
+- `gallery-01.jpg` a `gallery-08.jpg`: galería principal.
+- `vice-*.jpg` y `leonida-*.jpg`: archivo completo de escenas.
 
-| Archivo | Dónde aparece | Tamaño recomendado |
-|---|---|---|
-| `hero.jpg` | Fondo de la portada (pareja, skyline, coche) | 1920×1080, horizontal |
-| `logo.png` | Logo de la cabecera, fondo transparente | 600×300 aprox. |
-| `proyecto.jpg` | Sección "El proyecto" | 1200×1500, vertical |
-| `nft-1.jpg` … `nft-4.jpg` | Tarjetas de la colección (OG, Raro, Épico, Legendario) | 1000×1000, cuadrada |
-| `final.jpg` | Fondo del cierre "Mission passed" | 1920×1080 |
-
-No subas logos, capturas ni personajes oficiales de Rockstar Games.
+No son capturas oficiales de Rockstar Games.

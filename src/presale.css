@@ -85,3 +85,5 @@
   .ps-hero,.ps-buy-grid { grid-template-columns: 1fr; }
   .ps-top nav { display: none; }
 }
+
+.ps-wallet-directory{margin:.7rem 0 0;color:#cdb8da;font-size:.78rem;line-height:1.5}.ps-wallet-directory a{color:#ff8bd7;text-decoration:underline;text-underline-offset:3px}
