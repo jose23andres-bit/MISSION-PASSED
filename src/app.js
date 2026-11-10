@@ -242,7 +242,7 @@
   }
 
   function setupCountdown() {
-    const target = new Date(2026, 10, 19, 0, 0, 0, 0);
+    const target = new Date(2026, 10, 15, 20, 0, 0, 0);
     const nodes = {
       days: $('#countdown-days'), hours: $('#countdown-hours'),
       minutes: $('#countdown-minutes'), seconds: $('#countdown-seconds'),
