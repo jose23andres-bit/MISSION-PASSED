@@ -32,11 +32,41 @@
     toastTimer = window.setTimeout(() => { toast.className = 'toast'; }, 3200);
   }
 
+  const standardWallets = new Map();
+  const walletStandardApp = Object.freeze({
+    name: 'MISSION PASSED',
+    url: window.location.origin,
+    icon: 'https://solana.com/src/img/branding/solanaLogoMark.svg',
+    chains: ['solana:mainnet', 'solana:devnet', 'solana:testnet'],
+    features: {},
+    register(...wallets) {
+      for (const wallet of wallets) {
+        if (wallet?.features?.['standard:connect'] && (wallet.chains || []).some((chain) => chain.startsWith('solana:'))) {
+          standardWallets.set(wallet.name, wallet);
+        }
+      }
+    },
+  });
+  window.addEventListener('wallet-standard:register-wallet', (event) => {
+    try { event.detail(walletStandardApp); } catch { /* ignore incompatible wallet */ }
+  });
+  try { window.dispatchEvent(new CustomEvent('wallet-standard:app-ready', { detail: walletStandardApp })); } catch { /* browser compatibility */ }
+
   function getWalletProvider() {
     if (window.phantom?.solana?.isPhantom) return window.phantom.solana;
     if (window.solflare?.isSolflare) return window.solflare;
+    if (window.backpack?.solana?.connect) return window.backpack.solana;
     if (window.solana?.connect) return window.solana;
     return null;
+  }
+
+  function getStandardWallet() {
+    const priority = ['Phantom', 'Solflare', 'Backpack', 'MetaMask', 'Ledger'];
+    for (const name of priority) {
+      const wallet = [...standardWallets.values()].find((item) => item.name.toLowerCase().includes(name.toLowerCase()));
+      if (wallet) return wallet;
+    }
+    return standardWallets.values().next().value || null;
   }
 
   async function readBalance(address) {
@@ -74,16 +104,23 @@
       return;
     }
 
-    provider = getWalletProvider();
-    if (!provider) {
-      showToast('No se detectó una wallet Solana. Abre esta web en el navegador de Phantom o instala una wallet compatible.', 'error');
-      window.open('https://solana.com/ecosystem/explore?categories=wallet', '_blank', 'noopener,noreferrer');
-      return;
-    }
-
     try {
-      const result = await provider.connect();
-      publicKey = (result?.publicKey || provider.publicKey)?.toString?.() || '';
+      const standard = getStandardWallet();
+      if (standard) {
+        const result = await standard.features['standard:connect'].connect();
+        const account = (result.accounts || standard.accounts || []).find((item) => (item.chains || []).some((chain) => chain.startsWith('solana:')));
+        publicKey = account?.address || '';
+        provider = null;
+      } else {
+        provider = getWalletProvider();
+        if (!provider) {
+          showToast('No hay una wallet Solana detectada. Abre esta web desde Phantom, Solflare, Backpack o consulta wallets compatibles.', 'error');
+          window.open('https://solana.com/ecosystem/explore?categories=wallet', '_blank', 'noopener,noreferrer');
+          return;
+        }
+        const result = await provider.connect();
+        publicKey = (result?.publicKey || provider.publicKey)?.toString?.() || '';
+      }
       if (!isValidPublicKey(publicKey)) throw new Error('La wallet no devolvió una dirección válida');
       setWalletUI(publicKey, NaN);
       const balance = await readBalance(publicKey).catch(() => NaN);
