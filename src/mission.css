@@ -498,3 +498,7 @@ body.mp .mp-footer .independent-badge { position: static; color: #a993b6; }
 .guide.min .guide-avatar { width:68px; }
 @media (max-width:640px) { .guide-avatar { width:64px; } .guide.min .guide-avatar { width:58px; } }
 @media (prefers-reduced-motion:reduce) { .mp-hero-img,.mp-section img,.mp-final-img { transform:none !important; } }
+
+/* Solana wallet directory link; Spotify player intentionally removed. */
+.wallet-directory-link{display:inline-flex;align-items:center;min-height:38px;padding:0 .7rem;color:#f8c9f0;text-decoration:none;font:700 .62rem/1 var(--ui);letter-spacing:.06em;text-transform:uppercase;border:1px solid rgba(255,45,155,.35);border-radius:.55rem;white-space:nowrap}.wallet-directory-link:hover{color:#fff;border-color:#ff2d9b;background:rgba(255,45,155,.12)}
+@media(max-width:760px){.wallet-directory-link{display:none}}
