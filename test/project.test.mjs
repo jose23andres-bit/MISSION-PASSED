@@ -24,7 +24,7 @@ test('published pages contain no fake purchase button', async () => {
 
 test('project countdown targets its own launch on 15 November 2026', async () => {
   const script = await readFile(resolve(root, 'src/app.js'), 'utf8');
-  assert.match(script, /new Date\(2026, 10, 19, 0, 0, 0, 0\)/);
+  assert.match(script, /new Date\(2026, 10, 15, 20, 0, 0, 0\)/);
   assert.match(script, /release-active/);
 });
 
@@ -53,10 +53,10 @@ test('production config defaults to the published wallet and final Launch Pool',
 test('cinematic rebrand is original and contains no third-party game branding', async () => {
   const html = await readFile(resolve(root, 'index.html'), 'utf8');
   assert.match(html, /id="universo"/);
-  assert.match(html, /mission-passed-motion-hd\\.mp4/);
+  assert.match(html, /mission-passed-motion-hd\.mp4/);
   assert.match(html, /PROYECTO ORIGINAL/);
   assert.doesNotMatch(html, /Rockstar|Grand Theft Auto|GTA VI|Vice City|Leonida|Jason Duval|Lucia Caminos/i);
-  assert.doesNotMatch(html, /youtube-nocookie\\.com\\/embed/);
+  assert.doesNotMatch(html, /youtube-nocookie\.com\/embed/);
 });
 
 test('giveaway fund is labelled with its real custody and the gallery is original art', async () => {
@@ -69,7 +69,7 @@ test('giveaway fund is labelled with its real custody and the gallery is origina
   assert.match(transparency, /Esta wallet la controla el creador/);
   assert.equal(plan.giveawayFund.custodyWallet, plan.creatorPublicWallet);
   assert.equal(plan.giveawayFund.nftPasses.supply, 999);
-  assert.match(html, /https:\/\/www\.rockstargames\.com\/VI\/media\/screenshots/);
+  assert.match(html, /Postales de Neon Coast/);
   // Gallery uses the project's own cinematic photos; every image must exist and none may come from Rockstar.
   const shots = [...html.matchAll(/<img[^>]*src="\/photos\/(gallery-[^"]+)"/g)].map((m) => m[1]);
   assert.equal(shots.length, 8);
