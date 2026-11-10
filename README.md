@@ -4,7 +4,7 @@ Web cinematográfica y herramientas para lanzar MISSION PASSED (MP) mediante Met
 
 ## Distribución final
 
-- 20% fondo común de sorteos (copias de GTA VI entre los poseedores de 999 pases NFT, aún no acuñados), en la wallet del creador:
+- 20% fondo común de sorteos (experiencias digitales entre los poseedores de 999 pases NFT, aún no acuñados), en la wallet del creador:
   - 16% disponible al lanzamiento (estimación de remanente Genesis).
   - 4% con vesting de 12 meses y cliff de 3 meses.
 - 53,33% para compradores del Launch Pool.
@@ -15,13 +15,13 @@ Wallet pública del creador, custodia del fondo de sorteos: `4hqDqmWYnN1N2VJHfCa
 
 ## Galería
 
-`public/gallery/` contiene seis ilustraciones originales generadas con `python3 scripts/generate-gallery.py`. No incluyen capturas, logos ni arte de Rockstar Games; la web enlaza a la galería oficial.
+`public/gallery/` contiene seis ilustraciones originales generadas con `python3 scripts/generate-gallery.py`. No incluyen capturas, logos ni arte de terceros titulares de derechos; la web enlaza a la galería oficial.
 
 ## Estado
 
 | Parte | Estado |
 |---|---|
-| Web, portal GTA VI, buscador y cuenta atrás | Terminada |
+| Web, portal experiencias digitales, buscador y cuenta atrás | Terminada |
 | Wallet, transparencia y Launch Pool | Terminados |
 | Configuración Genesis | Válida; pendiente de confirmar reparto exacto en Devnet |
 | Preventa | Página lista; pago desactivado hasta publicar la wallet de cobro |
@@ -52,4 +52,4 @@ Para el ensayo: GitHub → Actions → **Devnet rehearsal** → escribe `DEVNET`
 - `test/`: pruebas de web, distribución y seguridad.
 - `docs/preview/`: capturas de escritorio y móvil.
 
-Proyecto experimental. Sin afiliación con Rockstar Games.
+Proyecto experimental, independiente y sin afiliación con terceros.
