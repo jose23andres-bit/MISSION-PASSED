@@ -158,7 +158,7 @@ body.mp .fullmenu-mark { font: 400 clamp(10rem,28vw,26rem)/.8 var(--brush); }
 .mp-feature strong { font: 700 italic .95rem var(--ui); text-transform: uppercase; }.mp-feature span { color: #cdb8da; font-size: .75rem; }
 
 /* ---------- GTA zone ---------- */
-.mp-gta::before { background: linear-gradient(180deg,rgba(13,4,20,.88),rgba(13,4,20,.96)),url('../gallery/02-neon-skyline.svg') center/cover; }
+.mp-gta::before { background: linear-gradient(180deg,rgba(13,4,20,.88),rgba(13,4,20,.96)),url('/photos/leonida-04.jpg') center/cover; }
 .mp-trailers { display: grid; grid-template-columns: 1.6fr 1fr; gap: 1rem; }
 .mp-trailer { position: relative; overflow: hidden; padding: 0; color: #fff; cursor: pointer; aspect-ratio: 16/9; text-align: left; }
 .mp-trailer:first-child { grid-row: span 2; }
@@ -196,7 +196,7 @@ body.mp .fullmenu-mark { font: 400 clamp(10rem,28vw,26rem)/.8 var(--brush); }
 .mp-gallery::before { background: radial-gradient(circle at 50% 0,rgba(255,45,155,.25),transparent 50%),#120419; }
 
 /* ---------- collection ---------- */
-.mp-collection::before { background: linear-gradient(180deg,rgba(13,4,20,.85),rgba(26,6,40,.95)),url('../gallery/00-hero-leonida.svg') center/cover; }
+.mp-collection::before { background: linear-gradient(180deg,rgba(13,4,20,.85),rgba(26,6,40,.95)),url('/photos/vice-01.jpg') center/cover; }
 .mp-tabs { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
 .mp-tabs button { padding: .6rem 1.1rem; color: #fff; border: 1px solid rgba(255,111,208,.45); border-radius: .6rem; background: rgba(13,4,20,.6); cursor: pointer; font: 700 italic .82rem var(--ui); letter-spacing: .06em; text-transform: uppercase; transition: all .2s; }
 .mp-tabs button:hover { border-color: var(--hot-2); box-shadow: 0 0 16px rgba(255,45,155,.55); }
@@ -217,7 +217,7 @@ body.mp .fullmenu-mark { font: 400 clamp(10rem,28vw,26rem)/.8 var(--brush); }
 .mp-custody p { margin: 0; color: #e8d6f0; line-height: 1.7; }.mp-custody code { color: var(--gold); overflow-wrap: anywhere; }
 
 /* ---------- roadmap ---------- */
-.mp-roadmap::before { background: linear-gradient(90deg,rgba(13,4,20,.95) 30%,rgba(13,4,20,.55)),url('../gallery/03-night-highway.svg') center/cover; }
+.mp-roadmap::before { background: linear-gradient(90deg,rgba(13,4,20,.95) 30%,rgba(13,4,20,.55)),url('/photos/vice-13.jpg') center/cover; }
 .mp-road { position: relative; display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin: 0; padding: 2.5rem 0 0; list-style: none; }
 .mp-road::before { position: absolute; top: .55rem; right: 0; left: 0; height: 3px; content: ''; background: linear-gradient(90deg,var(--hot),var(--cyan),var(--violet)); box-shadow: 0 0 14px var(--hot); }
 .mp-road li { padding: 1.4rem; }
@@ -282,11 +282,11 @@ body.mp .mp-footer p { color: #a993b6; font-size: .72rem; }
 body.mp .mp-footer .independent-badge { position: static; color: #a993b6; }
 
 
-.art-skyline::after { background-image: linear-gradient(180deg,transparent 15%,rgba(13,4,20,.95)),url('../gallery/02-neon-skyline.svg') !important; }
-.art-marina::after { background-image: linear-gradient(180deg,transparent 15%,rgba(13,4,20,.95)),url('../gallery/04-keys-marina.svg') !important; }
-.art-swamp::after { background-image: linear-gradient(180deg,transparent 15%,rgba(13,4,20,.95)),url('../gallery/05-swamp-night.svg') !important; }
-.art-beach::after { background-image: linear-gradient(180deg,rgba(13,4,20,.15),rgba(13,4,20,.95) 70%),url('../gallery/01-ocean-drive.svg') !important; }
-.art-club::after { background-image: linear-gradient(180deg,rgba(13,4,20,.15),rgba(13,4,20,.95) 70%),url('../gallery/06-night-club.svg') !important; }
+.art-skyline::after { background-image: linear-gradient(180deg,transparent 15%,rgba(13,4,20,.95)),url('/photos/leonida-04.jpg') !important; }
+.art-marina::after { background-image: linear-gradient(180deg,transparent 15%,rgba(13,4,20,.95)),url('/photos/leonida-08.jpg') !important; }
+.art-swamp::after { background-image: linear-gradient(180deg,transparent 15%,rgba(13,4,20,.95)),url('/photos/leonida-11.jpg') !important; }
+.art-beach::after { background-image: linear-gradient(180deg,rgba(13,4,20,.15),rgba(13,4,20,.95) 70%),url('/photos/vice-05.jpg') !important; }
+.art-club::after { background-image: linear-gradient(180deg,rgba(13,4,20,.15),rgba(13,4,20,.95) 70%),url('/photos/vice-06.jpg') !important; }
 .art-skyline::after,.art-marina::after,.art-swamp::after,.art-beach::after,.art-club::after { background-size: cover !important; background-position: center !important; }
 .ext { display: inline-block; width: 13px; height: 13px; margin-left: 6px; overflow: hidden; font-size: 0; vertical-align: -1px; background: currentColor; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 17 17 7M8 7h9v9' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 17 17 7M8 7h9v9' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat; }
 .mp-ticker i { width: 12px; height: 12px; background: var(--gold); box-shadow: 0 0 12px var(--gold); transform: rotate(45deg); }
@@ -415,7 +415,7 @@ body.mp .mp-footer .independent-badge { position: static; color: #a993b6; }
 }
 
 /* ---------- entry screen (starts Radio MP) ---------- */
-.mp-intro { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 1.5rem; background: radial-gradient(circle at 50% 40%,rgba(255,45,155,.35),transparent 55%),linear-gradient(180deg,rgba(13,4,20,.92),rgba(6,1,10,.97)),url('../gallery/00-hero-leonida.svg') center/cover; transition: opacity .6s; }
+.mp-intro { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 1.5rem; background: radial-gradient(circle at 50% 40%,rgba(255,45,155,.35),transparent 55%),linear-gradient(180deg,rgba(13,4,20,.92),rgba(6,1,10,.97)),url('/photos/vice-01.jpg') center/cover; transition: opacity .6s; }
 .mp-intro.out { opacity: 0; pointer-events: none; }
 .mp-intro-box { display: grid; justify-items: center; gap: 1.1rem; text-align: center; }
 .mp-intro-box .crown { width: 84px; }
