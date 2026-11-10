@@ -14,7 +14,8 @@
     const query=params.toString();
     return `https://${host}${pathname}${query?`?${query}`:''}${hash}`;
   };
-  const current=()=>new URLSearchParams(window.location.search).get('_x_tr_tl')||'es';
+  // Only accept known language codes: the value is shown in the page.
+  const current=()=>{const c=new URLSearchParams(window.location.search).get('_x_tr_tl');return c&&(FEATURED.includes(c)||MORE.includes(c))?c:'es';};
   const go=(code)=>{const url=originalUrl();window.location.href=code==='es'?url:`https://translate.google.com/translate?sl=es&tl=${encodeURIComponent(code)}&hl=${encodeURIComponent(code)}&u=${encodeURIComponent(url)}`;};
   const wrap=document.createElement('div');wrap.className='lang-switch';wrap.setAttribute('translate','no');
   wrap.innerHTML=`<button type="button" class="lang-toggle" aria-expanded="false" aria-controls="lang-panel" aria-label="Cambiar idioma"><span class="lang-current-flag" aria-hidden="true">${flag(current())}</span><span class="lang-current-code">${current().split('-')[0].toUpperCase()}</span><span class="lang-chevron" aria-hidden="true">⌄</span></button><div class="lang-panel" id="lang-panel" role="dialog" aria-label="Seleccionar idioma" hidden><p class="lang-title">Selecciona tu idioma</p><div class="lang-grid">${FEATURED.map(c=>`<button type="button" data-lang="${c}" lang="${c}"${c===current()?' aria-current="true"':''}><span aria-hidden="true">${flag(c)}</span>${native(c)}</button>`).join('')}</div><label class="lang-more">Más idiomas <select aria-label="Más idiomas"><option value="">Seleccionar</option>${MORE.map(c=>`<option value="${c}" lang="${c}">${native(c)}</option>`).join('')}</select></label><p class="lang-note">Traducción automática. La versión original está en español.</p></div>`;

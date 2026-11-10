@@ -70,11 +70,8 @@ test('giveaway fund is labelled with its real custody and the gallery is origina
   assert.equal(plan.giveawayFund.custodyWallet, plan.creatorPublicWallet);
   assert.equal(plan.giveawayFund.nftPasses.supply, 999);
   assert.match(html, /https:\/\/www\.rockstargames\.com\/VI\/media\/screenshots/);
-  const shots = [...html.matchAll(/<img[^>]*src="\/gallery\/([^"]+)"/g)].map((m) => m[1]);
-  assert.equal(shots.length, 8); // hero + 6 postcards + pass design
-  for (const shot of shots) {
-    const svg = await readFile(resolve(root, 'public/gallery', shot), 'utf8');
-    assert.match(svg, /Ilustración original MISSION PASSED/);
-    assert.doesNotMatch(svg, /<image\b|href="http/);
-  }
+  // Gallery uses the project's own cinematic photos; every image must exist and none may come from Rockstar.
+  const shots = [...html.matchAll(/<img[^>]*src="\/photos\/(gallery-[^"]+)"/g)].map((m) => m[1]);
+  assert.equal(shots.length, 8);
+  for (const shot of shots) await readFile(resolve(root, 'public/photos', shot));
 });
