@@ -35,7 +35,7 @@
     "tokens": 200000000,
     "custodyWallet": "4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj",
     "custodian": "creator",
-    "purpose": "Sorteos de copias de GTA VI entre poseedores de los pases NFT",
+    "purpose": "Recompensas comunitarias y experiencias para poseedores de pases NFT, sujetas a bases públicas, financiación verificada y normativa aplicable.",
     "nftPasses": {
       "supply": 999,
       "status": "NOT_MINTED"
@@ -55,7 +55,7 @@
     "launchType": "launchpool",
     "token": {
       "image": "https://raw.githubusercontent.com/jose23andres-bit/MISSION-PASSED/main/public/token-logo.png",
-      "description": "MISSION PASSED (MP) is a community memecoin on Solana. 20% community giveaway fund held in the creator wallet. Independent project, not affiliated with Rockstar Games.",
+      "description": "MISSION PASSED (MP) is an independent community token on Solana with an original digital collection and community rewards subject to published rules and verified funding.",
       "website": "https://github.com/jose23andres-bit/MISSION-PASSED",
       "twitter": null,
       "telegram": null
