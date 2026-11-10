@@ -20,7 +20,7 @@ async function files(directory, extension) {
 
 function withBasePath(html) {
   if (!config.basePath) return html;
-  return html.replace(/\b(href|src|action|content|data-fallback)="\/(?!\/)/g, `$1="${config.basePath}/`);
+  return html.replace(/\b(href|src|action|content|data-fallback|poster)="\/(?!\/)/g, `$1="${config.basePath}/`);
 }
 
 await rm(dist, { recursive: true, force: true });
