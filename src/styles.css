@@ -229,7 +229,3 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .lang-more { display:flex; align-items:center; gap:.6rem; margin-top:.75rem; color:#3ff0ff; font-size:.78rem; }
 .lang-more select { min-width:0; flex:1; height:36px; padding:0 .5rem; border:1px solid rgba(63,240,255,.5); border-radius:.5rem; color:#fff; background:#12031d; font:600 .8rem 'Kanit',system-ui,sans-serif; }
 .lang-note { margin:.7rem 0 0; color:#a993b6; font-size:.68rem; line-height:1.45; }
-.mp-spotify-player { position:fixed; left:.8rem; bottom:.8rem; z-index:82; width:240px; overflow:hidden; border:1px solid rgba(255,111,208,.5); border-radius:.8rem; background:rgba(10,3,18,.92); box-shadow:0 0 22px rgba(255,45,155,.24); backdrop-filter:blur(12px); }
-.mp-spotify-label { display:block; padding:.28rem .55rem; color:#ff8bd7; font:700 .58rem/1 'Kanit',system-ui,sans-serif; letter-spacing:.14em; }
-.mp-spotify-player iframe { display:block; width:100%; height:80px; border:0; }
-@media (max-width:640px) { .mp-spotify-player { left:.55rem; bottom:.55rem; width:190px; } .lang-toggle { min-width:42px; height:34px; padding:0 .4rem; } }
