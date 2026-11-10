@@ -488,7 +488,7 @@ body.mp .mp-footer .independent-badge { position: static; color: #a993b6; }
 .guide.open .guide-hint { display: none; }
 
 
-/* Cinematic Vice City depth and compact original Rico assistant */
+/* Cinematic Neon Coast depth and compact original Rico assistant */
 .mp-hero-media { perspective:1100px; transform-style:preserve-3d; }
 .mp-hero-img { transform:translate3d(0,var(--hero-parallax,0px),0) scale(1.08); will-change:transform; }
 .mp-section img,.mp-final-img { transform:translate3d(0,var(--scene-depth,0px),0) scale(1.035); will-change:transform; }
@@ -499,7 +499,7 @@ body.mp .mp-footer .independent-badge { position: static; color: #a993b6; }
 @media (max-width:640px) { .guide-avatar { width:64px; } .guide.min .guide-avatar { width:58px; } }
 @media (prefers-reduced-motion:reduce) { .mp-hero-img,.mp-section img,.mp-final-img { transform:none !important; } }
 
-/* MISSION PASSED — Vice City cinematic refresh */
+/* MISSION PASSED — Neon Coast cinematic refresh */
 body.mp{--hot:#ff35b5;--hot-2:#ff8be0;--violet:#8c42ff;--cyan:#45eaff;--gold:#ffd84d;--night:#080611;--night-2:#160b25;background:radial-gradient(ellipse at 50% -15%,rgba(137,49,255,.16),transparent 48%),var(--night)}
 body.mp .mp-header{height:76px;padding-inline:clamp(1rem,3.2vw,3.5rem);border-bottom:1px solid rgba(255,139,224,.18);background:linear-gradient(180deg,rgba(7,5,18,.94),rgba(7,5,18,.62));backdrop-filter:blur(18px) saturate(1.35)}
 body.mp .mp-header.scrolled{background:rgba(7,5,18,.96);border-color:rgba(255,139,224,.28);box-shadow:0 12px 45px rgba(0,0,0,.34),0 1px 0 rgba(255,53,181,.14)}
