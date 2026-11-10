@@ -179,6 +179,8 @@
 
   function setupScroll() {
     const header = $('#site-header');
+    const heroImage = $('.mp-hero-img');
+    const sceneImages = [...document.querySelectorAll('.mp-section img, .mp-final-img')];
     const progress = $('#scroll-progress-bar');
     const routeProgress = $('#route-progress');
     const update = () => {
@@ -187,6 +189,14 @@
       progress.style.width = `${ratio * 100}%`;
       header.classList.toggle('scrolled', window.scrollY > 24);
       if (routeProgress) routeProgress.style.height = `${Math.min(Math.max((ratio - .38) * 270, 0), 100)}%`;
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        if (heroImage) heroImage.style.setProperty('--hero-parallax', `${Math.min(window.scrollY * .12, 115)}px`);
+        sceneImages.forEach((img) => {
+          const rect = img.getBoundingClientRect();
+          const depth = Math.max(-1, Math.min(1, (window.innerHeight * .5 - (rect.top + rect.height * .5)) / window.innerHeight));
+          img.style.setProperty('--scene-depth', `${depth * -22}px`);
+        });
+      }
     };
     update();
     window.addEventListener('scroll', update, { passive: true });
