@@ -38,7 +38,7 @@ for (const file of ['app.js', 'portal-search.js', 'chain-dashboard.js', 'admin.j
 await mkdir(resolve(dist, 'assets/vendor'), { recursive: true });
 await cp(resolve(root, 'node_modules/@solana/web3.js/lib/index.iife.min.js'), resolve(dist, 'assets/vendor/solana-web3.min.js'));
 const landingHtml = await readFile(resolve(root, 'index.html'), 'utf8');
-await writeFile(resolve(dist, 'index.html'), withBasePath(landingHtml));
+await writeFile(resolve(dist, 'index.html'), landingHtml);
 
 for (const htmlFile of await files(dist, '.html')) {
   await writeFile(htmlFile, withBasePath(await readFile(htmlFile, 'utf8')));
