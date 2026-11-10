@@ -411,6 +411,154 @@
     }));
   }
 
+  function setupPresaleDashboard() {
+    const slider = $('#mp-demo-slider');
+    const demoPercent = $('#mp-demo-percent');
+    const demoAmount = $('#mp-demo-amount');
+    const goal = Number(config.campaignGoalEur || 50000);
+    const money = (value) => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(value);
+    const pct = (value) => `${Number(value).toLocaleString('es-ES', { maximumFractionDigits: 1 })} %`;
+    const renderDemo = () => {
+      if (!slider) return;
+      const value = Math.max(0, Math.min(100, Number(slider.value) || 0));
+      if (demoPercent) demoPercent.textContent = `${value}%`;
+      if (demoAmount) demoAmount.textContent = money(goal * value / 100);
+      slider.setAttribute('aria-valuetext', `${value}% del objetivo, simulación`);
+    };
+    slider?.addEventListener('input', renderDemo);
+    renderDemo();
+
+    const state = $('#mp-live-state');
+    const total = $('#mp-live-eur');
+    const caption = $('#mp-live-caption');
+    const fill = $('#mp-live-fill');
+    const percent = $('#mp-live-percent');
+    const solNode = $('#mp-live-sol');
+    const updated = $('#mp-live-updated');
+    const refresh = $('#mp-live-refresh');
+    if (!state || !total) return;
+
+    const setOffline = () => {
+      state.textContent = config.network === 'mainnet-beta' ? 'TESORERÍA NO CONFIGURADA' : 'DEVNET · PAGOS BLOQUEADOS';
+      total.textContent = money(0);
+      caption.textContent = '0 € de recaudación confirmada. No se contabilizan saldos de prueba ni estimaciones como ventas.';
+      if (fill) fill.style.width = '0%';
+      if (percent) percent.textContent = pct(0);
+      if (solNode) solNode.textContent = '—';
+      if (updated) updated.textContent = 'Fuente: RPC Solana · sin recaudación Mainnet verificable';
+    };
+
+    const validWallet = isValidPublicKey(config.presale?.wallet || '');
+    if (config.network !== 'mainnet-beta' || !validWallet) {
+      setOffline();
+      return;
+    }
+
+    const rpc = async (method, params) => {
+      const response = await fetch(config.rpcUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ jsonrpc: '2.0', id: 1, method, params }) });
+      if (!response.ok) throw new Error(`RPC ${response.status}`);
+      const body = await response.json();
+      if (body.error) throw new Error(body.error.message || 'RPC error');
+      return body.result;
+    };
+    const tokenBalance = async (mint) => {
+      const result = await rpc('getTokenAccountsByOwner', [config.presale.wallet, { mint }, { encoding: 'jsonParsed', commitment: 'confirmed' }]);
+      return result.value.reduce((sum, item) => sum + Number(item.account.data.parsed.info.tokenAmount.uiAmountString || 0), 0);
+    };
+    const readEurRates = async () => {
+      const [solResponse, fxResponse] = await Promise.all([
+        fetch('https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=eur'),
+        fetch('https://api.frankfurter.app/latest?from=USD&to=EUR'),
+      ]);
+      if (!solResponse.ok || !fxResponse.ok) throw new Error('No se pudieron consultar los tipos de cambio');
+      const [sol, fx] = await Promise.all([solResponse.json(), fxResponse.json()]);
+      const solEur = Number(sol.solana?.eur), usdEur = Number(fx.rates?.EUR);
+      if (!(solEur > 0) || !(usdEur > 0)) throw new Error('Tipos de cambio no válidos');
+      return { solEur, usdEur };
+    };
+    const load = async () => {
+      if (refresh) { refresh.disabled = true; refresh.textContent = 'Actualizando…'; }
+      state.textContent = 'CONSULTANDO MAINNET';
+      try {
+        const [balance, stableUsd, rates] = await Promise.all([
+          rpc('getBalance', [config.presale.wallet, { commitment: 'confirmed' }]),
+          Promise.all([
+            tokenBalance('EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v').catch(() => 0),
+            tokenBalance('Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB').catch(() => 0),
+          ]).then(values => values.reduce((a, b) => a + b, 0)),
+          readEurRates(),
+        ]);
+        const raisedSol = Math.max(0, Number(balance.value) / 1e9 - Math.max(0, Number(config.presale?.baselineSol) || 0));
+        const raisedEur = raisedSol * rates.solEur + stableUsd * rates.usdEur;
+        const progress = Math.max(0, Math.min(100, raisedEur / goal * 100));
+        state.textContent = 'MAINNET · SALDO NETO';
+        total.textContent = money(raisedEur);
+        caption.textContent = 'Saldo neto visible en la wallet pública de preventa, convertido a euros con tipos de cambio actuales. No equivale a un recuento de compradores.';
+        if (fill) fill.style.width = `${progress}%`;
+        if (percent) percent.textContent = pct(progress);
+        if (solNode) solNode.textContent = `${raisedSol.toLocaleString('es-ES', { maximumFractionDigits: 3 })} SOL`;
+        if (updated) updated.textContent = `Actualizado ${new Date().toLocaleTimeString('es-ES')} · RPC Mainnet + CoinGecko + Frankfurter`;
+      } catch (error) {
+        state.textContent = 'DATOS NO DISPONIBLES';
+        caption.textContent = 'No se puede verificar el saldo ahora mismo. No se muestran estimaciones como si fueran recaudación.';
+        if (updated) updated.textContent = `Error de consulta: ${error.message}`;
+      } finally {
+        if (refresh) { refresh.disabled = false; refresh.textContent = 'Actualizar datos ↻'; }
+      }
+    };
+    refresh?.addEventListener('click', load);
+    load();
+    window.setInterval(load, 60000);
+  }
+
+  function setupNftCollection() {
+    const dialog = $('#mp-nft-dialog');
+    const image = $('#mp-nft-dialog-image');
+    const title = $('#mp-nft-dialog-title');
+    const rarity = $('#mp-nft-dialog-rarity');
+    const story = $('#mp-nft-dialog-story');
+    const traits = $('#mp-nft-dialog-traits');
+    const favorite = $('#mp-nft-favorite');
+    const cards = [...document.querySelectorAll('[data-nft-open]')];
+    if (!dialog || !cards.length) return;
+    const collection = [
+      { name: 'El Conductor', rarity: 'OG', image: '/photos/nft-1.jpg', story: 'Especialista en rutas imposibles. Su pase representa velocidad, precisión y sangre fría.', traits: ['Distrito: Ocean District', 'Rol: Conductor', 'Nivel: OG', 'Serie: 001'] },
+      { name: 'La Jefa', rarity: 'Raro', image: '/photos/nft-2.jpg', story: 'Estratega de la marina. Lee la ciudad como un tablero y siempre mueve primero.', traits: ['Distrito: Golden Mile', 'Rol: Estratega', 'Nivel: Raro', 'Serie: 128'] },
+      { name: 'El Socio', rarity: 'Épico', image: '/photos/nft-3.jpg', story: 'Conoce cada atajo del pantano y cada puerta de la ciudad. Su valor está en las conexiones.', traits: ['Distrito: Everglade', 'Rol: Explorador', 'Nivel: Épico', 'Serie: 512'] },
+      { name: 'Rico', rarity: 'Legendario', image: '/photos/nft-4.jpg', story: 'El anfitrión de Neon Coast. Su pase está concebido como una pieza insignia de la colección.', traits: ['Distrito: Port Aurora', 'Rol: Anfitrión', 'Nivel: Legendario', 'Serie: 999'] },
+    ];
+    let active = 0;
+    const readFavorites = () => { try { return JSON.parse(localStorage.getItem('mp-nft-favorites') || '[]'); } catch { return []; } };
+    const saveFavorites = (items) => { try { localStorage.setItem('mp-nft-favorites', JSON.stringify(items)); } catch { /* storage can be unavailable */ } };
+    const renderFavorite = () => {
+      const items = readFavorites();
+      const saved = items.includes(active);
+      favorite.textContent = saved ? '♥ Guardado en favoritos' : '♡ Guardar en favoritos';
+      favorite.setAttribute('aria-pressed', String(saved));
+    };
+    cards.forEach((button) => button.addEventListener('click', () => {
+      active = Number(button.dataset.nftOpen);
+      const item = collection[active];
+      if (!item) return;
+      image.src = item.image;
+      image.alt = item.name + ' · MISSION PASSED';
+      title.textContent = item.name;
+      rarity.textContent = item.rarity;
+      story.textContent = item.story;
+      traits.replaceChildren(...item.traits.map((value) => { const li = document.createElement('li'); li.textContent = value; return li; }));
+      renderFavorite();
+      if (typeof dialog.showModal === 'function') dialog.showModal();
+      else dialog.setAttribute('open', '');
+    }));
+    favorite.addEventListener('click', () => {
+      const items = readFavorites();
+      saveFavorites(items.includes(active) ? items.filter((value) => value !== active) : [...items, active]);
+      renderFavorite();
+    });
+    $('#mp-nft-dialog-close')?.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+  }
+
   function setupGlow() {
     document.addEventListener('pointermove', (event) => {
       const card = event.target.closest?.('.glow-card');
@@ -458,6 +606,8 @@
     setupMarquees();
     setupTrailers();
     setupTabs();
+    setupPresaleDashboard();
+    setupNftCollection();
     setupGlow();
     setupCursorGlow();
     setupProviderEvents();
