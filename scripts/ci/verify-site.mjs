@@ -48,7 +48,7 @@ if (!siteUrl) {
 }
 siteUrl = siteUrl.replace(/\/*$/, '/');
 
-const PAGES = ['', 'portal/gta-vi.html', 'portal/search.html', 'portal/news.html', 'presale/', 'transparency/', 'admin/'];
+const PAGES = ['', 'portal/universo.html', 'portal/search.html', 'portal/news.html', 'presale/', 'transparency/', 'admin/'];
 if (dir) {
   const distDir = resolve(root, dir);
   for (const file of walk(distDir)) if (file.endsWith('.html')) {
