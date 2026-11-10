@@ -251,11 +251,23 @@
           <button type="button" role="tab" aria-selected="false" data-filter="legendario">Legendarios</button>
         </div>
         <div class="mp-cards">
-          <article class="mp-card glow-card reveal" data-rarity="og"><div class="mp-card-art"><img src="/photos/nft-1.jpg" data-fallback="/nft/01-el-conductor.svg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="El Conductor · pase OG, personaje original de MISSION PASSED" loading="lazy" /></div><span class="mp-rarity">OG</span><h3>El Conductor</h3><p>Pase #001 · Nunca llega tarde a una misión.</p></article>
-          <article class="mp-card glow-card reveal" data-rarity="raro"><div class="mp-card-art"><img src="/photos/nft-2.jpg" data-fallback="/nft/02-la-jefa.svg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="La Jefa · pase raro, personaje original de MISSION PASSED" loading="lazy" /></div><span class="mp-rarity">Raro</span><h3>La Jefa</h3><p>Pase #128 · Manda en la marina.</p></article>
-          <article class="mp-card glow-card reveal" data-rarity="epico"><div class="mp-card-art"><img src="/photos/nft-3.jpg" data-fallback="/nft/03-el-socio.svg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="El Socio · pase épico, personaje original de MISSION PASSED" loading="lazy" /></div><span class="mp-rarity">Épico</span><h3>El Socio</h3><p>Pase #512 · Conoce cada atajo del pantano.</p></article>
-          <article class="mp-card glow-card reveal" data-rarity="legendario"><div class="mp-card-art"><img src="/photos/nft-4.jpg" data-fallback="/nft/04-rico.svg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="Rico · pase legendario, personaje original de MISSION PASSED" loading="lazy" /></div><span class="mp-rarity">Legendario</span><h3>Rico</h3><p>Pase #999 · El guía de Neon Coast. Utilidad y recompensas sujetas a bases públicas.</p></article>
+          <article class="mp-card glow-card reveal" data-rarity="og"><div class="mp-card-art"><img src="/photos/nft-1.jpg" data-fallback="/nft/01-el-conductor.svg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="El Conductor · pase OG, personaje original de MISSION PASSED" loading="lazy" /></div><span class="mp-rarity">OG</span><h3>El Conductor</h3><p>Pase #001 · Nunca llega tarde a una misión.</p>
+            <button class="mp-nft-open" type="button" data-nft-open="0">Ver ficha del pase ↗</button></article>
+          <article class="mp-card glow-card reveal" data-rarity="raro"><div class="mp-card-art"><img src="/photos/nft-2.jpg" data-fallback="/nft/02-la-jefa.svg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="La Jefa · pase raro, personaje original de MISSION PASSED" loading="lazy" /></div><span class="mp-rarity">Raro</span><h3>La Jefa</h3><p>Pase #128 · Manda en la marina.</p>
+            <button class="mp-nft-open" type="button" data-nft-open="1">Ver ficha del pase ↗</button></article>
+          <article class="mp-card glow-card reveal" data-rarity="epico"><div class="mp-card-art"><img src="/photos/nft-3.jpg" data-fallback="/nft/03-el-socio.svg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="El Socio · pase épico, personaje original de MISSION PASSED" loading="lazy" /></div><span class="mp-rarity">Épico</span><h3>El Socio</h3><p>Pase #512 · Conoce cada atajo del pantano.</p>
+            <button class="mp-nft-open" type="button" data-nft-open="2">Ver ficha del pase ↗</button></article>
+          <article class="mp-card glow-card reveal" data-rarity="legendario"><div class="mp-card-art"><img src="/photos/nft-4.jpg" data-fallback="/nft/04-rico.svg" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="Rico · pase legendario, personaje original de MISSION PASSED" loading="lazy" /></div><span class="mp-rarity">Legendario</span><h3>Rico</h3><p>Pase #999 · El guía de Neon Coast. Utilidad y recompensas sujetas a bases públicas.</p>
+            <button class="mp-nft-open" type="button" data-nft-open="3">Ver ficha del pase ↗</button></article>
         </div>
+        <p class="mp-collection-status"><strong>0 / 999</strong> acuñados · colección conceptual · mint aún no habilitado</p>
+        <dialog class="mp-nft-dialog" id="mp-nft-dialog" aria-labelledby="mp-nft-dialog-title">
+          <button class="mp-nft-close" id="mp-nft-dialog-close" type="button" aria-label="Cerrar ficha">×</button>
+          <div class="mp-nft-dialog-grid">
+            <img id="mp-nft-dialog-image" src="/photos/nft-1.jpg" alt="" />
+            <div class="mp-nft-dialog-copy"><p class="mp-eyebrow">MISSION PASS · FICHA DE COLECCIÓN</p><span class="mp-rarity" id="mp-nft-dialog-rarity">OG</span><h3 id="mp-nft-dialog-title">El Conductor</h3><p id="mp-nft-dialog-story"></p><ul id="mp-nft-dialog-traits"></ul><p class="mp-nft-disclaimer">Diseño y ficha de previsualización. Este pase todavía no está acuñado y no concede derechos ni premios hasta que se publiquen sus condiciones.</p><button class="mp-btn mp-btn-dark" id="mp-nft-favorite" type="button" aria-pressed="false">♡ Guardar en favoritos</button></div>
+          </div>
+        </dialog>
         <article class="mp-grand glow-card reveal" aria-labelledby="grand-title">
           <div class="mp-grand-badge" aria-hidden="true"><svg class="crown" viewBox="0 0 120 70"><path d="M8 62 L14 14 L40 40 L60 6 L80 40 L106 14 L112 62 Z" /></svg><span>#999</span></div>
           <div class="mp-grand-copy">
