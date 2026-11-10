@@ -65,6 +65,8 @@
 
   // ---------- price board ----------
   function renderBoard() {
+    const priceLabel = $('ps-price-label');
+    if (priceLabel) priceLabel.textContent = enabled && isOpen() ? 'Precio de preventa' : 'Precio inicial propuesto';
     const index = T.tierAt(state.raisedSol, tiers);
     const tier = tiers[index], next = tiers[index + 1];
     $('ps-price').textContent = usd(tier.priceUsd);
