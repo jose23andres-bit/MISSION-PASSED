@@ -14,7 +14,7 @@ Genesis documenta que la asignación desbloqueada del creador es el remanente de
 
 ## Fondo común de sorteos
 
-- 20% del suministro (200.000.000 MP) destinado a sorteos de copias de GTA VI entre los poseedores de 999 pases NFT.
+- 20% del suministro (200.000.000 MP) destinado a sorteos de experiencias digitales entre los poseedores de 999 pases NFT.
 - Custodia: wallet del creador `4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj`. La web lo indica de forma visible.
 - Pases NFT: aún no acuñados. Las bases se publicarán antes del primer sorteo.
 
