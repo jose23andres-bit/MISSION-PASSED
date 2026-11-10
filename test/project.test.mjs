@@ -11,7 +11,7 @@ test('landing contains every required section and no placeholder links', async (
   assert.doesNotMatch(html, /href=["']#["']/);
   assert.match(html, /id="roadmap"/);
   assert.match(html, /id="launch-countdown"/);
-  assert.match(html, /16% disponible · 4% vesting/);
+  assert.match(html, /16% disponible y 4% con vesting de 12 meses/);
 });
 
 test('published pages contain no fake purchase button', async () => {
