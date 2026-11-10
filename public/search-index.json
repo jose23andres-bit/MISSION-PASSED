@@ -1,11 +1,47 @@
 [
-  {"title":"GTA VI: información confirmada","url":"/portal/gta-vi.html","text":"fecha lanzamiento plataformas PlayStation Xbox protagonistas vehículos armas actividades mundo"},
-  {"title":"Personajes","url":"/portal/characters.html","text":"Jason Duval Lucia Caminos Cal Hampton Boobie Ike Dre'Quan Priest Real Dimez Raul Bautista Brian Heder"},
-  {"title":"Vice City y Leonida","url":"/portal/leonida.html","text":"Vice City Leonida Keys Grassrivers Port Gellhorn Ambrosia Mount Kalaga localizaciones mapa"},
-  {"title":"Tráilers oficiales","url":"/portal/trailers.html","text":"Trailer 1 Trailer 2 Extended Look Launch Trailer vídeos Rockstar"},
-  {"title":"Guías","url":"/portal/guides.html","text":"plataformas preparación seguridad fuentes spoilers"},
-  {"title":"Teorías de la comunidad","url":"/portal/theories.html","text":"teorías especulación comunidad Jason Lucia Leonida redes"},
-  {"title":"Noticias","url":"/portal/news.html","text":"noticias novedades reservas fecha precarga horarios galería"},
-  {"title":"Tokenomics MISSION PASSED","url":"/#tokenomics","text":"token Solana MP distribución fondo sorteos 999 NFT creator presale liquidity community marketing"},
-  {"title":"Lanzamiento y wallet","url":"/#launch","text":"wallet Phantom Solscan DexScreener mint devnet"}
+  {
+    "title": "Universo original MISSION PASSED",
+    "url": "/portal/gta-vi.html",
+    "text": "ciudad ficticia Neon Coast escenarios cultura urbana historias originales comunidad"
+  },
+  {
+    "title": "Personajes originales",
+    "url": "/portal/characters.html",
+    "text": "El Conductor La Jefa El Socio Rico personajes ficción original"
+  },
+  {
+    "title": "Escenarios Neon Coast",
+    "url": "/portal/leonida.html",
+    "text": "Ocean District South Keys Everglade Port Aurora Golden Mile Sierra Azul escenarios"
+  },
+  {
+    "title": "Archivo audiovisual",
+    "url": "/portal/trailers.html",
+    "text": "vídeo cinematográfico MISSION PASSED colección de clips originales"
+  },
+  {
+    "title": "Guías de seguridad",
+    "url": "/portal/guides.html",
+    "text": "wallet Solana seguridad verificar transacciones token riesgo"
+  },
+  {
+    "title": "Ideas de la comunidad",
+    "url": "/portal/theories.html",
+    "text": "experiencias arte utilidad gobernanza propuestas"
+  },
+  {
+    "title": "Novedades",
+    "url": "/portal/news.html",
+    "text": "actualizaciones proyecto preventa transparencia colección"
+  },
+  {
+    "title": "Tokenomics MISSION PASSED",
+    "url": "/#tokenomics",
+    "text": "token Solana MP distribución fondo recompensas 999 NFT creator presale liquidity community marketing"
+  },
+  {
+    "title": "Lanzamiento y wallet",
+    "url": "/#launch",
+    "text": "wallet Phantom Solscan DexScreener mint devnet"
+  }
 ]
