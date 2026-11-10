@@ -25,7 +25,8 @@
   const state = { solUsd: 0, raisedSol: 0, currency: 'SOL', wallet: null, account: null, legacy: null, busy: false };
   const start = Date.parse(P.start), end = Date.parse(P.end);
   const isOpen = () => Date.now() >= start && Date.now() < end;
-  const enabled = isKey(P.wallet);
+  const configured = isKey(P.wallet);
+  const enabled = NET === 'mainnet-beta' && configured;
 
   // ---------- RPC + prices ----------
   async function rpc(method, params) {
@@ -367,11 +368,12 @@
     $('ps-network').textContent = NET === 'mainnet-beta' ? 'Solana Mainnet' : 'Solana Devnet · modo prueba (sin dinero real)';
     document.body.classList.toggle('ps-test', NET !== 'mainnet-beta');
     const walletBox = $('ps-receiver');
-    if (enabled) {
+    if (configured) {
       walletBox.innerHTML = '';
       const code = document.createElement('code'); code.setAttribute('translate', 'no'); code.textContent = P.wallet;
       const link = document.createElement('a'); link.href = explorer('account', P.wallet); link.target = '_blank'; link.rel = 'noopener noreferrer'; link.className = 'mp-link'; link.textContent = 'Ver en Solscan ↗';
       walletBox.append(code, ' ', link);
+      if (!enabled) { const note = document.createElement('small'); note.className = 'ps-wallet-pending'; note.textContent = 'Destino configurado. Los pagos reales permanecerán desactivados hasta autorizar y verificar Mainnet.'; walletBox.append(document.createElement('br'), note); }
     }
     const ladder = $('ps-ladder');
     tiers.forEach((tier, i) => {
