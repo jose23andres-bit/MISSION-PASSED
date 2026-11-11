@@ -1,0 +1,138 @@
+/* MISSION PASSED · motion layer (paired with fx.js) */
+@property --fx-angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+
+/* ---------- wanted-level HUD ---------- */
+.fx-wanted { position: fixed; top: 96px; right: clamp(.8rem,2vw,1.6rem); z-index: 60; display: flex; gap: .2rem; pointer-events: none; }
+.fx-wanted i { width: 22px; height: 22px; background: rgba(255,255,255,.18); clip-path: polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%); transition: background .25s, transform .25s; }
+.fx-wanted i.on { background: #fff; filter: drop-shadow(0 0 6px #fff); transform: scale(1.08); }
+.fx-wanted.bump { animation: fxBump .5s ease-out; }
+.fx-wanted.max i.on { animation: fxSiren 1s steps(1) infinite; }
+.fx-wanted.max i.on:nth-child(even) { animation-delay: .5s; }
+@keyframes fxBump { 30% { transform: scale(1.25); } }
+@keyframes fxSiren { 0% { background: #ff3b5c; filter: drop-shadow(0 0 8px #ff3b5c); } 50% { background: #3fa7ff; filter: drop-shadow(0 0 8px #3fa7ff); } }
+@media (max-width: 760px) { .fx-wanted { top: 74px; } .fx-wanted i { width: 16px; height: 16px; } }
+
+/* ---------- VHS scanlines + tracking line ---------- */
+.fx-scan { position: fixed; inset: 0; z-index: 3; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0,0,0,.16) 0 1px, transparent 1px 3px); mix-blend-mode: multiply; opacity: .45; }
+.fx-scan::after { position: absolute; left: 0; right: 0; height: 90px; content: ''; background: linear-gradient(180deg, transparent, rgba(255,111,208,.08) 45%, rgba(63,240,255,.1) 55%, transparent); animation: fxTrack 9s linear infinite; }
+@keyframes fxTrack { from { transform: translateY(-120px); } to { transform: translateY(110vh); } }
+
+/* ---------- glitch titles (RGB split + slice jitter) ---------- */
+.fx-glitch { position: relative; }
+.fx-glitch::before, .fx-glitch::after { position: absolute; inset: 0; content: attr(data-text); pointer-events: none; opacity: 0; white-space: pre-line; }
+.fx-glitch::before { color: #3ff0ff; text-shadow: none; }
+.fx-glitch::after { color: #ff2d9b; text-shadow: none; }
+.fx-glitch.fx-burst::before { animation: fxGlitchA .9s steps(2) both; }
+.fx-glitch.fx-burst::after { animation: fxGlitchB .9s steps(2) both; }
+.fx-glitch.fx-burst { animation: fxShake .9s steps(3) both; }
+@keyframes fxGlitchA {
+  0% { opacity: .9; transform: translate(-6px, -2px); clip-path: inset(10% 0 60% 0); }
+  25% { transform: translate(5px, 1px); clip-path: inset(55% 0 20% 0); }
+  50% { transform: translate(-3px, 2px); clip-path: inset(30% 0 45% 0); }
+  75% { transform: translate(4px, -1px); clip-path: inset(75% 0 5% 0); }
+  100% { opacity: 0; transform: none; clip-path: inset(0); }
+}
+@keyframes fxGlitchB {
+  0% { opacity: .9; transform: translate(6px, 2px); clip-path: inset(65% 0 10% 0); }
+  25% { transform: translate(-5px, -1px); clip-path: inset(15% 0 60% 0); }
+  50% { transform: translate(3px, -2px); clip-path: inset(45% 0 30% 0); }
+  75% { transform: translate(-4px, 1px); clip-path: inset(5% 0 80% 0); }
+  100% { opacity: 0; transform: none; clip-path: inset(0); }
+}
+@keyframes fxShake { 0%, 100% { translate: 0; } 20% { translate: -2px 0; } 40% { translate: 2px 0; } 60% { translate: -1px 0; } }
+
+/* ---------- slice-in reveal ("clip" cut) ---------- */
+.fx-slice { position: relative; overflow: hidden; }
+.fx-on .fx-slice > img, .fx-on .fx-slice > video { clip-path: inset(0 0 100% 0); }
+.fx-on .fx-slice.fx-sliced > img, .fx-on .fx-slice.fx-sliced > video { clip-path: inset(0); animation: fxSliceIn .85s cubic-bezier(.2,.8,.2,1) both; }
+.fx-slice::after { position: absolute; inset: 0; z-index: 2; content: ''; pointer-events: none; opacity: 0; background: linear-gradient(90deg, rgba(255,45,155,.55), rgba(63,240,255,.55)); mix-blend-mode: screen; }
+.fx-slice.fx-sliced::after { animation: fxFlash .85s steps(4) both; }
+@keyframes fxSliceIn {
+  0% { clip-path: inset(0 0 100% 0); transform: translateX(-12px) scale(1.06); }
+  20% { clip-path: inset(0 0 72% 0); transform: translateX(10px) scale(1.06); }
+  40% { clip-path: inset(0 0 40% 0); transform: translateX(-6px) scale(1.04); }
+  60% { clip-path: inset(0 0 18% 0); transform: translateX(4px) scale(1.03); }
+  100% { clip-path: inset(0); transform: none; }
+}
+@keyframes fxFlash { 0% { opacity: .8; clip-path: inset(20% 0 60% 0); } 30% { opacity: .6; clip-path: inset(60% 0 25% 0); } 60% { opacity: .4; clip-path: inset(5% 0 85% 0); } 100% { opacity: 0; } }
+
+/* ---------- NFT cards: 3D tilt, holographic foil, rarity aura ---------- */
+.mp-cards { perspective: 1100px; }
+.mp-card.fx-tilt, .fx-tilt { --rx: 0deg; --ry: 0deg; --px: 50%; --py: 50%; transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .3s, border-color .3s; }
+.mp-card.fx-tilt.fx-tilting, .fx-tilt.fx-tilting { transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(-8px); transition: transform .08s linear, box-shadow .3s, border-color .3s; }
+.mp-card-art { position: relative; }
+.mp-card-art::before { position: absolute; inset: 0; z-index: 3; content: ''; pointer-events: none; border-radius: inherit; opacity: .28;
+  background: conic-gradient(from 210deg at var(--px) var(--py), #ff2d9b, #ffd36e, #3ff0ff, #8b2cff, #ff2d9b);
+  mix-blend-mode: soft-light; transition: opacity .3s; }
+.mp-card-art .fx-shine, .mp-card-art::after { position: absolute; inset: -40%; z-index: 4; content: ''; pointer-events: none;
+  background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,.55) 50%, transparent 60%); transform: translateX(-60%); animation: fxSweep 4.5s ease-in-out infinite; }
+.mp-card:hover .mp-card-art::before, .mp-card.fx-tilting .mp-card-art::before { opacity: .55; }
+.fx-on .mp-card:hover .mp-card-art.fx-sliced img { animation: fxJitter .35s steps(2) 2; }
+@keyframes fxSweep { 0%, 55% { transform: translateX(-60%); } 85%, 100% { transform: translateX(60%); } }
+@keyframes fxJitter { 0% { translate: 0; filter: hue-rotate(0); } 50% { translate: 3px -1px; filter: hue-rotate(40deg) saturate(1.6); } 100% { translate: -2px 1px; } }
+.mp-card[data-rarity] { isolation: isolate; }
+.mp-card[data-rarity]::after { position: absolute; inset: -2px; z-index: -1; content: ''; border-radius: inherit; padding: 2px; pointer-events: none;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+  background: conic-gradient(from var(--fx-angle), var(--aura-a), var(--aura-b), var(--aura-a)); animation: fxSpin 5s linear infinite; opacity: .9; }
+.mp-card[data-rarity="og"] { --aura-a: #ff2d9b; --aura-b: #ff8fdc; }
+.mp-card[data-rarity="raro"] { --aura-a: #3ff0ff; --aura-b: #14a3a8; }
+.mp-card[data-rarity="epico"] { --aura-a: #b26bff; --aura-b: #7affc1; }
+.mp-card[data-rarity="legendario"] { --aura-a: #ffd36e; --aura-b: #ff2d9b; box-shadow: 0 0 40px rgba(255,211,110,.35); }
+.mp-card[data-rarity="legendario"] .mp-rarity { animation: fxGold 2.4s ease-in-out infinite; }
+@keyframes fxSpin { to { --fx-angle: 360deg; } }
+@keyframes fxGold { 50% { color: #fff; text-shadow: 0 0 12px #ffd36e, 0 0 26px #ff2d9b; } }
+
+/* ---------- "Mission passed / Respect +" banner ---------- */
+.fx-passed { position: fixed; left: 50%; top: 38%; z-index: 150; display: grid; justify-items: center; gap: .2rem; pointer-events: none; opacity: 0; transform: translate(-50%, -50%) scale(.9); }
+.fx-passed strong { color: #ffd36e; font: 400 clamp(2.6rem,7vw,5.6rem)/.9 var(--poster,'Anton',Impact,sans-serif); letter-spacing: .02em; text-transform: uppercase; text-shadow: 3px 3px 0 #1a0628, -2px -2px 0 #1a0628, 2px -2px 0 #1a0628, -2px 2px 0 #1a0628, 0 0 30px rgba(255,211,110,.6); }
+.fx-passed span { color: #fff; font: 700 italic clamp(1rem,2.2vw,1.5rem) var(--ui,'Kanit',sans-serif); letter-spacing: .14em; text-transform: uppercase; text-shadow: 2px 2px 0 #1a0628; }
+.fx-passed.show { animation: fxPassed 3s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes fxPassed { 0% { opacity: 0; transform: translate(-50%,-50%) scale(1.35); filter: blur(6px); } 12% { opacity: 1; transform: translate(-50%,-50%) scale(1); filter: none; } 82% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%,-56%) scale(1); } }
+
+/* ---------- Gran premio ---------- */
+.mp-prize { overflow: hidden; }
+.mp-prize-bg { position: absolute; inset: 0; z-index: -1; }
+.mp-prize-bg img { width: 100%; height: 100%; object-fit: cover; filter: saturate(1.3) brightness(.45); animation: fxDrift 28s ease-in-out infinite alternate; }
+.mp-prize-bg::after { position: absolute; inset: 0; content: ''; background: linear-gradient(180deg, rgba(13,4,20,.9), rgba(13,4,20,.55) 40%, rgba(13,4,20,.95)), radial-gradient(circle at 80% 10%, rgba(255,45,155,.35), transparent 50%); }
+@keyframes fxDrift { to { transform: scale(1.12) translate(-2%, -1%); } }
+.mp-prize-grid { display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 1.2rem; }
+.mp-prize-card { position: relative; min-height: 440px; overflow: hidden; border: 1px solid rgba(255,111,208,.45); border-radius: 1.2rem; background: #12031d; box-shadow: 0 24px 60px rgba(0,0,0,.45); }
+.mp-prize-card figure { position: absolute; inset: 0; margin: 0; }
+.mp-prize-card figure img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.8,.2,1), filter .4s; }
+.mp-prize-card:hover figure img { transform: scale(1.07); filter: saturate(1.25); }
+.mp-prize-info { position: absolute; right: 0; bottom: 0; left: 0; padding: 3rem 1.2rem 1.1rem; background: linear-gradient(transparent, rgba(13,4,20,.95)); }
+.mp-prize-tag { color: #ff8fdc; font: 700 .7rem var(--ui); letter-spacing: .2em; text-transform: uppercase; }
+.mp-prize-info h3 { margin: .3rem 0 .25rem; color: #fff; font: 400 clamp(1.7rem,2.8vw,2.4rem)/1 var(--brush); text-shadow: 3px 3px 0 #c414a8; }
+.mp-prize-info p { margin: 0; color: #eadcf2; font-size: .9rem; }
+.mp-prize-console figure { display: grid; place-items: center; background: radial-gradient(circle at 50% 75%, rgba(63,240,255,.45), transparent 45%), radial-gradient(circle at 50% 30%, rgba(255,45,155,.35), transparent 55%), #0d0414; }
+.mp-prize-console figure::before { position: absolute; inset: 0; content: ''; background: conic-gradient(from var(--fx-angle) at 50% 110%, transparent 0 40%, rgba(255,255,255,.12) 45%, transparent 50% 90%, rgba(255,255,255,.12) 95%, transparent); animation: fxSpin 7s linear infinite; }
+.mp-prize-console figure img { position: relative; width: auto; height: 82%; object-fit: contain; filter: drop-shadow(0 0 22px rgba(63,240,255,.55)) drop-shadow(0 20px 30px rgba(0,0,0,.6)); animation: fxFloat 4s ease-in-out infinite; }
+.mp-prize-console:hover figure img { transform: none; }
+@keyframes fxFloat { 50% { translate: 0 -12px; } }
+
+.mp-boarding { display: grid; grid-template-columns: 1fr auto; max-width: 860px; margin: 2rem auto 0; overflow: hidden; border-radius: 1.1rem; color: #1a0628; background: linear-gradient(120deg, #fff 0 70%, #ffe6f4); box-shadow: 0 0 0 2px #ff2d9b, 0 0 40px rgba(255,45,155,.45); }
+.mp-boarding-main { padding: 1.3rem 1.6rem; }
+.mp-boarding small { color: #c414a8; font: 700 .7rem var(--ui); letter-spacing: .2em; text-transform: uppercase; }
+.mp-boarding-route { display: flex; align-items: center; gap: 1.2rem; margin: .5rem 0 .9rem; }
+.mp-boarding-route b { display: block; min-width: 3ch; font: 400 clamp(1.8rem,4vw,3rem)/1 var(--num); letter-spacing: .06em; }
+.mp-boarding-route span { color: #7a5a8a; font-size: .78rem; }
+.mp-boarding-route svg { width: 34px; height: 34px; fill: #ff2d9b; animation: fxPlane 3s ease-in-out infinite; }
+@keyframes fxPlane { 50% { translate: 10px -4px; } }
+.mp-boarding dl { display: flex; flex-wrap: wrap; gap: 1.6rem; margin: 0; }
+.mp-boarding dt { color: #7a5a8a; font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; }
+.mp-boarding dd { margin: 0; font-weight: 700; }
+.mp-boarding-status { color: #c414a8; }
+.mp-boarding-stub { display: grid; align-content: center; justify-items: center; gap: .6rem; width: 150px; padding: 1rem; border-left: 2px dashed rgba(26,6,40,.3); background: #ffd36e; }
+.mp-boarding-stub b { font: 400 1.8rem var(--num); }
+.mp-barcode { width: 100%; height: 56px; background: repeating-linear-gradient(90deg, #1a0628 0 2px, transparent 2px 4px, #1a0628 4px 7px, transparent 7px 8px, #1a0628 8px 9px, transparent 9px 12px); }
+.mp-prize-legal { max-width: 860px; margin: 1.4rem auto 0; color: #d8c4e4; font-size: .82rem; line-height: 1.6; text-align: center; }
+.mp-prize-credits { max-width: 860px; margin: .6rem auto 0; color: #9a85a8; font-size: .7rem; line-height: 1.6; text-align: center; }
+.mp-prize-credits a { color: #c9b4d6; }
+@media (max-width: 900px) { .mp-prize-grid { grid-template-columns: 1fr 1fr; } .mp-prize-grid > :first-child { grid-column: 1 / -1; } }
+@media (max-width: 560px) { .mp-prize-card { min-height: 360px; } .mp-prize-grid { grid-template-columns: 1fr; } .mp-boarding { grid-template-columns: 1fr; } .mp-boarding-stub { width: auto; grid-auto-flow: column; border-left: 0; border-top: 2px dashed rgba(26,6,40,.3); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-scan, .fx-passed { display: none; }
+  .fx-slice > img, .fx-slice > video { clip-path: none; }
+  .mp-card[data-rarity]::after, .mp-card-art::after, .mp-prize-bg img, .mp-prize-console figure::before, .mp-prize-console figure img, .mp-boarding-route svg { animation: none !important; }
+}

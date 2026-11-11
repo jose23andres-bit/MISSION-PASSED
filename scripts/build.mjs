@@ -31,7 +31,7 @@ for (const dir of ['docs', 'portal', 'presale', 'transparency', 'admin', 'blockc
 }
 // Internal preview boards are excluded from the public site package.
 await rm(resolve(dist, 'docs/preview'), { recursive: true, force: true });
-for (const file of ['app.js', 'portal-search.js', 'chain-dashboard.js', 'admin.js', 'lang.js', 'guide.js', 'presale.js', 'presale-tiers.js', 'styles.css', 'mission.css', 'presale.css']) {
+for (const file of ['app.js', 'portal-search.js', 'chain-dashboard.js', 'admin.js', 'lang.js', 'guide.js', 'presale.js', 'presale-tiers.js', 'styles.css', 'mission.css', 'presale.css', 'fx.js', 'fx.css']) {
   await cp(resolve(root, 'src', file), resolve(dist, 'assets', file));
 }
 // Pinned by package-lock.json: the only third-party code the presale page runs.

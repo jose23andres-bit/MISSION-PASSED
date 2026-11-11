@@ -200,7 +200,13 @@
     root.classList.add('in');
     // Small screens: only the avatar with a hint, so the guide never covers prices or buttons.
     const roomy = window.matchMedia('(min-width: 1100px)').matches;
-    if (store.get() !== 'min' && roomy) window.setTimeout(open, reduced ? 0 : 700);
+    if (store.get() !== 'min' && roomy) {
+      window.setTimeout(open, reduced ? 0 : 700);
+      // Auto-opened bubble folds away after 12 s unless the visitor used it, so it never hides the page.
+      let used = false;
+      root.addEventListener('pointerdown', () => { used = true; }, { once: true });
+      window.setTimeout(() => { if (!used && !speaking && root.classList.contains('open')) { root.classList.remove('open'); root.classList.add('min'); } }, 12_700);
+    }
     else root.classList.add('min');
   }
 

@@ -15,10 +15,11 @@
     <link rel="preload" href="/fonts/Knewave-Regular.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="stylesheet" href="/assets/styles.css" />
     <link rel="stylesheet" href="/assets/mission.css" />
+    <link rel="stylesheet" href="/assets/fx.css" />
     <title>MISSION PASSED · $MP · Solana</title>
     <script src="/config.js"></script>
     <script src="/assets/app.js" defer></script>
-  <script src="/assets/lang.js" defer></script><script src="/assets/guide.js" defer></script></head>
+  <script src="/assets/lang.js" defer></script><script src="/assets/guide.js" defer></script><script src="/assets/fx.js" defer></script></head>
   <body class="mp">
     <a class="skip-link" href="#main">Saltar al contenido</a>
     <div class="grain" aria-hidden="true"></div>
@@ -36,6 +37,7 @@
         <a href="#proyecto">El proyecto</a>
         <a href="#universo">Universo</a>
         <a href="#sorteos">Colección</a>
+        <a href="#gran-premio">Premio</a>
         <a href="#roadmap">Roadmap</a>
         <a href="#tokenomics">Token</a>
         <a href="#faq">FAQ</a>
@@ -308,6 +310,51 @@
           <p>El fondo está en la wallet pública <code translate="no">4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj</code>, controlada por el creador. Cada movimiento queda a la vista en Solscan. Las bases (cómo conseguir un pase, fechas y número de premios) se publicarán aquí antes del primer sorteo.</p>
           <a class="mp-btn mp-btn-light" href="https://solscan.io/account/4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj" target="_blank" rel="noreferrer">Seguir el fondo en Solscan<span class="ext" aria-hidden="true">↗</span></a>
         </div>
+      </section>
+
+      <!-- GRAN PREMIO · VIAJE A MIAMI + VUELO + PS5 -->
+      <section class="mp-section mp-prize" id="gran-premio" aria-labelledby="prize-title">
+        <div class="mp-prize-bg" aria-hidden="true"><img src="/prize/miami-noche.jpg" alt="" loading="lazy" /></div>
+        <div class="mp-head reveal">
+          <p class="mp-eyebrow">Gran premio · Mission Pass #999</p>
+          <h2 class="mp-title fx-glitch" id="prize-title" data-text="Destino: Miami">Destino: Miami</h2>
+          <p>El premio previsto para el poseedor del pase legendario #999: viaje a Miami con vuelo incluido y una PS5. Se activa solo cuando se publiquen las bases y el fondo tenga saldo verificable en Solscan.</p>
+        </div>
+
+        <div class="mp-prize-grid">
+          <article class="mp-prize-card fx-tilt reveal" data-prize="viaje">
+            <figure class="fx-slice"><img src="/prize/viaje-miami.jpg" alt="Ocean Drive, Miami Beach, con hoteles art déco y palmeras" loading="lazy" width="1400" height="788" /></figure>
+            <div class="mp-prize-info"><span class="mp-prize-tag">01 · Destino</span><h3>Viaje a Miami</h3><p>Estancia en Miami Beach, a pasos de Ocean Drive.</p></div>
+          </article>
+          <article class="mp-prize-card fx-tilt reveal" data-prize="vuelo">
+            <figure class="fx-slice"><img src="/prize/vuelo.jpg" alt="Ala de un avión sobre las nubes al atardecer" loading="lazy" width="1400" height="932" /></figure>
+            <div class="mp-prize-info"><span class="mp-prize-tag">02 · Vuelo</span><h3>Vuelo incluido</h3><p>Ida y vuelta desde el aeropuerto más cercano al ganador.</p></div>
+          </article>
+          <article class="mp-prize-card mp-prize-console fx-tilt reveal" data-prize="ps5">
+            <figure><img src="/prize/ps5.webp" alt="Consola PlayStation 5 con su mando DualSense" loading="lazy" width="560" height="747" /></figure>
+            <div class="mp-prize-info"><span class="mp-prize-tag">03 · Consola</span><h3>PlayStation 5</h3><p>Consola con mando, entregada en el domicilio del ganador.</p></div>
+          </article>
+        </div>
+
+        <div class="mp-boarding reveal" aria-label="Tarjeta de embarque del gran premio">
+          <div class="mp-boarding-main">
+            <small>Boarding pass · Mission Pass #999</small>
+            <div class="mp-boarding-route">
+              <div><b class="fx-flap" data-flap="TU CIUDAD">TU CIUDAD</b><span>Salida</span></div>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5Z"/></svg>
+              <div><b class="fx-flap" data-flap="MIA">MIA</b><span>Miami</span></div>
+            </div>
+            <dl>
+              <div><dt>Pasajero</dt><dd>Poseedor #999</dd></div>
+              <div><dt>Puerta</dt><dd>MP-15</dd></div>
+              <div><dt>Estado</dt><dd class="mp-boarding-status">Pendiente de bases</dd></div>
+            </dl>
+          </div>
+          <div class="mp-boarding-stub" aria-hidden="true"><span class="mp-barcode"></span><b>#999</b></div>
+        </div>
+
+        <p class="mp-prize-legal">Premio previsto, no garantizado: se activa solo con bases publicadas, saldo verificable del fondo y si la normativa del país del ganador lo permite. PlayStation y PS5 son marcas de Sony Interactive Entertainment, que no patrocina este proyecto.</p>
+        <p class="mp-prize-credits">Fotos: <a href="https://commons.wikimedia.org/wiki/File:Miami_Beach_-_Ocean_Drive_(2023).jpg" target="_blank" rel="noopener noreferrer">P. Hughes</a> (CC BY 4.0) · <a href="https://commons.wikimedia.org/wiki/File:Miami_night_skyline_by_Don_Ramey_Logan.jpg" target="_blank" rel="noopener noreferrer">Don Ramey Logan</a> (CC BY 4.0) · <a href="https://commons.wikimedia.org/wiki/File:Sunset_from_a_plane_(Unsplash).jpg" target="_blank" rel="noopener noreferrer">Paul-Vincent Roll</a> (CC0) · <a href="https://commons.wikimedia.org/wiki/File:PlayStation_5_and_DualSense_with_transparent_background.png" target="_blank" rel="noopener noreferrer">Osh33m / Soberian</a> (<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>), vía Wikimedia Commons.</p>
       </section>
 
       <!-- ROADMAP -->
