@@ -383,7 +383,26 @@
     trailers.forEach((el) => observer.observe(el));
   }
 
+  // Local project videos: play muted while on screen, pause when scrolled away (browsers block autoplay with sound).
+  function setupLocalVideos() {
+    const videos = [...document.querySelectorAll('video[data-autoplay]')];
+    if (!videos.length) return;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced || navigator.connection?.saveData || !('IntersectionObserver' in window)) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(({ target, isIntersecting }) => {
+        if (isIntersecting) { target.muted = target.muted || !target.dataset.userUnmuted; target.play().catch(() => {}); }
+        else target.pause();
+      });
+    }, { threshold: 0.55 });
+    videos.forEach((video) => {
+      video.addEventListener('volumechange', () => { if (!video.muted) video.dataset.userUnmuted = '1'; });
+      observer.observe(video);
+    });
+  }
+
   function setupTrailers() {
+    setupLocalVideos();
     setupScrollAutoplay();
     document.querySelectorAll('.mp-trailer').forEach((button) => button.addEventListener('click', () => playTrailer(button)));
     document.querySelectorAll('[data-play-trailer]').forEach((trigger) => trigger.addEventListener('click', () => {
