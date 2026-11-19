@@ -40,7 +40,7 @@ npm run launch:readiness
 npm run ci   # lint + seguridad + pruebas + rutas GitHub Pages
 ```
 
-CI/CD (lint, pruebas, secretos, build, Pages, verificación): ver `docs/ci-cd.md`. Preventa, reparto y voz de Rico: ver `docs/preventa.md`.
+CI/CD (lint, pruebas, secretos, build, Pages, verificación): ver `docs/ci-cd.md`. Preventa, reparto y voz de Rico: ver `docs/preventa.md`. Tokens de personajes en Pump.fun: ver `docs/tokens-pumpfun.md`.
 
 Para el ensayo: GitHub → Actions → **Devnet rehearsal** → escribe `DEVNET`. Sigue `docs/quick-create-with-phantom.md`.
 

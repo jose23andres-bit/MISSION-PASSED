@@ -136,3 +136,18 @@
   .fx-slice > img, .fx-slice > video { clip-path: none; }
   .mp-card[data-rarity]::after, .mp-card-art::after, .mp-prize-bg img, .mp-prize-console figure::before, .mp-prize-console figure img, .mp-boarding-route svg { animation: none !important; }
 }
+
+/* ---------- character coins ---------- */
+.mp-coin-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+.mp-coin { position: relative; display: grid; justify-items: center; gap: .3rem; padding: 1.4rem 1rem 1.3rem; border: 1px solid color-mix(in srgb, var(--coin) 55%, transparent); border-radius: 1.2rem; text-align: center; background: radial-gradient(circle at 50% 0, color-mix(in srgb, var(--coin) 28%, transparent), transparent 60%), linear-gradient(160deg, rgba(40,10,60,.85), rgba(14,4,22,.95)); }
+.mp-coin img { width: min(190px, 70%); height: auto; aspect-ratio: 1; border-radius: 50%; filter: drop-shadow(0 0 22px color-mix(in srgb, var(--coin) 70%, transparent)); animation: fxCoin 6s ease-in-out infinite; }
+.mp-coin:nth-child(2) img { animation-delay: -1.5s; } .mp-coin:nth-child(3) img { animation-delay: -3s; } .mp-coin:nth-child(4) img { animation-delay: -4.5s; }
+@keyframes fxCoin { 0%, 100% { transform: translateY(0) rotateY(0); } 25% { transform: translateY(-8px) rotateY(18deg); } 75% { transform: translateY(-4px) rotateY(-18deg); } }
+.mp-coin small { margin-top: .6rem; color: var(--coin); font: 700 .7rem var(--ui); letter-spacing: .16em; text-transform: uppercase; }
+.mp-coin h3 { margin: 0; color: #fff; font: 400 clamp(1.7rem, 2.6vw, 2.3rem)/1 var(--poster); letter-spacing: .03em; text-shadow: 0 0 18px color-mix(in srgb, var(--coin) 70%, transparent); }
+.mp-coin p { margin: 0 0 .6rem; color: #d9c5e6; }
+.mp-coin-link { min-height: 44px; font-size: .8rem; }
+.mp-coin-state { color: #a993b6; font-size: .76rem; letter-spacing: .06em; }
+.mp-coin-legal { max-width: 860px; margin: 1.6rem auto 0; color: #a993b6; font-size: .8rem; line-height: 1.6; text-align: center; }
+@media (max-width: 900px) { .mp-coin-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (prefers-reduced-motion: reduce) { .mp-coin img { animation: none; } }

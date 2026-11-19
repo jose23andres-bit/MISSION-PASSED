@@ -7,6 +7,10 @@ const root = resolve(import.meta.dirname, '..');
 const dist = resolve(root, 'dist');
 loadEnv(resolve(root, '.env'));
 const config = publicConfig();
+// Character coins (Pump.fun). Only public data: name, ticker and the mint once it exists.
+const BASE58 = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/;
+config.characterTokens = JSON.parse(await readFile(resolve(root, 'tokens/characters.json'), 'utf8')).tokens
+  .map(({ slug, name, symbol, rarity, pass, mint }) => ({ slug, name, symbol, rarity, pass, mint: BASE58.test(mint || '') ? mint : '' }));
 
 async function files(directory, extension) {
   const result = [];
