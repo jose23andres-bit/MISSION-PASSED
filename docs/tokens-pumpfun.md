@@ -1,6 +1,6 @@
 # Tokens de personajes en Pump.fun
 
-Un token por personaje: $CONDUCTOR, $JEFA, $SOCIO y $RICO. El kit está en `tokens/characters.json` y los logos en `public/tokens/*.png` (1000×1000).
+Un token por perro de la crew GTADOGE ($GTADOGE, $GTASHIBA, $BULLY, $PROF, $HACKER, $DJPAWS, $JEFE) y por personaje ($CONDUCTOR, $JEFA, $SOCIO, $RICO). El kit está en `tokens/characters.json` y los logos en `public/tokens/*.png` (1000×1000).
 
 ## Por qué Pump.fun
 - **Más barato:** crear el token no cuesta nada. Solo pagas la comisión de red de Solana, una fracción de céntimo. Si haces una compra inicial al crearlo, la red cobra unos 0,025 SOL.

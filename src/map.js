@@ -119,7 +119,7 @@
     if (sel) select(sel.dataset.slug);
   }
 
-  select(coins.find((c) => c.slug === 'rico') ? 'rico' : coins[0].slug);
+  select(coins.find((c) => c.slug === 'doge') ? 'doge' : coins[0].slug);
   refresh();
   window.setInterval(() => { if (!document.hidden) refresh(); }, 30000);
 })();
