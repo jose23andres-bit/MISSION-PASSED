@@ -4,6 +4,104 @@
   "note": "Kit de lanzamiento. Ningún token está creado: se crea a mano desde la wallet del propietario en pump.fun/create. Al crearlo, pega su dirección (mint) en 'mint'.",
   "tokens": [
     {
+      "slug": "doge",
+      "kind": "perro",
+      "character": "DOGE",
+      "name": "Doge",
+      "symbol": "GTADOGE",
+      "rarity": "Líder",
+      "pass": "GTADOGE",
+      "description": "Doge ($GTADOGE) · GTADOGE: El líder carismático. Siempre tiene un plan. Memecoin comunitaria en Solana, sin utilidad prometida ni rentabilidad. Proyecto independiente.",
+      "zone": "downtown",
+      "x": 690,
+      "y": 360,
+      "mint": ""
+    },
+    {
+      "slug": "shiba",
+      "kind": "perro",
+      "character": "SHIBA",
+      "name": "Shiba",
+      "symbol": "GTASHIBA",
+      "rarity": "Estratega",
+      "pass": "GTADOGE",
+      "description": "Shiba ($GTASHIBA) · GTADOGE: La mente detrás de las grandes jugadas. Memecoin comunitaria en Solana, sin utilidad prometida ni rentabilidad. Proyecto independiente.",
+      "zone": "beach",
+      "x": 880,
+      "y": 330,
+      "mint": ""
+    },
+    {
+      "slug": "bully",
+      "kind": "perro",
+      "character": "BULLY",
+      "name": "Bully",
+      "symbol": "BULLY",
+      "rarity": "Crew",
+      "pass": "GTADOGE",
+      "description": "Bully ($BULLY) · GTADOGE: La fuerza bruta del grupo. Memecoin comunitaria en Solana, sin utilidad prometida ni rentabilidad. Proyecto independiente.",
+      "zone": "nightlife",
+      "x": 540,
+      "y": 420,
+      "mint": ""
+    },
+    {
+      "slug": "prof",
+      "kind": "perro",
+      "character": "PROF",
+      "name": "Prof",
+      "symbol": "PROF",
+      "rarity": "Crew",
+      "pass": "GTADOGE",
+      "description": "Prof ($PROF) · GTADOGE: El cerebro tech. Memecoin comunitaria en Solana, sin utilidad prometida ni rentabilidad. Proyecto independiente.",
+      "zone": "villas",
+      "x": 400,
+      "y": 190,
+      "mint": ""
+    },
+    {
+      "slug": "hacker",
+      "kind": "perro",
+      "character": "HACKER",
+      "name": "Hacker",
+      "symbol": "HACKER",
+      "rarity": "Crew",
+      "pass": "GTADOGE",
+      "description": "Hacker ($HACKER) · GTADOGE: El experto digital. Memecoin comunitaria en Solana, sin utilidad prometida ni rentabilidad. Proyecto independiente.",
+      "zone": "misiones",
+      "x": 470,
+      "y": 520,
+      "mint": ""
+    },
+    {
+      "slug": "djpaws",
+      "kind": "perro",
+      "character": "DJ PAWS",
+      "name": "DJ Paws",
+      "symbol": "DJPAWS",
+      "rarity": "Crew",
+      "pass": "GTADOGE",
+      "description": "DJ Paws ($DJPAWS) · GTADOGE: La música de la ciudad. Memecoin comunitaria en Solana, sin utilidad prometida ni rentabilidad. Proyecto independiente.",
+      "zone": "nightlife",
+      "x": 610,
+      "y": 470,
+      "mint": ""
+    },
+    {
+      "slug": "jefe",
+      "kind": "perro",
+      "character": "EL JEFE",
+      "name": "El Jefe",
+      "symbol": "JEFE",
+      "rarity": "Crew",
+      "pass": "GTADOGE",
+      "description": "El Jefe ($JEFE) · GTADOGE: El contacto misterioso. Memecoin comunitaria en Solana, sin utilidad prometida ni rentabilidad. Proyecto independiente.",
+      "zone": "marina",
+      "x": 820,
+      "y": 560,
+      "mint": ""
+    },
+    {
       "slug": "conductor",
       "character": "EL CONDUCTOR",
       "name": "El Conductor",
@@ -13,8 +111,9 @@
       "description": "El Conductor ($CONDUCTOR): el piloto original de MISSION PASSED. Nunca llega tarde a una misión. Memecoin comunitaria en Solana, sin utilidad prometida ni rentabilidad. Proyecto independiente.",
       "mint": "",
       "zone": "autopista",
-      "x": 560,
-      "y": 300
+      "x": 300,
+      "y": 260,
+      "kind": "personaje"
     },
     {
       "slug": "jefa",
@@ -26,8 +125,9 @@
       "description": "La Jefa ($JEFA): manda en la marina de MISSION PASSED. Memecoin comunitaria en Solana, sin utilidad prometida ni rentabilidad. Proyecto independiente.",
       "mint": "",
       "zone": "marina",
-      "x": 770,
-      "y": 640
+      "x": 760,
+      "y": 650,
+      "kind": "personaje"
     },
     {
       "slug": "socio",
@@ -39,8 +139,9 @@
       "description": "El Socio ($SOCIO): conoce cada atajo del pantano de MISSION PASSED. Memecoin comunitaria en Solana, sin utilidad prometida ni rentabilidad. Proyecto independiente.",
       "mint": "",
       "zone": "pantano",
-      "x": 360,
-      "y": 610
+      "x": 300,
+      "y": 600,
+      "kind": "personaje"
     },
     {
       "slug": "rico",
@@ -52,40 +153,75 @@
       "description": "Rico ($RICO): el guía legendario de MISSION PASSED. Memecoin comunitaria en Solana, sin utilidad prometida ni rentabilidad. Proyecto independiente.",
       "mint": "",
       "zone": "downtown",
-      "x": 690,
-      "y": 380
+      "x": 760,
+      "y": 420,
+      "kind": "personaje"
     }
   ],
   "zones": [
     {
       "id": "downtown",
-      "name": "Neon Downtown",
-      "blurb": "Rascacielos, clubs y el cuartel de Rico.",
-      "color": "#ff2d9b"
+      "name": "Downtown",
+      "blurb": "Finanzas, negocios y el cuartel de Doge.",
+      "color": "#ff2d9b",
+      "lx": 690,
+      "ly": 260
+    },
+    {
+      "id": "nightlife",
+      "name": "Nightlife",
+      "blurb": "Clubs y eventos. Aquí pincha DJ Paws.",
+      "color": "#b26bff",
+      "lx": 400,
+      "ly": 460
+    },
+    {
+      "id": "beach",
+      "name": "Beach Zone",
+      "blurb": "Playa y relax con Shiba.",
+      "color": "#3ff0ff",
+      "lx": 900,
+      "ly": 410
     },
     {
       "id": "marina",
-      "name": "Marina Keys",
-      "blurb": "Yates, puentes sobre el mar y negocios de La Jefa.",
-      "color": "#3ff0ff"
+      "name": "Marina",
+      "blurb": "Yates y lujo. Territorio de El Jefe.",
+      "color": "#14c9c0",
+      "lx": 880,
+      "ly": 620
+    },
+    {
+      "id": "villas",
+      "name": "Villas",
+      "blurb": "Residencias VIP de las colinas.",
+      "color": "#7affc1",
+      "lx": 520,
+      "ly": 150
+    },
+    {
+      "id": "misiones",
+      "name": "Misiones",
+      "blurb": "Retos para la crew.",
+      "color": "#ff6a3d",
+      "lx": 470,
+      "ly": 610
+    },
+    {
+      "id": "autopista",
+      "name": "Autopista",
+      "blurb": "Carreras y retos nocturnos.",
+      "color": "#ffd36e",
+      "lx": 200,
+      "ly": 330
     },
     {
       "id": "pantano",
       "name": "El Pantano",
-      "blurb": "Hidrodeslizadores y atajos que solo conoce El Socio.",
-      "color": "#7affc1"
-    },
-    {
-      "id": "autopista",
-      "name": "Ruta 95",
-      "blurb": "La autopista nocturna donde manda El Conductor.",
-      "color": "#ffd36e"
-    },
-    {
-      "id": "puerto",
-      "name": "Puerto Viejo",
-      "blurb": "Moteles, grúas y contenedores. Próximo personaje.",
-      "color": "#b26bff"
+      "blurb": "Atajos que solo conoce El Socio.",
+      "color": "#9be15d",
+      "lx": 230,
+      "ly": 700
     }
   ]
 }
