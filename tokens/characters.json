@@ -1,0 +1,47 @@
+{
+  "platform": "pump.fun",
+  "network": "solana",
+  "note": "Kit de lanzamiento. Ningún token está creado: se crea a mano desde la wallet del propietario en pump.fun/create. Al crearlo, pega su dirección (mint) en 'mint'.",
+  "tokens": [
+    {
+      "slug": "conductor",
+      "character": "EL CONDUCTOR",
+      "name": "El Conductor",
+      "symbol": "CONDUCTOR",
+      "rarity": "OG",
+      "pass": "#001",
+      "description": "El Conductor ($CONDUCTOR): el piloto original de MISSION PASSED. Nunca llega tarde a una misión. Memecoin comunitaria en Solana, sin utilidad prometida ni rentabilidad. Proyecto independiente.",
+      "mint": ""
+    },
+    {
+      "slug": "jefa",
+      "character": "LA JEFA",
+      "name": "La Jefa",
+      "symbol": "JEFA",
+      "rarity": "Raro",
+      "pass": "#128",
+      "description": "La Jefa ($JEFA): manda en la marina de MISSION PASSED. Memecoin comunitaria en Solana, sin utilidad prometida ni rentabilidad. Proyecto independiente.",
+      "mint": ""
+    },
+    {
+      "slug": "socio",
+      "character": "EL SOCIO",
+      "name": "El Socio",
+      "symbol": "SOCIO",
+      "rarity": "Épico",
+      "pass": "#512",
+      "description": "El Socio ($SOCIO): conoce cada atajo del pantano de MISSION PASSED. Memecoin comunitaria en Solana, sin utilidad prometida ni rentabilidad. Proyecto independiente.",
+      "mint": ""
+    },
+    {
+      "slug": "rico",
+      "character": "RICO",
+      "name": "Rico",
+      "symbol": "RICO",
+      "rarity": "Legendario",
+      "pass": "#999",
+      "description": "Rico ($RICO): el guía legendario de MISSION PASSED. Memecoin comunitaria en Solana, sin utilidad prometida ni rentabilidad. Proyecto independiente.",
+      "mint": ""
+    }
+  ]
+}

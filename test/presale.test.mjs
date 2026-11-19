@@ -51,3 +51,21 @@ test('NFT portraits are original MISSION PASSED art without embedded images', as
     assert.doesNotMatch(svg, /<image\b|href="http/);
   }
 });
+
+test('character coin kit is complete and never ships a fake mint', async () => {
+  const kit = JSON.parse(await readFile(resolve(root, 'tokens/characters.json'), 'utf8'));
+  assert.equal(kit.platform, 'pump.fun');
+  const symbols = new Set();
+  for (const t of kit.tokens) {
+    assert.match(t.symbol, /^[A-Z0-9]{2,10}$/);
+    assert.ok(!symbols.has(t.symbol));
+    symbols.add(t.symbol);
+    assert.ok(t.description.length > 20 && t.description.length < 500);
+    assert.doesNotMatch(t.description, /rentabilidad garantizada|garantiza|x100|moon/i);
+    assert.ok(t.mint === '' || /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(t.mint));
+    assert.notEqual(t.mint, 'So11111111111111111111111111111111111111112');
+    await readFile(resolve(root, 'public/tokens', `${t.slug}.png`));
+  }
+  const html = await readFile(resolve(root, 'index.html'), 'utf8');
+  for (const t of kit.tokens) assert.match(html, new RegExp(`data-coin="${t.slug}"`));
+});

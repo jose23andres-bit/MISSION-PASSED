@@ -147,3 +147,18 @@
   setupFlaps();
   setupBanner();
 })();
+
+// Character coins: show the Pump.fun button only for tokens with a published mint.
+(() => {
+  const coins = window.MISSION_PASSED_CONFIG?.characterTokens || [];
+  coins.forEach((coin) => {
+    const card = document.querySelector(`[data-coin="${CSS.escape(coin.slug)}"]`);
+    if (!card || !/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(coin.mint)) return;
+    const link = card.querySelector('[data-coin-link]');
+    link.href = `https://pump.fun/coin/${encodeURIComponent(coin.mint)}`;
+    link.hidden = false;
+    const state = card.querySelector('[data-coin-state]');
+    state.textContent = `Mint ${coin.mint.slice(0, 4)}…${coin.mint.slice(-4)}`;
+    state.title = coin.mint;
+  });
+})();
