@@ -16,10 +16,11 @@
     <link rel="stylesheet" href="/assets/styles.css" />
     <link rel="stylesheet" href="/assets/mission.css" />
     <link rel="stylesheet" href="/assets/fx.css" />
+    <link rel="stylesheet" href="/assets/map.css" />
     <title>MISSION PASSED · $MP · Solana</title>
     <script src="/config.js"></script>
     <script src="/assets/app.js" defer></script>
-  <script src="/assets/lang.js" defer></script><script src="/assets/guide.js" defer></script><script src="/assets/fx.js" defer></script></head>
+  <script src="/assets/lang.js" defer></script><script src="/assets/guide.js" defer></script><script src="/assets/fx.js" defer></script><script src="/assets/map.js" defer></script></head>
   <body class="mp">
     <a class="skip-link" href="#main">Saltar al contenido</a>
     <div class="grain" aria-hidden="true"></div>
@@ -37,6 +38,7 @@
         <a href="#proyecto">El proyecto</a>
         <a href="#universo">Universo</a>
         <a href="#sorteos">Colección</a>
+        <a href="#mapa">Mapa</a>
         <a href="#tokens-personajes">Tokens</a>
         <a href="#gran-premio">Premio</a>
         <a href="#roadmap">Roadmap</a>
@@ -310,6 +312,53 @@
           <small>Custodia del fondo</small>
           <p>El fondo está en la wallet pública <code translate="no">4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj</code>, controlada por el creador. Cada movimiento queda a la vista en Solscan. Las bases (cómo conseguir un pase, fechas y número de premios) se publicarán aquí antes del primer sorteo.</p>
           <a class="mp-btn mp-btn-light" href="https://solscan.io/account/4hqDqmWYnN1N2VJHfCanh5AAFJMBeZGUV31F4pTxcXnj" target="_blank" rel="noreferrer">Seguir el fondo en Solscan<span class="ext" aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <!-- MAP OF EVERY COIN -->
+      <section class="mp-section mp-map" id="mapa" aria-labelledby="map-title">
+        <div class="mp-head reveal">
+          <p class="mp-eyebrow">El mapa de cada token</p>
+          <h2 class="mp-title" id="map-title" data-text="Neon Coast">Neon Coast</h2>
+          <p>Cada personaje tiene su zona y su token. Pulsa un marcador para ver precio, mcap y volumen en directo, y comprar en Pump.fun.</p>
+        </div>
+        <div class="mp-map-stats">
+          <div><small>Mcap total</small><b data-stat="mcap">—</b></div>
+          <div><small>Volumen 24h</small><b data-stat="vol">—</b></div>
+          <div><small>Tokens activos</small><b data-stat="live">0 / 4</b></div>
+          <div><small>Plataforma</small><b>Pump.fun</b></div>
+        </div>
+        <div class="mp-map-wrap">
+          <div class="mp-map-view">
+            <div class="mp-map-stage">
+              <svg class="mp-map-land" viewBox="0 0 1000 800" aria-hidden="true">
+  <defs>
+    <pattern id="mgrid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#3ff0ff" stroke-opacity=".08"/></pattern>
+    <radialGradient id="mglow" cx=".65" cy=".45" r=".6"><stop offset="0" stop-color="#ff2d9b" stop-opacity=".35"/><stop offset="1" stop-color="#ff2d9b" stop-opacity="0"/></radialGradient>
+    <filter id="mneon"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1000" height="800" fill="#06101f"/>
+  <rect width="1000" height="800" fill="url(#mgrid)"/>
+  <path class="mp-land" d="M90 120 C180 70 330 60 450 90 C560 60 700 70 790 130 C850 170 860 250 830 320 C860 380 870 450 840 520 C820 580 760 600 720 590 C690 640 640 660 600 640 C540 690 450 700 380 680 C300 700 210 680 160 620 C110 560 90 480 100 410 C70 340 60 250 90 120 Z"/>
+  <path d="M720 590 C760 640 800 670 860 690 C900 705 930 730 960 760" fill="none" stroke="#3ff0ff" stroke-width="5" stroke-dasharray="2 10" stroke-linecap="round" opacity=".8"/>
+  <g fill="#0a2a3e" stroke="#3ff0ff" stroke-opacity=".5"><ellipse cx="880" cy="700" rx="26" ry="10"/><ellipse cx="930" cy="745" rx="18" ry="7"/><ellipse cx="820" cy="660" rx="20" ry="8"/></g>
+  <path d="M200 520 C260 480 360 500 420 560 C440 620 380 650 300 640 C230 630 180 580 200 520 Z" fill="#0f3a2a" opacity=".85"/>
+  <g stroke="#7affc1" stroke-opacity=".35" fill="none"><path d="M230 560 q30 -12 60 0 q30 12 60 0"/><path d="M250 600 q30 -12 60 0 q30 12 60 0"/></g>
+  <path d="M120 300 C300 250 500 230 640 300 C700 330 740 380 760 440" fill="none" stroke="#ffd36e" stroke-width="6" stroke-linecap="round" filter="url(#mneon)" opacity=".85"/>
+  <path d="M120 300 C300 250 500 230 640 300 C700 330 740 380 760 440" fill="none" stroke="#1a0628" stroke-width="1.5" stroke-dasharray="10 12"/>
+  <g class="mp-towers"><rect x="620" y="290" width="12" height="40" rx="1"/><rect x="636" y="260" width="12" height="70" rx="1"/><rect x="652" y="275" width="12" height="55" rx="1"/><rect x="668" y="235" width="12" height="95" rx="1"/><rect x="684" y="270" width="12" height="60" rx="1"/><rect x="700" y="220" width="12" height="110" rx="1"/><rect x="716" y="250" width="12" height="80" rx="1"/><rect x="732" y="280" width="12" height="50" rx="1"/><rect x="748" y="265" width="12" height="65" rx="1"/></g>
+  <ellipse cx="680" cy="340" rx="140" ry="90" fill="url(#mglow)"/>
+  <g fill="#1d1430" stroke="#b26bff" stroke-opacity=".6"><rect x="150" y="210" width="40" height="18"/><rect x="200" y="214" width="30" height="14"/><rect x="170" y="236" width="50" height="12"/></g>
+  <path class="mp-coast" d="M90 120 C180 70 330 60 450 90 C560 60 700 70 790 130 C850 170 860 250 830 320 C860 380 870 450 840 520 C820 580 760 600 720 590 C690 640 640 660 600 640 C540 690 450 700 380 680 C300 700 210 680 160 620 C110 560 90 480 100 410 C70 340 60 250 90 120 Z"/>
+  <text x="940" y="60" fill="#3ff0ff" fill-opacity=".5" font-size="14" text-anchor="end" font-family="Kanit, sans-serif" letter-spacing="3">N ▲</text>
+</svg>
+              <div class="mp-map-zones"><button type="button" class="mp-zone" data-zone="downtown" style="left:80.0%;top:37.5%;--zc:#ff2d9b"><i></i>Neon Downtown</button><button type="button" class="mp-zone" data-zone="marina" style="left:88.0%;top:73.75%;--zc:#3ff0ff"><i></i>Marina Keys</button><button type="button" class="mp-zone" data-zone="pantano" style="left:30.0%;top:87.5%;--zc:#7affc1"><i></i>El Pantano</button><button type="button" class="mp-zone" data-zone="autopista" style="left:31.0%;top:28.125%;--zc:#ffd36e"><i></i>Ruta 95</button><button type="button" class="mp-zone" data-zone="puerto" style="left:19.0%;top:47.5%;--zc:#b26bff"><i></i>Puerto Viejo</button></div>
+              <div class="mp-map-blips"></div>
+            </div>
+            <div class="mp-map-ctrl"><button type="button" data-zoom="in" aria-label="Acercar">+</button><button type="button" data-zoom="out" aria-label="Alejar">−</button><button type="button" data-zoom="reset" aria-label="Ver todo">1:1</button></div>
+            <div class="mp-map-radar" aria-hidden="true"></div>
+          </div>
+          <aside class="mp-map-panel" aria-live="polite" hidden></aside>
         </div>
       </section>
 

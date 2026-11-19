@@ -1,0 +1,63 @@
+/* MISSION PASSED · map of every coin */
+.mp-map-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: .8rem; margin-bottom: 1rem; }
+.mp-map-stats div { padding: .9rem 1.1rem; border: 1px solid rgba(63,240,255,.35); border-radius: .9rem; background: rgba(6,16,31,.75); }
+.mp-map-stats small { display: block; color: #3ff0ff; font: 700 .68rem var(--ui); letter-spacing: .18em; text-transform: uppercase; }
+.mp-map-stats b { font: 400 clamp(1.5rem, 2.6vw, 2.2rem)/1.1 var(--num); color: #fff; }
+
+.mp-map-wrap { display: grid; grid-template-columns: 1fr 300px; gap: 1rem; align-items: stretch; }
+.mp-map-view { position: relative; overflow: hidden; aspect-ratio: 5 / 4; border: 1px solid rgba(63,240,255,.45); border-radius: 1.2rem; background: #06101f; box-shadow: 0 0 40px rgba(63,240,255,.18), inset 0 0 80px rgba(0,0,0,.6); touch-action: pan-y; cursor: grab; }
+.mp-map-stage { position: absolute; inset: 0; transform-origin: 0 0; transition: transform .25s cubic-bezier(.2,.8,.2,1); }
+.mp-map-land { position: absolute; inset: 0; width: 100%; height: 100%; }
+.mp-land { fill: #120a24; }
+.mp-coast { fill: none; stroke: #ff2d9b; stroke-width: 3; filter: drop-shadow(0 0 6px #ff2d9b); stroke-dasharray: 2400; stroke-dashoffset: 2400; animation: mpCoast 3.5s ease-out forwards; }
+@keyframes mpCoast { to { stroke-dashoffset: 0; } }
+.mp-towers rect { fill: #2a0f3c; stroke: #ff6fd0; stroke-opacity: .7; animation: mpTower 3s ease-in-out infinite alternate; }
+.mp-towers rect:nth-child(odd) { animation-delay: -1.4s; }
+@keyframes mpTower { to { stroke-opacity: .2; } }
+
+/* radar sweep */
+.mp-map-radar { position: absolute; inset: -30%; pointer-events: none; background: conic-gradient(from 0deg, rgba(63,240,255,.16), transparent 18%); animation: mpSweep 6s linear infinite; mix-blend-mode: screen; }
+@keyframes mpSweep { to { transform: rotate(360deg); } }
+
+/* zones */
+.mp-zone { position: absolute; display: inline-flex; white-space: nowrap; align-items: center; gap: .4rem; padding: .25rem .6rem; border: 1px solid color-mix(in srgb, var(--zc) 60%, transparent); border-radius: 999px; color: #fff; background: rgba(6,16,31,.75); cursor: pointer; font: 700 .68rem var(--ui); letter-spacing: .1em; text-transform: uppercase; transform: translate(-50%, -50%); }
+.mp-zone i { width: 8px; height: 8px; border-radius: 50%; background: var(--zc); box-shadow: 0 0 8px var(--zc); }
+.mp-zone:hover, .mp-zone.on { background: color-mix(in srgb, var(--zc) 30%, #06101f); }
+
+/* blips */
+.mp-blip { position: absolute; z-index: 2; display: grid; justify-items: center; gap: .25rem; padding: 0; border: 0; background: none; cursor: pointer; transform: translate(-50%, -100%); }
+.mp-blip b { position: relative; width: 58px; height: 58px; border: 3px solid var(--zc); border-radius: 50%; background: #000 center/cover; box-shadow: 0 0 0 4px rgba(6,16,31,.8), 0 0 22px var(--zc); transition: transform .2s; }
+.mp-blip b::after { position: absolute; inset: -10px; content: ''; border: 2px solid var(--zc); border-radius: 50%; opacity: 0; animation: mpPing 2.4s ease-out infinite; }
+.mp-blip:nth-child(2) b::after { animation-delay: -.6s; } .mp-blip:nth-child(3) b::after { animation-delay: -1.2s; } .mp-blip:nth-child(4) b::after { animation-delay: -1.8s; }
+@keyframes mpPing { 0% { opacity: .9; transform: scale(.8); } 100% { opacity: 0; transform: scale(1.8); } }
+.mp-blip span { padding: .1rem .45rem; border-radius: .35rem; color: #1a0628; background: var(--zc); font: 400 .9rem var(--poster); letter-spacing: .04em; }
+.mp-blip:hover b, .mp-blip.on b { transform: scale(1.18); }
+.mp-blip.on b { box-shadow: 0 0 0 4px #fff, 0 0 30px var(--zc); }
+.mp-blip::before { position: absolute; bottom: -8px; width: 10px; height: 10px; content: ''; border-radius: 50%; background: var(--zc); box-shadow: 0 0 10px var(--zc); }
+
+.mp-map-ctrl { position: absolute; right: .8rem; bottom: .8rem; z-index: 3; display: grid; gap: .35rem; }
+.mp-map-ctrl button { width: 38px; height: 38px; font-size: .8rem; border: 1px solid rgba(63,240,255,.6); border-radius: .6rem; color: #fff; background: rgba(6,16,31,.85); cursor: pointer; font: 700 1.1rem var(--ui); }
+.mp-map-ctrl button:hover { box-shadow: 0 0 14px rgba(63,240,255,.6); }
+
+/* panel */
+.mp-map-panel { --zc: #ff2d9b; display: grid; align-content: start; justify-items: center; gap: .35rem; padding: 1.4rem 1.2rem; border: 1px solid color-mix(in srgb, var(--zc) 60%, transparent); border-radius: 1.2rem; text-align: center; background: radial-gradient(circle at 50% 0, color-mix(in srgb, var(--zc) 30%, transparent), transparent 60%), rgba(14,4,22,.92); animation: mpPanel .35s cubic-bezier(.2,.8,.2,1); }
+@keyframes mpPanel { from { opacity: 0; transform: translateX(14px); } }
+.mp-map-panel img { width: 120px; height: 120px; border-radius: 50%; box-shadow: 0 0 26px var(--zc); }
+.mp-map-panel small { color: var(--zc); font: 700 .7rem var(--ui); letter-spacing: .16em; text-transform: uppercase; }
+.mp-map-panel h3 { margin: 0; font: 400 2.2rem/1 var(--poster); color: #fff; }
+.mp-map-panel p { margin: 0; color: #d9c5e6; }
+.mp-map-panel dl { display: grid; grid-template-columns: repeat(3, 1fr); gap: .4rem; width: 100%; margin: .8rem 0; }
+.mp-map-panel dl div { padding: .5rem .2rem; border-radius: .6rem; background: rgba(255,255,255,.05); }
+.mp-map-panel dt { color: #a993b6; font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; }
+.mp-map-panel dd { margin: 0; font: 400 1.05rem var(--num); color: #fff; }
+.mp-map-panel .mp-btn { width: 100%; min-height: 48px; font-size: .82rem; }
+.mp-map-panel code { color: #a993b6; font-size: .72rem; }
+.mp-map-soon { margin-top: .5rem; padding: .5rem .9rem; border: 1px dashed color-mix(in srgb, var(--zc) 60%, transparent); border-radius: .6rem; color: #e8d6f0; font-size: .82rem; }
+
+@media (max-width: 900px) {
+  .mp-map-wrap { grid-template-columns: 1fr; }
+  .mp-map-stats { grid-template-columns: repeat(2, 1fr); }
+  .mp-blip b { width: 42px; height: 42px; }
+  .mp-zone { font-size: .55rem; padding: .2rem .45rem; }
+}
+@media (prefers-reduced-motion: reduce) { .mp-coast { animation: none; stroke-dashoffset: 0; } .mp-map-radar, .mp-towers rect, .mp-blip b::after { animation: none; } }
