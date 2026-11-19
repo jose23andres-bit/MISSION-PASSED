@@ -25,3 +25,7 @@ Seleccionado de estos repositorios de GitHub y adaptado al proyecto:
 - Premios y sorteos: siempre en lenguaje condicional («previsto», «sujeto a bases publicadas y fondo verificable»).
 - Blockchain: el pipeline nunca despliega en Mainnet, crea tokens, firma ni mueve fondos (`scripts/ci/safety-guard.mjs`).
 - Antes de publicar: `npm run ci` en verde y revisión visual en navegador real, en escritorio y en móvil.
+
+## Protegido por el propietario
+- **Estrellas de búsqueda** (`setupWanted` en `src/fx.js` y el bloque «wanted-level HUD» en `src/fx.css`): no se modifican, mueven ni quitan nunca. `test/wanted-stars.test.mjs` falla si alguien las toca.
+- Respuestas al propietario: cortas y concretas.
