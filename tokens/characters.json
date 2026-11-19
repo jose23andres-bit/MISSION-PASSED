@@ -11,7 +11,10 @@
       "rarity": "OG",
       "pass": "#001",
       "description": "El Conductor ($CONDUCTOR): el piloto original de MISSION PASSED. Nunca llega tarde a una misión. Memecoin comunitaria en Solana, sin utilidad prometida ni rentabilidad. Proyecto independiente.",
-      "mint": ""
+      "mint": "",
+      "zone": "autopista",
+      "x": 560,
+      "y": 300
     },
     {
       "slug": "jefa",
@@ -21,7 +24,10 @@
       "rarity": "Raro",
       "pass": "#128",
       "description": "La Jefa ($JEFA): manda en la marina de MISSION PASSED. Memecoin comunitaria en Solana, sin utilidad prometida ni rentabilidad. Proyecto independiente.",
-      "mint": ""
+      "mint": "",
+      "zone": "marina",
+      "x": 770,
+      "y": 640
     },
     {
       "slug": "socio",
@@ -31,7 +37,10 @@
       "rarity": "Épico",
       "pass": "#512",
       "description": "El Socio ($SOCIO): conoce cada atajo del pantano de MISSION PASSED. Memecoin comunitaria en Solana, sin utilidad prometida ni rentabilidad. Proyecto independiente.",
-      "mint": ""
+      "mint": "",
+      "zone": "pantano",
+      "x": 360,
+      "y": 610
     },
     {
       "slug": "rico",
@@ -41,7 +50,42 @@
       "rarity": "Legendario",
       "pass": "#999",
       "description": "Rico ($RICO): el guía legendario de MISSION PASSED. Memecoin comunitaria en Solana, sin utilidad prometida ni rentabilidad. Proyecto independiente.",
-      "mint": ""
+      "mint": "",
+      "zone": "downtown",
+      "x": 690,
+      "y": 380
+    }
+  ],
+  "zones": [
+    {
+      "id": "downtown",
+      "name": "Neon Downtown",
+      "blurb": "Rascacielos, clubs y el cuartel de Rico.",
+      "color": "#ff2d9b"
+    },
+    {
+      "id": "marina",
+      "name": "Marina Keys",
+      "blurb": "Yates, puentes sobre el mar y negocios de La Jefa.",
+      "color": "#3ff0ff"
+    },
+    {
+      "id": "pantano",
+      "name": "El Pantano",
+      "blurb": "Hidrodeslizadores y atajos que solo conoce El Socio.",
+      "color": "#7affc1"
+    },
+    {
+      "id": "autopista",
+      "name": "Ruta 95",
+      "blurb": "La autopista nocturna donde manda El Conductor.",
+      "color": "#ffd36e"
+    },
+    {
+      "id": "puerto",
+      "name": "Puerto Viejo",
+      "blurb": "Moteles, grúas y contenedores. Próximo personaje.",
+      "color": "#b26bff"
     }
   ]
 }

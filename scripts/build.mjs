@@ -9,8 +9,10 @@ loadEnv(resolve(root, '.env'));
 const config = publicConfig();
 // Character coins (Pump.fun). Only public data: name, ticker and the mint once it exists.
 const BASE58 = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/;
-config.characterTokens = JSON.parse(await readFile(resolve(root, 'tokens/characters.json'), 'utf8')).tokens
-  .map(({ slug, name, symbol, rarity, pass, mint }) => ({ slug, name, symbol, rarity, pass, mint: BASE58.test(mint || '') ? mint : '' }));
+const kit = JSON.parse(await readFile(resolve(root, 'tokens/characters.json'), 'utf8'));
+config.characterTokens = kit.tokens
+  .map(({ slug, name, symbol, rarity, pass, mint, zone, x, y }) => ({ slug, name, symbol, rarity, pass, zone, x, y, mint: BASE58.test(mint || '') ? mint : '' }));
+config.mapZones = kit.zones;
 
 async function files(directory, extension) {
   const result = [];
@@ -35,7 +37,7 @@ for (const dir of ['docs', 'portal', 'presale', 'transparency', 'admin', 'blockc
 }
 // Internal preview boards are excluded from the public site package.
 await rm(resolve(dist, 'docs/preview'), { recursive: true, force: true });
-for (const file of ['app.js', 'portal-search.js', 'chain-dashboard.js', 'admin.js', 'lang.js', 'guide.js', 'presale.js', 'presale-tiers.js', 'styles.css', 'mission.css', 'presale.css', 'fx.js', 'fx.css']) {
+for (const file of ['app.js', 'portal-search.js', 'chain-dashboard.js', 'admin.js', 'lang.js', 'guide.js', 'presale.js', 'presale-tiers.js', 'styles.css', 'mission.css', 'presale.css', 'fx.js', 'fx.css', 'map.js', 'map.css']) {
   await cp(resolve(root, 'src', file), resolve(dist, 'assets', file));
 }
 // Pinned by package-lock.json: the only third-party code the presale page runs.
